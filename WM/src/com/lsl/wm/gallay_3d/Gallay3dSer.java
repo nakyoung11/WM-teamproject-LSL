@@ -13,7 +13,7 @@ public class Gallay3dSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String jsp = "/WEB-INF/3d_gallay/3dGallay.jsp";
+		String jsp = "/WEB-INF/3d_gallay/3dGallay.jsp"; 
 		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
