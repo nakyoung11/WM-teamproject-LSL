@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WM 웹 전시관</title>
-    <%@ include file="../../header.jsp" %> 
+ 
     <style>
         .side {
             float: left;

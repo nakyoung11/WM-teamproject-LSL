@@ -1,214 +1,131 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WM ¿• ¿¸Ω√∞¸</title>
-    <style>
-        body {
-	background: #F9F9F9
-}
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WM Ïõπ Ï†ÑÏãúÍ¥Ä</title>
+<style>
 #container {
-	position: relative;
-	width: 1382px;
+	display: flex;
+	width: 1350px;
 	height: 1356px;
-	left: calc(50% - 1382px/ 2);
-	top: calc(50% - 1356px/ 2 + 42px);
+	margin: 5px auto;
+	justify-content: center;
 }
 
-#header {
-	position: fixed;
-	width: 1440px;
-	height: 215px;
-	left: calc(50% - 1440px/ 2);
-	top: 0px;
-	background: #F9F9F9;
-	z-index: 9999;
+#schedua {
+	display: flex;
+	justify-content: space-between;
+	width: 1200px;
 }
 
-#contents {
-	position: absolute;
-	width: 907px;
-	height: 620px;
-	right: 99px;
-	top: calc(53% - 633px/ 2 + 41px);
+#schedua li {
+	font-size: 1.2em
 }
 
-#footer {
-	position: absolute;
-	width: 1382px;
-	height: 78px;
-	left: 0px;
-	top: 870px;
+#now {
+	background: cornflowerblue;
+	padding: 10px;
 }
 
-#logo {
-	position: relative;
-	width: 30%;
+.now {
+	display: flex;
+	flex-direction: column;
 }
 
-#login {
-	position: absolute;
-	width: 88.15px;
-	height: 47px;
-	left: 1221px;
-	top: 43px;
+.now .title {
+	text-align: center;
+	font-size: 1.5em;
 }
 
-.menu {
-	position: absolute;
-	width: 837px;
-	height: 51px;
-	left: 433px;
-	top: 110px;
+#now_schedua {
+	
 }
 
-.menu ul {
+#now_schedua ul {
 	list-style: none;
 }
 
-.menu li {
-	float: left;
-	margin-left: 5%;
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-top: 5%;
-	margin-bottom: 2%;
-	cursor: pointer;
+#now_schedua li {
+	
 }
 
-.menu li:first-child {
-	margin-left: 13%;
+#now_schedua p {
+	
 }
-
-hr {
-	width: 912px;
-	height: 0px;
-	left: 397px;
-	top: 199px;
-	border: 2px solid rgba(39, 47, 89, 0.29);
-	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
-}
-        .side {
-            clear: both;
-            width: 300px;
-            text-align: center;
-            float: left;
-            margin-left: 70px;
-            padding-right: 70px;
-            background-color: #fae4bb;
-            padding-bottom: 100px;
-        }
-        .side h4 {
-            margin-left: 80px;
-            font-size: x-large;
-            color: coral;
-            text-decoration: underline;
-            margin-bottom: 50px;
-        }
-        .side ul {
-            list-style: none;
-            margin-left: 30px;
-        }
-        .side ul li {
-            margin-bottom: 40px;
-        }
-        .side1 {
-            float: left;
-            margin-left: 100px;
-            width: 300px;
-            text-align: center;
-            background-color: #fcf1de;
-            padding-right: 70px;
-            padding-bottom: 100px;
-        }
-        .side1 h4 {
-            margin-left: 80px;
-            font-size: x-large;
-            color: coral;
-            text-decoration: underline;
-            margin-bottom: 50px;
-        }
-        .side1 ul {
-            list-style: none;
-            margin-left: 30px;
-        }
-        .side1 ul li {
-            margin-bottom: 40px;
-        }
-        .side2 {
-            float: left;
-            margin-left: 100px;
-            width: 300px;
-            text-align: center;
-            background-color: #e7dcc8;
-            padding-right: 70px;
-            padding-bottom: 100px;
-        }
-        .side2 h4 {
-            margin-left: 80px;
-            font-size: x-large;
-            color: coral;
-            text-decoration: underline;
-            margin-bottom: 50px;
-        }
-        .side2 ul {
-            list-style: none;
-            margin-left: 30px;
-        }
-        .side2 ul li {
-            margin-bottom: 40px;
-        }
-        
-    </style>
+</style>
 </head>
 <body>
-    <div id="container">
-		<div id="header">
-			<nav>
-				<a href="#"><img src="/image/logo.png" id="logo"></a> <a
-					href="#"><img src="/image/login.png" id="login"></a>
-				<div class="menu">
-					<ul>
-						<li id="m1">¿¸Ω√¿œ¡§</li>
-						<li id="m2">±‚∞¸º“∞≥</li>
-						<li id="m3">ƒøπ¬¥œ∆º</li>
-						<li id="m4">¿Ã¿¸¿¸Ω√</li>
-						<li id="m5">∏∂¿Ã∆‰¿Ã¡ˆ</li>
-						<hr>
-					</ul>
+	<div id="container">
+		<jsp:include page="../../header.jsp"></jsp:include>
+		<div id="contents">
+			<div id="schedua">
+				<div id="now">
+					<div class="now">
+						<p class="title">NOW</p>
+					</div>
+					<div id="now_schedua">
+						<ul>
+							<li>2020. 08. 22 ~ 2020. 09. 22
+								<p>Í≥†ÌùêÏ†Ñ
+								<p>
+							</li>
+							<li>2020. 09. 22 ~ 2020. 10. 22
+								<p>ÌòÑÎåÄÎØ∏Ïà†
+								<p>
+							</li>
+							<li>2020. 08. 22 ~ 2020. 09. 22
+								<p>ÌïòÏù¥ÏÑ†</p>
+							</li>
+						</ul>
+					</div>
 				</div>
-			</nav>
+				<div id="coming_soon">
+					<div class="coming_soon">
+						<p class="title">Coming Soon</p>
+					</div>
+					<div id="coming_schedua">
+						<ul>
+							<a href="/introduce"><li>2020. 08. 22 ~ 2020. 09. 22
+									<p>Í≥†ÌùêÏ†Ñ
+									<p>
+							</li></a>
+							<li>2020. 09. 22 ~ 2020. 10. 22
+								<p>ÌòÑÎåÄÎØ∏Ïà†
+								<p>
+							</li>
+							<li>2020. 08. 22 ~ 2020. 09. 22
+								<p>ÌïòÏù¥ÏÑ†</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="recruitment">
+					<div class="recruitment">
+						<p class="title">Recruitment</p>
+					</div>
+					<div id="recruitment_schedua">
+						<ul>
+							<li>2020. 08. 22 ~ 2020. 09. 22
+								<p>Í≥†ÌùêÏ†Ñ
+								<p>
+							</li>
+							<li>2020. 09. 22 ~ 2020. 10. 22
+								<p>ÌòÑÎåÄÎØ∏Ïà†
+								<p>
+							</li>
+							<li>2020. 08. 22 ~ 2020. 09. 22
+								<p>ÌïòÏù¥ÏÑ†</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
 		</div>
-<div id="contents">
-        <div class="side">
-            <h4>NOW</h4>
-            <ul>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;π› ∞Ì»Â ∆Ø∫∞¿¸&gt;</span> </li><br>
-                <li>2020. 09. 22 ~ 2020. 10. 22<br> &lt;∑Á∫Í∏£ ¿¸&gt;</span></li><br>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;∆Àæ∆∆Æ&gt;</span></li><br>
-            </ul>
-        </div>
-        <div class="side1">
-            <h4>COMMING SOON</h4>
-            <ul>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;π› ∞Ì»Â ∆Ø∫∞¿¸&gt;</span> </li><br>
-                <li>2020. 09. 22 ~ 2020. 10. 22<br> &lt;∑Á∫Í∏£ ¿¸&gt;</span></li><br>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;∆Àæ∆∆Æ&gt;</span></li><br>
-            </ul>
-        </div>
-        <div class="side2">
-            <h4>RECRUITMENT</h4>
-            <ul>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;π› ∞Ì»Â ∆Ø∫∞¿¸&gt;</span> </li><br>
-                <li>2020. 09. 22 ~ 2020. 10. 22<br> &lt;∑Á∫Í∏£ ¿¸&gt;</span></li><br>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;∆Àæ∆∆Æ&gt;</span></li><br>
-            </ul>
-        </div>
-    </div>
-    </div>
+	</div>
+
 </body>
 </html>
