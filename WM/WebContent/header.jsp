@@ -11,8 +11,8 @@
 
 		<div id="header">
 			<nav>
-				<a href="/main"><img src="image/logo.png" id="logo"></a> <a
-					href="#"><img src="image/login.png" id="login"></a>
+				<a href="/main"><img src="/resource/main/images/logo.png" id="logo"></a> <a
+					href="#"><img src="/resource/main/images/login.png" id="login"></a>
 				<div class="menu">
 					<ul>
 						<a href="/calendar"><li id="m1">전시일정</li></a>

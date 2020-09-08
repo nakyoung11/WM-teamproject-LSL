@@ -52,6 +52,8 @@
     </style>
 </head>
 <body>
+<jsp:include page="../../header.jsp"></jsp:include>
+	<div id="container">
         <div id="contents">
             <div class="side">
                 <ul type="none">
@@ -64,6 +66,7 @@
                     <input type="password" name="passCon" id="passCon">
                     <a href="mypage-both-profile.html"><button>확인</button></a>
             </div>
+        </div>
         </div>
 </body>
 </html>
