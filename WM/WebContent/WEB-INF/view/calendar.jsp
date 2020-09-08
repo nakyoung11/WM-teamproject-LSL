@@ -3,212 +3,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WM 웹 전시관</title>
-    <style>
-        body {
-	background: #F9F9F9
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WM 웹 전시관</title>
+<style>
+body {
+    background: #FFFCFE
 }
 
 #container {
-	position: relative;
-	width: 1382px;
-	height: 1356px;
-	left: calc(50% - 1382px/ 2);
-	top: calc(50% - 1356px/ 2 + 42px);
+    display: flex;
+    width: 1350px;
+    height: 1356px;
+    margin: 5px auto;
+    justify-content: center;
 }
 
 #header {
-	position: fixed;
-	width: 1440px;
-	height: 215px;
-	left: calc(50% - 1440px/ 2);
-	top: 0px;
-	background: #F9F9F9;
-	z-index: 9999;
+    position: fixed;
+    width: 1440px;
+    height: 215px;
+    height: 248px;
+    left: calc(50% - 1440px/ 2);
+    margin-bottom: 50px;
+    top: 0px;
+    background: #FFFCFE;
+    z-index: 9999;
 }
 
 #contents {
-	position: absolute;
-	width: 907px;
-	height: 620px;
-	right: 99px;
-	top: calc(53% - 633px/ 2 + 41px);
+    position: relative;
+    width: 1398px;
+    margin-top: 260px;
 }
 
 #footer {
-	position: absolute;
-	width: 1382px;
-	height: 78px;
-	left: 0px;
-	top: 870px;
+    position: absolute;
+    width: 1440px;
+    height: 78px;
+    left: 0px;
+    top: 1740px;
 }
 
 #logo {
-	position: relative;
-	width: 30%;
+    width: 320px;
+    height: 228px;
 }
 
 #login {
-	position: absolute;
-	width: 88.15px;
-	height: 47px;
-	left: 1221px;
-	top: 43px;
-}
-
-.menu {
-	position: absolute;
-	width: 837px;
-	height: 51px;
-	left: 433px;
-	top: 110px;
+    position: absolute;
+    width: 88.15px;
+    height: 47px;
+    left: 1221px;
+    top: 43px;
 }
 
 .menu ul {
-	list-style: none;
+    position: absolute;
+    width: 837px;
+    height: 51px;
+    left: 400px;
+    top: 134px;
+    list-style: none;
 }
 
 .menu li {
-	float: left;
-	margin-left: 5%;
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-top: 5%;
-	margin-bottom: 2%;
-	cursor: pointer;
-}
-
-.menu li:first-child {
-	margin-left: 13%;
+    float: left;
+    margin-left: 60px;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 1%;
+    cursor: pointer;
 }
 
 hr {
-	width: 912px;
-	height: 0px;
-	left: 397px;
-	top: 199px;
-	border: 2px solid rgba(39, 47, 89, 0.29);
-	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    clear: both;
+    float: right;
+    width: 940px;
+    margin-left: 10%;
+    border: 1px solid rgba(39, 47, 89, 0.29);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 }
-        .side {
-            clear: both;
-            width: 300px;
-            text-align: center;
-            float: left;
-            margin-left: 70px;
-            padding-right: 70px;
-            background-color: #fae4bb;
-            padding-bottom: 100px;
-        }
-        .side h4 {
-            margin-left: 80px;
-            font-size: x-large;
-            color: coral;
-            text-decoration: underline;
-            margin-bottom: 50px;
-        }
-        .side ul {
-            list-style: none;
-            margin-left: 30px;
-        }
-        .side ul li {
-            margin-bottom: 40px;
-        }
-        .side1 {
-            float: left;
-            margin-left: 100px;
-            width: 300px;
-            text-align: center;
-            background-color: #fcf1de;
-            padding-right: 70px;
-            padding-bottom: 100px;
-        }
-        .side1 h4 {
-            margin-left: 80px;
-            font-size: x-large;
-            color: coral;
-            text-decoration: underline;
-            margin-bottom: 50px;
-        }
-        .side1 ul {
-            list-style: none;
-            margin-left: 30px;
-        }
-        .side1 ul li {
-            margin-bottom: 40px;
-        }
-        .side2 {
-            float: left;
-            margin-left: 100px;
-            width: 300px;
-            text-align: center;
-            background-color: #e7dcc8;
-            padding-right: 70px;
-            padding-bottom: 100px;
-        }
-        .side2 h4 {
-            margin-left: 80px;
-            font-size: x-large;
-            color: coral;
-            text-decoration: underline;
-            margin-bottom: 50px;
-        }
-        .side2 ul {
-            list-style: none;
-            margin-left: 30px;
-        }
-        .side2 ul li {
-            margin-bottom: 40px;
-        }
-        
+
+#schedua {display: flex;
+    justify-content: space-between;
+    width: 1200px;}
+#schedua li{font-size:1.2em}
+
+#now{
+    background: cornflowerblue; 
+    padding: 10px;
+}
+
+.now {
+display: flex;
+flex-direction: column;
+
+
+}
+
+.now .title {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+
+
+#now_schedua {
+    
+}
+
+#now_schedua ul {
+
+    list-style: none;
+}
+
+#now_schedua li {
+
+}
+
+#now_schedua p {
+
+}
+
+
+
+</style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <nav>
+                <a href="/main"><img src="/image/logo.png" id="logo"></a> <a
+                    href="#"><img src="/image/login.png" id="login"></a>
+                <div class="menu">
+                    <ul>
+                        <li id="m1">전시일정</li>
+                        <li id="m2">기관소개</li>
+                        <li id="m3">커뮤니티</li>
+                        <li id="m4">이전전시</li>
+                        <li id="m5">마이페이지</li>
+                        <hr>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div id="contents">
+   
     </style>
 </head>
 <body>
     <div id="container">
-		<div id="header">
-			<nav>
-				<a href="#"><img src="/image/logo.png" id="logo"></a> <a
-					href="#"><img src="/image/login.png" id="login"></a>
-				<div class="menu">
-					<ul>
-						<li id="m1">전시일정</li>
-						<li id="m2">기관소개</li>
-						<li id="m3">커뮤니티</li>
-						<li id="m4">이전전시</li>
-						<li id="m5">마이페이지</li>
-						<hr>
-					</ul>
-				</div>
-			</nav>
-		</div>
+        <div id="header">
+            <nav>
+                <a href="/main"><img src="image/logo.png" id="logo"></a> <a
+                    href="#"><img src="image/login.png" id="login"></a>
+                <div class="menu">
+                    <ul>
+                        <a><li id="m1">전시일정</li></a>
+                        <a><li id="m2">기관소개</li></a>
+                        <a><li id="m3">커뮤니티</li></a>
+                        <a><li id="m4">이전전시</li></a>
+                        <a><li id="m5">마이페이지</li></a>
+
+                        <hr>
+                    </ul>
+                </div>
+            </nav>
+        </div>
 <div id="contents">
-        <div class="side">
-            <h4>NOW</h4>
-            <ul>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;반 고흐 특별전&gt;</span> </li><br>
-                <li>2020. 09. 22 ~ 2020. 10. 22<br> &lt;루브르 전&gt;</span></li><br>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;팝아트&gt;</span></li><br>
-            </ul>
+    <div id="schedua">
+        <div id="now">
+            <div class="now">
+                <p class="title">NOW</p>
+            </div>
+            <div id="now_schedua">
+                <ul>
+                    <li>2020. 08. 22 ~ 2020. 09. 22
+                        <p>고흐전
+                        <p>
+                    </li>
+                    <li>2020. 09. 22 ~ 2020. 10. 22
+                        <p>현대미술
+                        <p>
+                    </li>
+                    <li>2020. 08. 22 ~ 2020. 09. 22
+                        <p>하이선</p>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="side1">
-            <h4>COMMING SOON</h4>
-            <ul>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;반 고흐 특별전&gt;</span> </li><br>
-                <li>2020. 09. 22 ~ 2020. 10. 22<br> &lt;루브르 전&gt;</span></li><br>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;팝아트&gt;</span></li><br>
-            </ul>
+        <div id="coming_soon">
+            <div class="coming_soon">
+                <p class="title">Coming Soon</p>
         </div>
-        <div class="side2">
-            <h4>RECRUITMENT</h4>
-            <ul>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;반 고흐 특별전&gt;</span> </li><br>
-                <li>2020. 09. 22 ~ 2020. 10. 22<br> &lt;루브르 전&gt;</span></li><br>
-                <li>2020. 08. 22 ~ 2020. 09. 22<br>&lt;팝아트&gt;</span></li><br>
-            </ul>
+            <div id="coming_schedua">
+                <ul>
+                    <a href="/introduce"><li>2020. 08. 22 ~ 2020. 09. 22
+                        <p>고흐전
+                        <p>
+                    </li></a>
+                    <li>2020. 09. 22 ~ 2020. 10. 22
+                        <p>현대미술
+                        <p>
+                    </li>
+                    <li>2020. 08. 22 ~ 2020. 09. 22
+                        <p>하이선</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="recruitment">
+            <div class="recruitment">
+                <p class="title">Recruitment</p>
+            </div>
+            <div id="recruitment_schedua">
+                <ul>
+                    <li>2020. 08. 22 ~ 2020. 09. 22
+                        <p>고흐전
+                        <p>
+                    </li>
+                    <li>2020. 09. 22 ~ 2020. 10. 22
+                        <p>현대미술
+                        <p>
+                    </li>
+                    <li>2020. 08. 22 ~ 2020. 09. 22
+                        <p>하이선</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    </div>
+
+</div>
+</div>
+
 </body>
 </html>
