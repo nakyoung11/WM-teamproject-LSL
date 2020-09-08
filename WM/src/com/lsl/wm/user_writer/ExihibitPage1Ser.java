@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.lsl.wm.vo.WorkVO;
 
 
-@WebServlet("/exhibit_page1")
+@WebServlet("/writer/exhibit_page1")
 public class ExihibitPage1Ser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

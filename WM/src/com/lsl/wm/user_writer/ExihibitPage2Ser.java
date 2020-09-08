@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lsl.wm.vo.WorkVO;
 
-@WebServlet("/exhibit_page2")
+@WebServlet("/writer/exhibit_page2")
 public class ExihibitPage2Ser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
