@@ -8,22 +8,24 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<div id="container">
+
 		<div id="header">
 			<nav>
-				<a href="#"><img src="/image/logo.png" id="logo"></a> <a
-					href="#"><img src="/image/login.png" id="login"></a>
+				<a href="/main"><img src="image/logo.png" id="logo"></a> <a
+					href="#"><img src="image/login.png" id="login"></a>
 				<div class="menu">
 					<ul>
-						<li id="m1">전시일정</li>
-						<li id="m3">커뮤니티</li>
-						<li id="m4">이전전시</li>
-						<li id="m5">마이페이지</li>
+						<a href="/calendar"><li id="m1">전시일정</li></a>
+						<a><li id="m2">기관소개</li></a>
+						<a><li id="m3">커뮤니티</li></a>
+						<a><li id="m4">이전전시</li></a>
+						<a><li id="m5">마이페이지</li></a>
+
 						<hr>
 					</ul>
 				</div>
 			</nav>
 		</div>
-	</div>
+
 </body>
 </html>

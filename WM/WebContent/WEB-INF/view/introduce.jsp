@@ -1,140 +1,109 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WM 웹 전시관</title>
-    <style>
-body {
-	background: #F9F9F9
-}
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WM 웹 전시관</title>
+<style>
 #container {
-	position: relative;
-	width: 1382px;
+	display: flex;
+	width: 1350px;
 	height: 1356px;
-	left: calc(50% - 1382px/ 2);
-	top: calc(50% - 1356px/ 2 + 42px);
+	margin: 5px auto;
+	justify-content: center;
 }
 
-#header {
-	position: fixed;
-	width: 1440px;
-	height: 215px;
-	left: calc(50% - 1440px/ 2);
-	top: 0px;
-	background: #F9F9F9;
-	z-index: 9999;
+.main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-#contents {
-	position: absolute;
-	width: 907px;
-	height: 620px;
-	right: 99px;
-	top: calc(53% - 633px/ 2 + 41px);
+.poster {
+	flex-direction: column;
+	margin-left: 50px;
 }
 
-#footer {
-	position: absolute;
-	width: 1382px;
-	height: 78px;
-	left: 0px;
-	top: 870px;
+#poster {
+	width: 625px;
+	height: 299px;
+	margin-bottom: 30px
 }
 
-#logo {
-	position: relative;
-	width: 30%;
+.main #title {
+	display: block;
 }
 
-#login {
-	position: absolute;
-	width: 88.15px;
-	height: 47px;
-	left: 1221px;
-	top: 43px;
+.main h3 {
+	display: block;
 }
 
-.menu {
-	position: absolute;
-	width: 837px;
-	height: 51px;
-	left: 433px;
-	top: 110px;
+.introduction {
+	flex-direction: column;
+	margin-left: 50px;
+	width: 430px
 }
 
-.menu ul {
+.exhibition {
+	display: flex;
+	width: 1150px;
+	flex-direction: column;
+	margin-left: 140px;
+}
+
+.exhibition ul {
+	display: flex;
+	flex-wrap: wrap;
 	list-style: none;
 }
 
-.menu li {
-	float: left;
-	margin-left: 5%;
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-top: 5%;
-	margin-bottom: 2%;
-	cursor: pointer;
-}
-
-.menu li:first-child {
-	margin-left: 13%;
-}
-
-hr {
-	width: 912px;
-	height: 0px;
-	left: 397px;
-	top: 199px;
-	border: 2px solid rgba(39, 47, 89, 0.29);
-	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
-}
-
-.side {
-	margin-left: 800px;
-}
-
-.side :first-child {
-	margin-top: 100px;
-}
-
-.side h3 {
-	margin-bottom: 150px;
+.exhibition ul li {
+	flex: 1 1 30%;
+	margin-bottom: 1em
 }
 </style>
 </head>
 <body>
-    <div id="container">
-		<div id="header">
-			<nav>
-				<a href="#"><img src="/image/logo.png" id="logo"></a> <a
-					href="#"><img src="/image/login.png" id="login"></a>
-				<div class="menu">
+	<div id="container">
+		<jsp:include page="../../header.jsp"></jsp:include>
+		<div id="contents">
+
+			<div class="main">
+				<div class="poster">
+					<h2 id="title">반고흐 특별전</h2>
+					<img src="image/main.png" id="poster">
+				</div>
+				<div class="introduction">
+					<h3>전시소개</h3>
+					<div id="introduction">
+						<p>민주평화통일자문회의의 조직·직무범위 기타 필요한 사항은 법률로 정한다. 교육의 자주성·전문성·정치적 중립성
+							및 대학의 자율성은 법률이 정하는 바에 의하여 보장된다. 모든 국민은 양심의 자유를 가진다. 제1항의 해임건의는
+							국회재적의원 3분의 1 이상의 발의에 의하여 국회재적의원 과반수의 찬성이 있어야 한다.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="exhibition">
+				<h3>전시작품 및 참여작가</h3>
+
+				<div id="exhibition_items">
 					<ul>
-						<li id="m1">전시일정</li>
-						<li id="m2">기관소개</li>
-						<li id="m3">커뮤니티</li>
-						<li id="m4">이전전시</li>
-						<li id="m5">마이페이지</li>
-						<hr>
+						<li>대통령이 궐위되거나 사고로 인하여 직무를...</li>
+						<li>헌법재판소의 조직과 운영 기타 필요한 사...</li>
+						<li>대통령은 국가의 원수이며, 외국에 대하여 ...</li>
+						<li>환경권의 내용과 행사에 관하여는 법률로 ...</li>
+						<li>누구든지 체포 또는 구속을 당한 때에는 적...</li>
+						<li>선거와 국민투표의 공정한 관리 및 정당에 ...</li>
+						<li>국가는 모성의 보호를 위하여 노력하여야 ...</li>
+						<li>모든 국민은 헌법과 법률이 정한 법관에 의...</li>
+						<li>이 헌법중 공무원의 임기 또는 중임제한에 ...</li>
+						<li>대법관의 임기는 6년으로 하며, 법률이 정...</li>
 					</ul>
 				</div>
-			</nav>
+			</div>
 		</div>
-		<div id="contents">
-        <div class="main">
-            <h2>반고흐 특별전</h2>
-            <img src="image/main.png" id="main">
-        </div>
-        <div class="side">
-            <h3>전시소개</h3>
-            <h3>전시작품</h3>
-            <h3>참여작가</h3>
-        </div>
-    </div>
-    </div>
+	</div>
 </body>
 </html>
