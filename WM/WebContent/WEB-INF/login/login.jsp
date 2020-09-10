@@ -72,12 +72,11 @@ input {
 <body>
         <div id="contents">
             <h2 id="login_title">로그인</h2>
-            <form action="" id="loginFrm" method="post" onsubmit="return chk()">
-              
+            <div>${msg}</div>
+            <form action="/login" id="loginFrm" method="post" onsubmit="return chk()">      
                <div class="user_email"><label for="user_email">이메일</label>
                     <input type="email" name="user_email" id="user_email" required autofocus>
-                </div>
-              
+                </div>            
                 <div class="user_pw"><label for="user_pw">비밀번호</label>
                     <input type="password" name="user_pw" id="user_pw" required>
                 </div>
@@ -85,17 +84,10 @@ input {
                     <input type="submit" value="로그인" id="submit_btn">
                 </div>
                 </form>
-                <a id="kakao-login-btn"></a>
-
-<a href="http://developers.kakao.com/logout"></a>
         </div>
+        <div><a href="/join">회원가입</a></div>
         <div id="footer">
             <h3>푸터 영역</h3>        
         </div>
-	<script>
-
-
-	</script>
-
 </body>
 </html>
