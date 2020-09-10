@@ -1,15 +1,22 @@
 package com.lsl.wm.vo;
 
 public class UserVO {
+	private int i_user;
 	private String user_email; // 이메일
 	private String nickname; // 닉네임
 	private String user_pw; // 로그인 비밀번호
-	private String salt; // 난수 저장
 	private String user_year; // 년
 	private String user_month; // 월
 	private String user_date; // 일
 	private String news; // 소식여부
 	
+	
+	public int getI_user() {
+		return i_user;
+	}
+	public void setI_user(int i_user) {
+		this.i_user = i_user;
+	}
 	public String getUser_email() {
 		return user_email;
 	}
@@ -27,12 +34,6 @@ public class UserVO {
 	}
 	public void setUser_pw(String user_pw) {
 		this.user_pw = user_pw;
-	}
-	public String getSalt() {
-		return salt;
-	}
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 	public String getUser_year() {
 		return user_year;
