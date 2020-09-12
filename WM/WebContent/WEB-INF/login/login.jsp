@@ -75,7 +75,7 @@ input {
             <div>${msg}</div>
             <form action="/login" id="loginFrm" method="post" onsubmit="return chk()">      
                <div class="user_email"><label for="user_email">이메일</label>
-                    <input type="email" name="user_email" id="user_email" required autofocus>
+                    <input type="email" name="user_email" id="user_email" value="${user_email}" required autofocus>
                 </div>            
                 <div class="user_pw"><label for="user_pw">비밀번호</label>
                     <input type="password" name="user_pw" id="user_pw" required>
