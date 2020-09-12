@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.lsl.wm.MyUtils;
 import com.lsl.wm.SecurityUtils;
 import com.lsl.wm.db.UserDAO;
 import com.lsl.wm.vo.UserVO;
@@ -16,8 +18,15 @@ public class LoginSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String jsp = "/WEB-INF/login/login.jsp";
-		request.getRequestDispatcher(jsp).forward(request, response);
+		UserVO loginUser = MyUtils.getLoginUser(request);
+		
+		if(loginUser != null) {
+			response.sendRedirect("/main");
+		} else {
+			String jsp = "/WEB-INF/login/login.jsp";	
+			request.getRequestDispatcher(jsp).forward(request, response);			
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,6 +39,9 @@ public class LoginSer extends HttpServlet {
 		param.setUser_pw(encrypt_pw);
 		
 		int result = UserDAO.login(param);
+		
+		HttpSession hs = request.getSession();
+		hs.setAttribute("loginUser", param);
 		
 		if(result == 1) {
 			response.sendRedirect("/main");
@@ -53,6 +65,8 @@ public class LoginSer extends HttpServlet {
 			doGet(request, response);
 			return;
 		}
+		
+		
 	}
 
 }

@@ -57,4 +57,26 @@ public class UserDAO {
 			}
 		});
 	}
+	public static int nickNameChk(UserVO param) {
+		String sql = " SELECT nickname "
+				   + " FROM t_user "
+				   + " WHERE nickname = ? ";
+		
+		return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setNString(1, param.getNickname());
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				if(rs.next()) {
+					return 0; 
+				} else {
+					return 1;
+				}
+			}
+		});
+	}
 }

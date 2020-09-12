@@ -136,7 +136,7 @@ input {
  	
         <div id="contents">
             <h2 id="join_title">회원가입</h2>
-            <form action="" id="joinFrm" method="post">
+            <form action="" id="joinFrm" method="post" onsubmit="return chk()">
                <div class="user_email"><label for="user_email">이메일</label>
                     <input type="email" name="user_email" id="user_email" required autofocus>
                      <input type="button" value="중복확인" id="double_check" onclick="chkEmail()">
@@ -145,6 +145,8 @@ input {
                 <div class="nickname">
                     <label for="nickname">닉네임</label>
                     <input type="text" name="nickname" id="nickname" placeholder="5글자 이하">
+                    <input type="button" value="중복확인" id="double_check" onclick="chkNickname()">
+                    <div id="nicknameChkResult" class="msg"></div>
                 </div>
                 <div class="user_pw"><label for="user_pw">비밀번호</label>
                     <input type="password" name="user_pw" id="user_pw" required>
@@ -165,7 +167,7 @@ input {
                 <div class="submit_btn">
                     <input type="submit" value="가입하기" id="submit_btn">
                 </div>
-                </form>
+             </form>
         </div>
         <div id="footer">
             <h3>푸터 영역</h3>
@@ -197,7 +199,7 @@ input {
 			
 			function chkEmail() {
 				const user_email = joinFrm.user_email.value
-				axios.get('/ajax', {
+				axios.get('/ajaxemail', {
 					params: {
 						user_email : user_email
 					} 
@@ -207,6 +209,22 @@ input {
 						idChkResult.innerText = '사용할 수 있는 아이디입니다.'
 					} else if(res.data == 2) { //아이디 중복됨
 						idChkResult.innerText = '이미 사용중입니다.'
+					}
+				})
+			}
+			
+			function chkNickname() {
+				const nickname = joinFrm.nickname.value
+				axios.get('/ajaxnickname', {
+					params: {
+						nickname : nickname
+					} 
+				}).then(function(res) {
+					console.log(res)
+					if(res.data == 1) { //아이디 없음
+						nicknameChkResult.innerText = '사용할 수 있는 아이디입니다.'
+					} else if(res.data == 0) { //아이디 중복됨
+						nicknameChkResult.innerText = '이미 사용중입니다.'
 					}
 				})
 			}
