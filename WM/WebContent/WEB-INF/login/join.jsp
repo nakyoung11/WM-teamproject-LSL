@@ -140,8 +140,8 @@ input {
                <div class="user_email"><label for="user_email">이메일</label>
                     <input type="email" name="user_email" id="user_email" required autofocus>
                      <input type="button" value="중복확인" id="double_check" onclick="chkEmail()">
-                     <input type="hidden" name="idCheck" value="idUnCheck">
-                     <div id="idChkResult" class="msg"></div>
+                     <input type="hidden" name="eamilCheck" value="emailUnCheck">
+                     <div id="emailChkResult" class="msg"></div>
                 </div>
                 <div class="nickname">
                     <label for="nickname">닉네임</label>
@@ -167,7 +167,7 @@ input {
                 	<label id="news_guide" for="news"> <input type="checkbox" name="news" value="1" id="news">전시회 정보 및 소식 받기</label>
                 </div> 
                 <div class="submit_btn">
-                    <input type="submit" value="가입하기" id="submit_btn" >
+                    <input type="submit" value="가입하기" id="submit_btn">
                 </div>
              </form>
         </div>
@@ -188,8 +188,8 @@ input {
 					return false
 				}
 				
-				if(joinFrm.idCheck.value != "idCheck") {
-					alert('아이디 중복확인을 해주세요.')
+				if(joinFrm.emailCheck.value != "emailCheck") {
+					alert('이메일 중복확인을 해주세요.')
 					return false
 				}
 				if(joinFrm.nicknameCheck.value != "nicknameCheck") {
@@ -229,8 +229,7 @@ input {
 						joinFrm.nm.focus()
 						return false
 					}
-				}
-	
+				}	
 			}
 			
 			function chkEmail() {
@@ -242,15 +241,15 @@ input {
 				}).then(function(res) {
 					console.log(res)
 					if(joinFrm.user_email.value != '') {
-						if(res.data == 3) { //아이디 없음
-							idChkResult.innerText = '사용할 수 있는 아이디입니다.'
-							joinFrm.idCheck.value = "idCheck"
-						} else if(res.data == 2) { //아이디 중복됨
-							idChkResult.innerText = '이미 사용중입니다.'
-							joinFrm.idCheck.value = "idUnCheck"
+						if(res.data == 3) { // 이메일 DB에 없음
+							emailChkResult.innerText = '사용할 수 있는 이메일입니다.'
+							joinFrm.emailCheck.value = "emailCheck"
+						} else if(res.data == 2) { // 이메일 DB에 있음
+							emailChkResult.innerText = '이미 사용중입니다.'
+							joinFrm.emailCheck.value = "emailUnCheck"
 						}
 					} else {
-						alert('아이디를 입력해주세요')
+						alert('이메일을 입력해주세요')
 					}
 					
 				})
@@ -265,10 +264,10 @@ input {
 				}).then(function(res) {
 					console.log(res)
 					if(joinFrm.nickname.value != '') {
-						if(res.data == 1) { //아이디 없음
+						if(res.data == 1) { // 닉네임 DB에 없음
 							nicknameChkResult.innerText = '사용할 수 있는 닉네입니다.'
 							joinFrm.nicknameCheck.value = "nicknameCheck"
-						} else if(res.data == 0) { //아이디 중복됨
+						} else if(res.data == 0) { // 닉네임 DB에 있음
 							nicknameChkResult.innerText = '이미 사용중입니다.'
 							joinFrm.nicknameCheck.value = "nicknameUnCheck"
 						}
@@ -278,6 +277,7 @@ input {
 					
 				})
 			}
+
 		</script>
 
 </body>

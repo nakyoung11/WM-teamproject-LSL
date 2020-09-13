@@ -22,7 +22,7 @@ public class AjaxChkEmailSer extends HttpServlet {
 		param.setUser_email(user_email);
 		param.setUser_pw("");
 		
-		int result = UserDAO.login(param);
+		int result = UserDAO.login(param); // return값이 3이면 해당 닉네임 존재, 2면 사용가능
 		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
