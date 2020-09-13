@@ -30,17 +30,9 @@ public class JoinSer extends HttpServlet {
 		String user_date = request.getParameter("user_date");
 		String news = request.getParameter("news");
 		if(news == null) {
-			news = "0";
+			news = "0"; // 소식받기 체크박스 체크를 하지않으면 null값이 넘어옴, 체크시 value값인 1이 넘어옴
 		}
-		
-		System.out.println("user_email : " + user_email);
-		System.out.println("nickname : " + nickname);
-		System.out.println("enryptPw : " + encrypt_pw);
-		System.out.println("user_year : " + user_year);
-		System.out.println("user_month : " + user_month);
-		System.out.println("user_date : " + user_date);
-		System.out.println("news : " + news);
-		
+
 		UserVO param = new UserVO();
 		param.setUser_email(user_email);
 		param.setNickname(nickname);
@@ -51,7 +43,6 @@ public class JoinSer extends HttpServlet {
 		param.setNews(news);
 		
 		int result = UserDAO.insUser(param);
-		System.out.println("result = " + result);
 
 		response.sendRedirect("/login");
 	}
