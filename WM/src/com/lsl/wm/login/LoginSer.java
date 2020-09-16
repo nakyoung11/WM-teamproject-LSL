@@ -21,12 +21,11 @@ public class LoginSer extends HttpServlet {
 		UserVO loginUser = MyUtils.getLoginUser(request);
 		
 		if(loginUser != null) {
-			response.sendRedirect("/main");
-		} else {
+			response.sendRedirect("/main"); // 로그인을 했는데 login화면으로 가려고 할때
+		} else { // 로그인을 하지 못했을 때 다시 로그인페이지로 이동
 			String jsp = "/WEB-INF/login/login.jsp";	
 			request.getRequestDispatcher(jsp).forward(request, response);			
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,14 +38,6 @@ public class LoginSer extends HttpServlet {
 		param.setUser_pw(encrypt_pw);
 		
 		int result = UserDAO.login(param);
-		
-		HttpSession hs = request.getSession();
-		hs.setAttribute("loginUser", param);
-		
-		if(result == 1) {
-			response.sendRedirect("/main");
-			return;
-		}
 		
 		if(result != 1) {
 			String msg = null;
@@ -65,7 +56,10 @@ public class LoginSer extends HttpServlet {
 			doGet(request, response);
 			return;
 		}
+		HttpSession hs = request.getSession();
+		hs.setAttribute("loginUser", param); // 세션에 UserDAO에서 param에 set한 얘들을 세션에 set
 		
+		response.sendRedirect("/main"); // 로그인 성공시 바로 main페이지로 이동
 		
 	}
 

@@ -29,7 +29,7 @@ public class UserDAO {
 	}
 	
 	public static int login(UserVO param) {
-		String sql = " SELECT i_user, user_pw "
+		String sql = " SELECT i_user, nickname, user_pw "
 				   + " FROM t_user "
 				   + " WHERE user_email = ? ";
 		
@@ -44,9 +44,11 @@ public class UserDAO {
 			public int executeQuery(ResultSet rs) throws SQLException {
 				if(rs.next()) {
 					String dbPw = rs.getNString("user_pw");
+					String nickname = rs.getNString("nickname");
 					if(dbPw.equals(param.getUser_pw())) {
 						int i_user = rs.getInt("i_user");
 						
+						param.setNickname(nickname);
 						param.setUser_pw(null);
 						param.setI_user(i_user);
 						return 1; // 로그인 성공
@@ -72,9 +74,9 @@ public class UserDAO {
 			@Override
 			public int executeQuery(ResultSet rs) throws SQLException {
 				if(rs.next()) {
-					return 0; 
+					return 0; // 닉네임이 존재하면 0 리턴
 				} else {
-					return 1;
+					return 1; // 존재하지 않으면 1 리턴
 				}
 			}
 		});
