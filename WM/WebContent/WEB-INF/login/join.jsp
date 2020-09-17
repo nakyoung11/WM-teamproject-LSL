@@ -151,7 +151,7 @@ input {
                 </div>
                 <div class="user_pw"><label for="user_pw">비밀번호</label>
                     <input type="password" name="user_pw" id="user_pw" required>
-                    <span id="pw_guide">8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</span>
+                    <span id="pw_guide">8~16자 영문, 숫자, 특수문자를 사용하세요.</span>
                 </div>
                 <div class="user_pwre"> <label for="user_pwre">비밀번호확인</label>
                     <input type="password" name="user_pwre" id="user_pwre"></label>
@@ -177,15 +177,15 @@ input {
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script>
 			function chk() {
-				if (joinFrm.user_pw.value.length < 8) {
-					alert("비밀번호는 8글자 이상이어야 합니다.")
+				if (!joinFrm.user_pw.value.match(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~,-])|([!,@,#,$,%,^,&,*,?,_,~,-].*[a-zA-Z0-9])/) || joinFrm.user_pw.value.length > 16) {
+					alert("8~16자 영문, 숫자, 특수문자를 사용하세요.")
 					joinFrm.user_pw.focus()
 					return false
 				} else if (joinFrm.user_pw.value != joinFrm.user_pwre.value) {
 					alert("비밀번호를 확인해주세요.")
 					joinFrm.user_pw.focus()
 					return false
-				}
+				} 
 				
 				
 				if(joinFrm.emailCheck.value != "emailCheck") {
