@@ -133,10 +133,9 @@ input {
     </style>
 </head>
 <body>
- 	
         <div id="contents">
             <h2 id="join_title">회원가입</h2>
-            <form action="" id="joinFrm" method="post" onsubmit="return chk()">
+            <form action="/join" id="joinFrm" method="post" onsubmit="return chk()">
                <div class="user_email"><label for="user_email">이메일</label>
                     <input type="email" name="user_email" id="user_email" required autofocus>
                      <input type="button" value="중복확인" id="double_check" onclick="chkEmail()">
@@ -188,6 +187,7 @@ input {
 					return false
 				}
 				
+				
 				if(joinFrm.emailCheck.value != "emailCheck") {
 					alert('이메일 중복확인을 해주세요.')
 					return false
@@ -229,7 +229,7 @@ input {
 						joinFrm.nm.focus()
 						return false
 					}
-				}	
+				}
 			}
 			
 			function chkEmail() {
