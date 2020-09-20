@@ -1,6 +1,8 @@
 package com.lsl.wm.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,17 +32,9 @@ public class JoinSer extends HttpServlet {
 		String user_date = request.getParameter("user_date");
 		String news = request.getParameter("news");
 		if(news == null) {
-			news = "0";
+			news = "0"; // 소식받기 체크박스 체크를 하지않으면 null값이 넘어옴, 체크시 value값인 1이 넘어옴
 		}
-		
-		System.out.println("user_email : " + user_email);
-		System.out.println("nickname : " + nickname);
-		System.out.println("enryptPw : " + encrypt_pw);
-		System.out.println("user_year : " + user_year);
-		System.out.println("user_month : " + user_month);
-		System.out.println("user_date : " + user_date);
-		System.out.println("news : " + news);
-		
+
 		UserVO param = new UserVO();
 		param.setUser_email(user_email);
 		param.setNickname(nickname);
@@ -51,9 +45,22 @@ public class JoinSer extends HttpServlet {
 		param.setNews(news);
 		
 		int result = UserDAO.insUser(param);
-		System.out.println("result = " + result);
+		
 
-		response.sendRedirect("/login");
+
+
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out=response.getWriter();
+		
+		out.println("<script language='javascript'>");
+		out.println("alert('회원가입을 축하드립니다!'); location.href='/login'"); // 서블릿에서 script 태그 사용
+		out.println("</script>");
+		out.flush();
+		// sendRedirect 안됨
+		// location.href 사용 해야함
+		
+		
+		
 	}
 
 }
