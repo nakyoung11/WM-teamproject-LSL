@@ -22,19 +22,19 @@
 						손님 환영합니다.
 					</c:otherwise>
 				</c:choose>
-				<a href="/logout">로그아웃</a></div>
+				<a href="/logout">로그아웃</a>
 				<div class="menu">
 					<ul>
-						<a href="/calendar"><li id="m1">전시일정</li></a>
-						<a><li id="m2">기관소개</li></a>
-						<a><li id="m3">커뮤니티</li></a>
-						<a><li id="m4">이전전시</li></a>
-						<a><li id="m5">마이페이지</li></a>
-						<hr>
+						<li id="m1"><a href="/calendar">전시일정</a></li>
+						<li id="m2"><a>기관소개</a></li>
+						<li id="m3"><a>커뮤니티</a></li>
+						<li id="m4"><a>이전전시</a></li>
+						<li id="m5"><a href="/writer/mypage_profile">마이페이지</a></li>		
 					</ul>
+					<hr>
 				</div>
 			</nav>
 		</div>
-
+	
 </body>
 </html>
