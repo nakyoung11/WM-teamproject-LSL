@@ -28,7 +28,7 @@ public class AjaxChkEmailSer extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		
-		out.print(result);
+		out.print(result); // data 값에 result 대입
 		
 	}
 }
