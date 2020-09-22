@@ -12,10 +12,27 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
 <style>
+#footer {
+	position: absolute;
+	width: 1440px;
+	height: 78px;
+	left: 0px;
+	top: 1740px;
+}
+
 #container {
-	width: 100%;
-	margin: 0 auto;
-	border: 1px solid black;
+	display: flex;
+	width: 1000px;
+	margin: 5px auto;
+	justify-content: center;
+	font-family: 'RIDIBatang';
+	font-weight: 300;
+}
+
+#contents {
+	position: relative;
+	width: 900px;
+	margin-top: 280px;
 }
 /*----------------------- 추가 사항 ----------------- */
 #exhibit_list {

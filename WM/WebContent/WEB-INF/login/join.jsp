@@ -9,19 +9,23 @@
     <title>회원가입</title>
 
     <style>
+body{background-image:url('/resource/background/background.png');}
 
 #joinFrm {
-    width: 100%;
-    margin:5% auto;
+    width: 500px;
+    margin:50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.767);
     
  
 }
 
+#join_title{text-align: center;}
 label {
-    padding-left: 1em;
     display: block;
     margin: 10px;
-    font-size: 1.4em;
+    margin-left: 30px;
+    font-size: 18px;
     font-size-adjust:0.6em
 }
 
@@ -29,7 +33,7 @@ label {
     display: block;
     padding-left: 2em;
     margin-bottom: 2em;
-    font-size: 1em;
+    font-size: 14px;
     color: rgb(170, 14, 14);
     font-size-adjust:0.6em
 }
@@ -37,25 +41,24 @@ label {
 input {
     width: 55%;
     height: 2.5em;
-    margin-left: 3%;
-    margin-bottom: 2em;
+    margin-left: 30px;
+    margin-bottom: 5px;
     height: 1.8em;
-    font-size: 1.2em;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
+    font-size: 18px;
+    border:0;
     border-bottom: 1px solid black;
-    background: #F9F9F9;
-    padding-left: 1em;
+    background:none;
+    padding-left: 5px;
     font-size-adjust:0.6em;
     cursor:pointer;
 }
+
 
 #birthday {
     padding-left: 1em;
     display: block;
     margin: 10px;
-    font-size: 1.4em;
+    font-size: 18px;
     font-size-adjust:0.6em
 }
 
@@ -63,12 +66,11 @@ input {
     display: inline-block;
     width: 5%;
     margin-right: 10px;
-    padding-left: 0;
     font-size-adjust:0.6em
 }
 
 .birthday>input {
-    width: 15%;
+    width: 100px;
 
   
 }
@@ -87,23 +89,25 @@ input {
 
 .nickname>input{width:45%}
 .news{height: 10%;}
-#user_pw{margin-bottom: 0.8em;}
+#user_pw{margin-bottom: 10px }
 #news {
-    font-size:1.3em;
+    font-size:18px;
     height: 1em;
     width: 1.3em;
-    margin-right: 0.5em;
+
 }
 
 #news_guide {
-    font-size: 1.3em;
+    margin-left: 0;
+    margin-top: 15px;
+    font-size: 18px;
     
    
 }
 
 #double_check {
     display: inline-block;
-    width: 13%;
+    width: 80px;
     height: 2.5em;
     border: none;
     background: #544E57;
@@ -116,8 +120,8 @@ input {
 
 #submit_btn {
     display:block;
-    margin: 4em auto;
-    width: 60%;
+    margin: 10px auto;
+    width: 300px;
     height:3.5em;
     background: #927E9C;
     border: none;
@@ -128,16 +132,19 @@ input {
 
 }
 .msg {
-	color: red;
+   margin-top: 10px;
+   margin-left: 30px; 
+   color: red;
 }  
     </style>
 </head>
 <body>
- 	
+    
         <div id="contents">
-            <h2 id="join_title">회원가입</h2>
+        
             <form action="" id="joinFrm" method="post" onsubmit="return chk()">
-               <div class="user_email"><label for="user_email">이메일</label>
+                <h2 id="join_title">회원가입</h2>   
+                <div class="user_email"><label for="user_email">이메일</label>
                     <input type="email" name="user_email" id="user_email" required autofocus>
                      <input type="button" value="중복확인" id="double_check" onclick="chkEmail()">
                      <input type="hidden" name="eamilCheck" value="emailUnCheck">
@@ -164,7 +171,7 @@ input {
                     <input type="text" name="user_date" id="date" placeholder="예)1"><label for="date">일</label>
                 </div>
                 <div class="news">
-                	<label id="news_guide" for="news"> <input type="checkbox" name="news" value="1" id="news">전시회 정보 및 소식 받기</label>
+                   <label id="news_guide" for="news"> <input type="checkbox" name="news" value="1" id="news">전시회 정보 및 소식 받기</label>
                 </div> 
                 <div class="submit_btn">
                     <input type="submit" value="가입하기" id="submit_btn">
@@ -175,110 +182,110 @@ input {
             <h3>푸터 영역</h3>
         </div>
 
-		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script>
-			function chk() {
-				if (joinFrm.user_pw.value.length < 8) {
-					alert("비밀번호는 8글자 이상이어야 합니다.")
-					joinFrm.user_pw.focus()
-					return false
-				} else if (joinFrm.user_pw.value != joinFrm.user_pwre.value) {
-					alert("비밀번호를 확인해주세요.")
-					joinFrm.user_pw.focus()
-					return false
-				}
-				
-				if(joinFrm.emailCheck.value != "emailCheck") {
-					alert('이메일 중복확인을 해주세요.')
-					return false
-				}
-				if(joinFrm.nicknameCheck.value != "nicknameCheck") {
-					alert('닉네임 중복확인을 해주세요.')
-					return false
-				}
-				if(joinFrm.user_year.value == ''){
-	                alert("년도를 입력하세요.");
-	                return false;
-	            }    
-	            if(isNaN(joinFrm.user_year.value)){
-	                alert("년도는 숫자만 입력가능합니다.");
-	                return false;
-	            }
-	            if(joinFrm.user_month.value == ''){
-	                alert("월을 입력하세요.");
-	                return false;
-	            }
-	            
-	            if(isNaN(joinFrm.user_month.value)){
-	                alert("월은 숫자만 입력가능합니다.");
-	                return false;
-	            }
-	            if(joinFrm.user_date.value == ''){
-	                alert("일을 입력하세요.");
-	                return false;
-	            }
-	            
-	            if(isNaN(joinFrm.user_date.value)){
-	                alert("일은 숫자만 입력가능합니다.");
-	                return false;
-	            }
-				if (joinFrm.user_email.value.length > 0) {
-					const email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-					if (!email.test(frm.email.value)) {
-						alert("이메일을 확인해 주세요.")
-						joinFrm.nm.focus()
-						return false
-					}
-				}	
-			}
-			
-			function chkEmail() {
-				const user_email = joinFrm.user_email.value
-				axios.get('/ajaxemail', {
-					params: {
-						user_email : user_email
-					} 
-				}).then(function(res) {
-					console.log(res)
-					if(joinFrm.user_email.value != '') {
-						if(res.data == 3) { // 이메일 DB에 없음
-							emailChkResult.innerText = '사용할 수 있는 이메일입니다.'
-							joinFrm.emailCheck.value = "emailCheck"
-						} else if(res.data == 2) { // 이메일 DB에 있음
-							emailChkResult.innerText = '이미 사용중입니다.'
-							joinFrm.emailCheck.value = "emailUnCheck"
-						}
-					} else {
-						alert('이메일을 입력해주세요')
-					}
-					
-				})
-			}
-			
-			function chkNickname() {
-				const nickname = joinFrm.nickname.value
-				axios.get('/ajaxnickname', {
-					params: {
-						nickname : nickname
-					} 
-				}).then(function(res) {
-					console.log(res)
-					if(joinFrm.nickname.value != '') {
-						if(res.data == 1) { // 닉네임 DB에 없음
-							nicknameChkResult.innerText = '사용할 수 있는 닉네입니다.'
-							joinFrm.nicknameCheck.value = "nicknameCheck"
-						} else if(res.data == 0) { // 닉네임 DB에 있음
-							nicknameChkResult.innerText = '이미 사용중입니다.'
-							joinFrm.nicknameCheck.value = "nicknameUnCheck"
-						}
-					} else {
-						alert('닉네임을 입력해주세요')
-					}
-					
-				})
-			}
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script>
+         function chk() {
+            if (joinFrm.user_pw.value.length < 8) {
+               alert("비밀번호는 8글자 이상이어야 합니다.")
+               joinFrm.user_pw.focus()
+               return false
+            } else if (joinFrm.user_pw.value != joinFrm.user_pwre.value) {
+               alert("비밀번호를 확인해주세요.")
+               joinFrm.user_pw.focus()
+               return false
+            }
+            
+            if(joinFrm.emailCheck.value != "emailCheck") {
+               alert('이메일 중복확인을 해주세요.')
+               return false
+            }
+            if(joinFrm.nicknameCheck.value != "nicknameCheck") {
+               alert('닉네임 중복확인을 해주세요.')
+               return false
+            }
+            if(joinFrm.user_year.value == ''){
+                   alert("년도를 입력하세요.");
+                   return false;
+               }    
+               if(isNaN(joinFrm.user_year.value)){
+                   alert("년도는 숫자만 입력가능합니다.");
+                   return false;
+               }
+               if(joinFrm.user_month.value == ''){
+                   alert("월을 입력하세요.");
+                   return false;
+               }
+               
+               if(isNaN(joinFrm.user_month.value)){
+                   alert("월은 숫자만 입력가능합니다.");
+                   return false;
+               }
+               if(joinFrm.user_date.value == ''){
+                   alert("일을 입력하세요.");
+                   return false;
+               }
+               
+               if(isNaN(joinFrm.user_date.value)){
+                   alert("일은 숫자만 입력가능합니다.");
+                   return false;
+               }
+            if (joinFrm.user_email.value.length > 0) {
+               const email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+               if (!email.test(frm.email.value)) {
+                  alert("이메일을 확인해 주세요.")
+                  joinFrm.nm.focus()
+                  return false
+               }
+            }   
+         }
+         
+         function chkEmail() {
+            const user_email = joinFrm.user_email.value
+            axios.get('/ajaxemail', {
+               params: {
+                  user_email : user_email
+               } 
+            }).then(function(res) {
+               console.log(res)
+               if(joinFrm.user_email.value != '') {
+                  if(res.data == 3) { // 이메일 DB에 없음
+                     emailChkResult.innerText = '사용할 수 있는 이메일입니다.'
+                     joinFrm.emailCheck.value = "emailCheck"
+                  } else if(res.data == 2) { // 이메일 DB에 있음
+                     emailChkResult.innerText = '이미 사용중입니다.'
+                     joinFrm.emailCheck.value = "emailUnCheck"
+                  }
+               } else {
+                  alert('이메일을 입력해주세요')
+               }
+               
+            })
+         }
+         
+         function chkNickname() {
+            const nickname = joinFrm.nickname.value
+            axios.get('/ajaxnickname', {
+               params: {
+                  nickname : nickname
+               } 
+            }).then(function(res) {
+               console.log(res)
+               if(joinFrm.nickname.value != '') {
+                  if(res.data == 1) { // 닉네임 DB에 없음
+                     nicknameChkResult.innerText = '사용할 수 있는 닉네입니다.'
+                     joinFrm.nicknameCheck.value = "nicknameCheck"
+                  } else if(res.data == 0) { // 닉네임 DB에 있음
+                     nicknameChkResult.innerText = '이미 사용중입니다.'
+                     joinFrm.nicknameCheck.value = "nicknameUnCheck"
+                  }
+               } else {
+                  alert('닉네임을 입력해주세요')
+               }
+               
+            })
+         }
 
-		</script>
+      </script>
 
 </body>
 </html>
