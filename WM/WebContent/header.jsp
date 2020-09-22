@@ -29,6 +29,7 @@
         <header id="header">
             <h1><a href="">WM</a></h1> 
              <nav id="member">
+
                 <h2 class="hidden">회원로그인/ 가입/ 로그아웃</h2>
                 <ul>
                     <li><a href="#"><span class="material-icons md-36">login</samp></a></li>
@@ -37,6 +38,7 @@
             </nav>
             <nav id="menu">
                 <h2 class="hidden">WM이용메뉴</h2>
+
                 <ul>
                     <li id="li_1"  class="main_li"><a href="/calendar">전시일정</a></li>
                     <li class="main_li"><a href="#">전시상세</a></li>
@@ -54,6 +56,19 @@
                     </li>
                   </ul>
             </nav>
+
+
+           <c:choose>
+					<c:when test="${loginUser.nickname != null}">
+						${loginUser.nickname}님 환영합니다.
+					</c:when>
+					<c:otherwise>
+						손님 환영합니다.
+					</c:otherwise>
+				</c:choose>
+				<a href="/logout">로그아웃</a></div>
+
+
         </header> 
     </div>  
 </body>

@@ -147,7 +147,7 @@ input {
 
                     <input type="email" name="user_email" id="user_email" required autofocus>
                      <input type="button" value="중복확인" id="double_check" onclick="chkEmail()">
-                     <input type="hidden" name="eamilCheck" value="emailUnCheck">
+                     <input type="hidden" name="emailCheck" value="emailUnCheck">
                      <div id="emailChkResult" class="msg"></div>
                 </div>
                 <div class="nickname">
@@ -286,8 +286,6 @@ input {
 					
 				})
 			}
-
-
       </script>
 
 </body>
