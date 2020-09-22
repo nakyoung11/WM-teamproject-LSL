@@ -7,6 +7,33 @@ import java.sql.SQLException;
 import com.lsl.wm.vo.UserVO;
 
 public class UserDAO {
+	public static UserVO selUser(final int i_user) {
+		String sql = " SELECT user_email, nickname "
+				   + " FROM t_user "
+				   + " WHERE i_user = ? ";
+		
+		UserVO result = new UserVO();
+		
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, i_user);
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				if(rs.next()) {
+					result.setUser_email(rs.getNString("user_email"));
+					result.setNickname(rs.getNString("nickname"));
+				}
+				return 1;
+			}
+		});
+		
+		return result;
+	}
+	
 	public static int insUser(UserVO param) {
 		String sql = " INSERT INTO t_user " 
 				+ " (user_email, nickname, user_pw, user_year, user_month, user_date, news) " 
