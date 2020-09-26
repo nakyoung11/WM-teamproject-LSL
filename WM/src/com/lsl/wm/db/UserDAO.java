@@ -108,4 +108,33 @@ public class UserDAO {
 			}
 		});
 	}
+	
+	public static int updUser(UserVO param) {
+		StringBuilder sb = new StringBuilder(" UPDATE t_user SET m_dt = now() ");
+		if(param.getNickname() != null) {
+			sb.append(" , nickname = '");
+			sb.append(param.getNickname());
+			sb.append("' ");
+			
+		}	
+		if(param.getUser_pw() != null) {
+			sb.append(" , user_pw = '");
+			sb.append(param.getUser_pw());
+			sb.append("' ");
+		}
+		if(param.getProfile_img() != null) {
+			sb.append(" , profile_img = '");
+			sb.append(param.getProfile_img());
+			sb.append("' ");
+		}
+		
+		sb.append(" WHERE i_user = ");
+		sb.append(param.getI_user());
+		
+		return JdbcTemplate.executeUpdate(sb.toString(), new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {}
+		});
+	}
 }
