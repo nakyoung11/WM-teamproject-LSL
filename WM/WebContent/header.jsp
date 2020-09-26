@@ -48,7 +48,7 @@
                           <li><a href="#">자유게시판</a></li>
                        </ul>
                     </li>
-                    <li><a href="#"  class="main_li">마이페이지</a>
+                    <li><a href="/writer/mypage_profile"  class="main_li">마이페이지</a>
                        <ul class="sub_menu_2">
                           <li><a href="#">프로필관리</a></li>
                      <li><a href="#">전시회관리</a></li>                       
