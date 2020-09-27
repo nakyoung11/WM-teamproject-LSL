@@ -20,7 +20,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
 @WebServlet("/profile")
-public class ProfileSer extends HttpServlet {
+public class ChangeProfileSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,7 +74,7 @@ public class ProfileSer extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		
 		out.println("<script language='javascript'>");
-		out.println("alert('개인정보가 변경되었습니다.'); location.href='/logout'"); // 서블릿에서 script 태그 사용
+		out.println("alert('프로필이미지가 변경되었습니다.'); location.href='/writer/mypage_profile'"); // 서블릿에서 script 태그 사용
 		out.println("</script>");
 		out.flush();
 	}
