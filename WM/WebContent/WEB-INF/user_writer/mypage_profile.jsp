@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,6 +85,7 @@
 <body>
  
 	<div id="container">
+	<jsp:include page="../../header.jsp"></jsp:include>
         <div id="contents">
             <div class="side">
                 <ul type="none">
@@ -92,6 +94,26 @@
                 </ul>
             </div>
             <div class="main">
+            <div>
+				<c:choose>
+					<c:when test="${data.profile_img != null}">
+						<img src="/img/user/${loginUser.i_user}/${data.profile_img}">
+					</c:when>
+					<c:otherwise>
+						<img src="/resource/profile/default_profile.jpg">
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div>
+				<form action="/profile" method="post" enctype="multipart/form-data">
+					<div>
+						<label>프로필 이미지 : <br><input type="file" name="profile_img" accept="image/*"></label>
+						<br>
+						<input type="submit" value="업로드">
+					</div>				
+				</form>
+			</div>
+			<br>
                 <form id="frm" action="/changePw" method="post" onsubmit="return chkChangePw()">
                 	<div>
                     	이메일 : ${data.user_email}

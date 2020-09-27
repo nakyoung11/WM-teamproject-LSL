@@ -8,7 +8,7 @@ import com.lsl.wm.vo.UserVO;
 
 public class UserDAO {
 	public static UserVO selUser(final int i_user) {
-		String sql = " SELECT user_email, nickname "
+		String sql = " SELECT user_email, nickname, profile_img "
 				   + " FROM t_user "
 				   + " WHERE i_user = ? ";
 		
@@ -26,6 +26,7 @@ public class UserDAO {
 				if(rs.next()) {
 					result.setUser_email(rs.getNString("user_email"));
 					result.setNickname(rs.getNString("nickname"));
+					result.setProfile_img(rs.getNString("profile_img"));
 				}
 				return 1;
 			}
