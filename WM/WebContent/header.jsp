@@ -31,10 +31,8 @@
              <nav id="member">
 
                 <h2 class="hidden">회원로그인/ 가입/ 로그아웃</h2>
-                <ul>
-                    <li><a href="#"><span class="material-icons md-36">login</samp></a></li>
-                    <li><a href="#">JOIN</a></li>
-                </ul>
+                
+       
             </nav>
             <nav id="menu">
                 <h2 class="hidden">WM이용메뉴</h2>
@@ -56,19 +54,17 @@
                     </li>
                   </ul>
             </nav>
-
-
-           <c:choose>
+<c:choose>
 					<c:when test="${loginUser.nickname != null}">
-						${loginUser.nickname}님 환영합니다.
+						${loginUser.nickname}님 환영합니다.<a href="/logout">로그아웃</a></div>
 					</c:when>
 					<c:otherwise>
-						손님 환영합니다.
+						  <ul>
+	                    <li><a href="/login"><span class="material-icons md-36">login</samp></a></li>
+	                    <li><a href="/join">JOIN</a></li>
+	                	</ul>
 					</c:otherwise>
 				</c:choose>
-				<a href="/logout">로그아웃</a></div>
-
-
         </header> 
     </div>  
 </body>
