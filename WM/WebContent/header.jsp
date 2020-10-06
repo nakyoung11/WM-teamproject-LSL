@@ -38,7 +38,7 @@
                 <h2 class="hidden">WM이용메뉴</h2>
 
                 <ul>
-                    <li id="li_1"  class="main_li"><a href="/calendar">전시일정</a></li>
+                    <li id="li_1"  class="main_li"><a href="#">전시 둘러보기</a></li>
                     <li class="main_li"><a href="#">전시상세</a></li>
                     <li class="main_li"><a href="#">커뮤니티</a>
                        <ul class="sub_menu">
