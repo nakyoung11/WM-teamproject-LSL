@@ -29,12 +29,13 @@ public class ShowDAO {
 		});
 	}
 	*/
-	public static List<ShowVO> selShowList(ShowVO param) {
-		List<ShowVO> list = new ArrayList<ShowVO>();
+	public static int selPagingCnt(ShowVO param) {
+		String sql = " SELECT CEIL(count(i_show) / 6) as pagingCnt "
+				   + " FROM t_show "
+				   + " WHERE show_title LIKE ? "
+				   + " ORDER BY start_dt DESC ";
 		
-		String sql = " SELECT show_title FROM t_show WHERE show_title LIKE ? ";
-		
-		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+		return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
 			
 			@Override
 			public void prepared(PreparedStatement ps) throws SQLException {
@@ -44,11 +45,39 @@ public class ShowDAO {
 			@Override
 			public int executeQuery(ResultSet rs) throws SQLException {
 				if(rs.next()) {
+					return rs.getInt("pagingCnt");
+				}
+				return 0;
+			}
+		});
+	}
+	
+	public static List<ShowVO> selShowList(ShowVO param) {
+		List<ShowVO> list = new ArrayList<ShowVO>();
+		
+		String sql = " SELECT A.* "
+				   + " FROM (SELECT show_title FROM t_show WHERE show_title LIKE ? ORDER BY start_dt DESC) A "
+				   + " LIMIT ?, 6 ";
+		
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {				
+				ps.setNString(1, param.getSearchText());
+				ps.setInt(2, param.getRow());
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				while(rs.next()) {
+					
 					String show_title = rs.getNString("show_title");
 					
-					param.setTitle(show_title);
+					ShowVO vo = new ShowVO();
 					
-					list.add(param);
+					vo.setShow_title(show_title);
+					
+					list.add(vo);
 				}
 				return 0;
 			}

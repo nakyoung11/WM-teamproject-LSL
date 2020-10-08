@@ -19,13 +19,25 @@ public class ShowListSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchText = request.getParameter("searchText");
 		searchText = (searchText == null ? "" : searchText);
+		String strPage = request.getParameter("page");
+		if(strPage == null) {
+			strPage = "0";
+		}
+		int page = Integer.parseInt(strPage);
+		
+		page = (page == 0 ? 1 : page);
+		
+		request.setAttribute("page", page);
 		
 		ShowVO param = new ShowVO();
+		param.setRow(page * 6 - 6);
 		param.setSearchText("%" + searchText + "%");
+		int pagingCnt = ShowDAO.selPagingCnt(param);
 		
 		List<ShowVO> list = ShowDAO.selShowList(param);
 		
 		request.setAttribute("list", list);
+		request.setAttribute("pagingCnt", pagingCnt);
 		
 		request.getRequestDispatcher("/WEB-INF/view/showList.jsp").forward(request, response);
 	}

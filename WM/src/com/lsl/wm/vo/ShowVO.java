@@ -9,9 +9,15 @@ public class ShowVO {
 	private String exhibit_end_dt;
 	private String show_title;
 	private String show_ctnt;
-	private String title;
 	private String searchText;
-	
+	private int row;
+
+	public int getRow() {
+		return row;
+	}
+	public void setRow(int row) {
+		this.row = row;
+	}
 	public int getI_show() {
 		return i_show;
 	}
@@ -59,12 +65,6 @@ public class ShowVO {
 	}
 	public void setShow_ctnt(String show_ctnt) {
 		this.show_ctnt = show_ctnt;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
 	}
 	public String getSearchText() {
 		return searchText;
