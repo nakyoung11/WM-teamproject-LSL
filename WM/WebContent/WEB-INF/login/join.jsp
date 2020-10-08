@@ -233,9 +233,9 @@ input {
 	            }
 				if (joinFrm.user_email.value.length > 0) {
 					const email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-					if (!email.test(frm.email.value)) {
+					if (!email.test(joinFrm.user_email.value)) {
 						alert("이메일을 확인해 주세요.")
-						joinFrm.nm.focus()
+						joinFrm.user_email.focus()
 						return false
 					}
 				}
