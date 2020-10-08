@@ -83,15 +83,13 @@
     </style>
 </head>
 <body>
- <jsp:include page="../../header.jsp"></jsp:include>
-	<div id="container">
-        <div id="contents">
-            <div class="side">
-                <ul type="none">
-                    <a href="mypage-both-profile.html"><li id="pro">프로필 관리</li></a>                
-                    <a href="mypage-artist-his.html"><li>나의 출품 목록</li></a>
+ 	<jsp:include page="../../header.jsp"></jsp:include>
+            <nav class="my_nav">
+                <ul>
+                  <li id="pro">  <a href="mypage-both-profile.html">프로필 관리</li></a>                
+                    <li><a href="mypage-artist-his.html">나의 출품 목록</li></a>
                 </ul>
-            </div>
+            </nav>
             <div class="main">
             <div>
 				<c:choose>
