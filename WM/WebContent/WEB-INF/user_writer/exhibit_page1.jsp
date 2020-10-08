@@ -7,32 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>등록 페이지1</title>
+<work_title>등록 페이지1</work_title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
 <style>
-#footer {
-	position: absolute;
-	width: 1440px;
-	height: 78px;
-	left: 0px;
-	top: 1740px;
-}
-
 #container {
-	display: flex;
-	width: 1000px;
-	margin: 5px auto;
-	justify-content: center;
-	font-family: 'RIDIBatang';
-	font-weight: 300;
-}
-
-#contents {
-	position: relative;
-	width: 900px;
-	margin-top: 280px;
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid black;
 }
 /*----------------------- 추가 사항 ----------------- */
 #exhibit_list {
@@ -83,7 +66,6 @@
 	top: 0;
 	width: 90%;
 	height: 100%;
-	/*background-image: url(/image/main.png);*/
 	background-size: 100% 100%;
 	cursor: pointer;
 	display: table;
@@ -224,29 +206,20 @@ button:focus {
 }
 </style>
 <body>
-<jsp:include page="../../header.jsp"></jsp:include>
 	<div id="container">
 		<div id="contents">
-			<form action="/exhibit_page2" method="POST" name="exhibit_frm"
+		<div>
+			<h1>전시회 제목: ${data.show_title}</h1>
+			<h2>전시회 설명: ${data.show_ctnt}</h2>
+			<h3>전시회 기간: ${data.start_dt} ~ ${data.end_dt} </h3>
+		</div>
+			<form action="/exhibit_page1" method="POST" name="exhibit_frm" enctype="multipart/form-data"
 				accept-charset="UTF-8">
-				<input type="hidden" name="exhibit_list_cnt" id="exhibit_list_cnt">
+				<!-- 어느 전시회인지를  POST로 보내주기 위해 i_show정보를 담아놓는다. -->
+				<input type="hidden" name="i_show" id="i_show" value="${data.i_show}">
+				<input type="hidden" name="list_cnt" id="list_cnt" value="">
 				<div id="exhibit_list">
-					<table>
-						<tr>
-							<td rowspan="2"><button id="min_work_btn_">－</button></td>
-							<td rowspan="2">
-								<div id="input_painting_">
-									<span>이미지 등록/수정</span>
-								</div>
-							</td>
-							<td>제목</td>
-							<td><input type="text" name="input_title_" id="input_title_"></td>
-						</tr>
-						<tr>
-							<td>작품설명</td>
-							<td><textarea name="input_comment_" id="input_comment_"></textarea></td>
-						</tr>
-					</table>
+				
 				</div>
 				<button id="add_work_btn" onclick='insertWorkInfo();return false;'>+</button>
 			</form>
@@ -257,126 +230,178 @@ button:focus {
 		</div>
 	</div>
 	<script>
-    	
-	/*작품 경로 상수*/
-    const WORK_PATH = '/resource/user_writer/images/exhibition/';
-
-    /*작품 정보 생성자 함수(자바로 치면 클래스) 선언*/
-    function WorkInfo(painting, title, comment) {
-        this.painting = painting;
-        this.title = title;
-        this.comment = comment;
-    }
-
-    /*작품 정보 배열 생성*/
-    var workInfoArr = [];
-        
-        /*서블릿의 작품 리스트를 받아온다.*/
-    	<c:forEach items="${workList}" var="item">
-        	workInfoArr.push(new WorkInfo("${item.painting}", "${item.title}", "${item.comment}"));
-		</c:forEach>
-		
         /*작품정보를 받아와 콘텐츠영역안에 테이블을 생성하여 보여주는 함수*/
-       function displayWorkInfo(paramArr) {
-    	   var exhibitList = document.getElementById('exhibit_list');
-    	   exhibitList.innerHTML = "";
-            for (var i = 0; i < paramArr.length; i++) {
+        function displayWorkInfo() {
+        	
+            var exhibitList = document.getElementById('exhibit_list');
+            exhibitList.innerHTML = "";
+           
                 var table = document.createElement('table');
-                table.innerHTML = `<tr>
+                table.setAttribute('id', `idx_0`);
+                table.innerHTML = `
+                <tr>
                 <td rowspan="2">
-                <button id="min_work_btn_\${i}" onclick="deleteWorkInfo(\${i}); return false;">－</button>
+                <button id="min_work_btn_0" onclick="deleteWorkInfo(0); return false;" style="visibility:hidden">－</button>
                 </td>
                 <td rowspan="2">
-                <div id="input_painting_\${i}" onclick="document.all.file\${i}.click()" style="background-image:url(\${WORK_PATH}\${paramArr[i].painting})">
-                <input type="file" name="file\${i}" id="file\${i}" style="display:none" accept="image/*" onchange="updatePainting(\${i})">
+                <div id="input_painting_0" onclick="document.all.file0.click()">
+                <input type="file" name="file0" id="file0" style="display:none" accept="image/*" onchange="updatePainting(0)">
                 <span>이미지 등록/수정</span>
+                <input id="work_image_idx_0" name="work_image_idx_0" type="hidden" value="">
                 </div>
                 </td>
                 <td>제목</td>
                 <td>
-                <input type="text" name="input_title_\${i}" id="input_title_\${i}" value="\${paramArr[i].title}"></td>
+                <input type="text" name="input_title_0" id="input_title_0" value=""></td>
                 </tr>
                 <tr>
                 <td>작품설명</td>
-                <td><textarea name="input_comment_\${i}" id="input_comment_\${i}">\${paramArr[i].comment}</textarea></td>
+                <td><textarea name="input_comment_0" id="input_comment_0"></textarea></td>
                 </tr>`;
                 exhibitList.append(table);
-            }
         }
+       
+	
+        /*현재 까지의 입력사항을 검사하는 함수*/
+        function checkInput() {
+        	 var exhibitList = document.getElementById('exhibit_list');
+        	var listLastIndex = exhibitList.childElementCount;
+            for (var i = 0; i < listLastIndex; i++) {
+            	
+            		var work_title = document.getElementById(`input_title_\${i}`).value;
+                    var work_ctnt = document.getElementById(`input_comment_\${i}`).value;
+                    var work_image = document.getElementById(`work_image_idx_\${i}`).value;
+                   
+            		//제목, 작품설명, 그림선택 등의 길이(공백미포함)가 0이라면
+    				if(work_title.replace(/\s| /gi, "").length == 0 || 
+    						work_ctnt.replace(/\s| /gi, "").length == 0 || 
+    						work_image.replace(/\s| /gi, "").length == 0){
+                        return false;
+                    }
+            	
+            }
+            return true;
+        }
+		
+        /*작품 목록을 지우는 함수*/
+        function deleteWorkInfo(idx) {
+         
+            	/*지울 작품의 타이틀을 가져옴*/
+                var work_title = document.getElementById(`input_title_\${idx}`).value;
+                var exhibitList = document.getElementById('exhibit_list');
+                var listLastIndex = exhibitList.childElementCount;
+            	
+                if(confirm(`제목: \${work_title} \n삭제하시겠습니까?`))
+                {
+                	
+                		document.getElementById("idx_" + idx).remove();
+                    	
+                      	idx++;
+                      	//삭제한 idx보다 큰 idx들의 수를 1 줄여준다(줄을 맞춘다.)
+                        for(var i=idx; i<listLastIndex; i++) {
+                        	 var table = document.getElementById(`idx_\${i}`);
+                             table.setAttribute('id', `idx_\${i - 1}`);
+                             var button = document.getElementById(`min_work_btn_\${i}`);
+                             button.setAttribute('id', `min_work_btn_\${i-1}`);
+                             button.setAttribute('onclick', `deleteWorkInfo(\${i-1})`);
+                             var div = document.getElementById(`input_painting_\${i}`);
+                             div.setAttribute('id', `input_painting_\${i-1}`);
+                             div.setAttribute('onclick', `document.all.file\${i-1}.click()`);
+                             var input_img = document.getElementById(`work_image_idx_\${i}`);
+                             input_img.setAttribute('id', `work_image_idx_\${i-1}`);
+                             input_img.setAttribute('name', `work_image_idx_\${i-1}`);
+                             var file = document.getElementById(`file\${i}`);
+                             file.setAttribute('id', `file\${i-1}`);
+                             file.setAttribute('name', `file\${i-1}`);
+                             file.setAttribute('onchange', `updatePainting(\${i-1})`);
+                             var input = document.getElementById(`input_title_\${i}`);
+                             input.setAttribute('id', `input_title_\${i-1}`);
+                             input.setAttribute('name', `input_title_\${i-1}`);
+                             var textarea =  document.getElementById(`input_comment_\${i}`);
+                             textarea.setAttribute('id', `input_comment_\${i-1}`);
+                             textarea.setAttribute('name', `input_comment_\${i-1}`);
+                	}
 
-       /*현재 까지의 입력사항을 저장하는 함수*/
-       function saveInput(paramArr) {
-           for (var i = 0; i < paramArr.length; i++) {
-               var title = document.getElementById(`input_title_\${i}`).value;
-               var comment = document.getElementById(`input_comment_\${i}`).value;
-               paramArr[i].title = title;
-               paramArr[i].comment = comment;
-           }
-       }
-
-       /*현재 까지의 입력사항을 검사하는 함수*/
-       function checkInput() {
-           //현재까지 입력사항 저장
-           saveInput(workInfoArr);
+                }
+              
+        }
+		
+		
+        /*추가버튼을 눌렀을시 공백의 입력란을 만들어주는 함수*/
+        function insertWorkInfo() { 
            
-           for (var i = 0; i < workInfoArr.length; i++) {
-               //제목, 작품설명, 그림선택 등의 길이(공백미포함)가 0이라면
-               if(workInfoArr[i].title.replace(/\s| /gi, "").length == 0 || 
-                workInfoArr[i].comment.replace(/\s| /gi, "").length == 0 || 
-                workInfoArr[i].painting.replace(/\s| /gi, "").length == 0){
-                   return false;
-               }
-           }
-           return true;
-       }
-
-       /*작품 목록을 지우는 함수*/
-       function deleteWorkInfo(idx) {
-           /*지울 작품의 타이틀을 가져옴*/
-           var title = document.getElementById(`input_title_\${idx}`).value;
-           /*삭제확인*/
-           if(confirm(`제목: \${title} \n삭제하시겠습니까?`))
-           {
-               /*현재 까지의 입력 정보를 배열에 저장*/
-               saveInput(workInfoArr);
-               workInfoArr.splice(idx, 1);
-               displayWorkInfo(workInfoArr);
-           }
-       }
-
-       /*추가버튼을 눌렀을시 공백의 입력란을 만들어주는 함수*/
-       function insertWorkInfo() {
-           /*현재 까지의 입력 정보를 배열에 저장*/
-           saveInput(workInfoArr);
-           workInfoArr.push(new WorkInfo("", "", ""));
-           displayWorkInfo(workInfoArr);
-       }
-
-       /*이미지 선택시 이미지 저장과 이미지 변경*/
-       function updatePainting(idx) {
-           var painting = document.getElementById(`file\${idx}`).value.substring(document.getElementById(`file\${idx}`).value.lastIndexOf("\\") + 1);
-           //painting 맴버 변수에는 파일 이름만 들어간다.
-           workInfoArr[idx].painting = painting;
-           saveInput(workInfoArr);
-           displayWorkInfo(workInfoArr);
-       }
-
-       /*출품하기 버튼 눌렀을때 페이지 이동하는 페이지*/
-       function submitExihibit(){
-           if(checkInput()){
-               alert('출품완료');
-               for(var i=0; i<workInfoArr.length; i++){
-                console.log(workInfoArr[i]);
-               }
-               document.getElementById('exhibit_list_cnt').value = workInfoArr.length;
-               alert('출품작 수 : ' + document.getElementById('exhibit_list_cnt').value + '개');
-               document.exhibit_frm.submit();
-           }else {
-               alert('작성이 완전치 않은 테이블이 존재합니다.\n작성 혹은 삭제 해주세요.');
-           }
-       }
-
-       displayWorkInfo(workInfoArr);
+            var exhibitList = document.getElementById('exhibit_list');
+            var listLastIndex = exhibitList.childElementCount;
+            console.log(listLastIndex);
+          
+                var table = document.createElement('table');
+                table.setAttribute('id', `idx_\${listLastIndex}`);
+                table.innerHTML = `
+                <tr>
+                <td rowspan="2">
+                <button id="min_work_btn_\${listLastIndex}" onclick="deleteWorkInfo(\${listLastIndex}); return false;">－</button>
+                </td>
+                <td rowspan="2">
+                <div id="input_painting_\${listLastIndex}" onclick="document.all.file\${listLastIndex}.click()" style="background-image:url()">
+                <input type="file" name="file\${listLastIndex}" id="file\${listLastIndex}" style="display:none" accept="image/*" onchange="updatePainting(\${listLastIndex})">
+                <input type="hidden" name="input_image_\${listLastIndex}" id="input_image_\${listLastIndex}">
+                <span>이미지 등록/수정</span>
+                <input id="work_image_idx_\${listLastIndex}" name="work_image_idx_\${listLastIndex}" type="hidden" value="">
+                </div>
+                </td>
+                <td>제목</td>
+                <td>
+                <input type="text" name="input_title_\${listLastIndex}" id="input_title_\${listLastIndex}"></td>
+                </tr>
+                <tr>
+                <td>작품설명</td>
+                <td><textarea name="input_comment_\${listLastIndex}" id="input_comment_\${listLastIndex}"></textarea></td>
+                </tr>`;
+                exhibitList.append(table);
+            
+        }
+		
+        /*이미지 선택시 이미지 저장과 이미지 변경*/
+        function updatePainting(idx) {
+           
+        	console.log("이미지 변경 함수 실행")
+        	
+        	/*파일 선택시 미리보기 기능 구현부*/
+			const file = document.getElementById('file' + idx).files[0];
+			if(file){
+	            const reader = new FileReader();
+	            reader.readAsDataURL(file);
+	            console.log(reader.result);
+	            reader.onload = () => {
+	            	document.getElementById('input_painting_' + idx).style.backgroundImage = `url(\${reader.result})`;
+	            }
+	        }
+         
+           
+            var work_image = document.getElementById('file' + idx).files[0].name;
+           
+            document.getElementById(`work_image_idx_\${idx}`).value = work_image;
+            console.log( document.getElementById(`work_image_idx_\${idx}`).value);
+            
+        }
+		
+		
+        /*출품하기 버튼 눌렀을때 페이지 이동하는 페이지*/
+        function submitExihibit(){
+        	var exhibitList = document.getElementById('exhibit_list');
+            var listLastIndex = exhibitList.childElementCount;
+			if(checkInput()){
+				//총 몇 개의 작품이 올라갔는지 보내주기 위해 list_cnt에 넣어준다.
+				document.getElementById('list_cnt').value = listLastIndex;
+				
+               	alert('출품완료'); 
+               	document.exhibit_frm.submit();
+           	}else {
+                alert('작성이 완전치 않은 테이블이 존재합니다.\n작성 혹은 삭제 해주세요.');
+           	}
+        }
+			
+        displayWorkInfo();
     </script>
 </body>
 
