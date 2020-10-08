@@ -22,12 +22,8 @@
 	<div id="blocker">
 
 		<div id="instructions">
-			<strong>전시회장에 오신걸 환영합니다!</br>
-			</br> 클릭으로 시작합니다.
-			</strong> </br>
-			</br> W,A,S,D 또는 방향키 = 움직이기 </br>
-			</br>
-			<strong>Mouse = 주위둘러보기</strong>
+			<strong>전시회장에 오신걸 환영합니다!</br> </br> 클릭으로 시작합니다.
+			</strong> </br> </br> W,A,S,D 또는 방향키 = 움직이기 </br> </br> <strong>Mouse = 주위둘러보기</strong>
 		</div>
 
 	</div>
@@ -62,22 +58,24 @@
 					<p></p>
 				</div>
 			</div>
-			<div id="user_commnets_div">
-				
-			</div>
+			<div id="user_commnets_div"></div>
 			<div id="bottom_div">
 				<div id="like_div">
-					<img id= "like_icon_div" src="/resource/3d_gallay/images/icons/empty_like_icon.png"
-						alt="" style="cursor: pointer">
+					<img id="like_icon_div"
+						src="/resource/3d_gallay/images/icons/empty_like_icon.png" alt=""
+						style="cursor: pointer">
 					<p>좋아요</p>
 				</div>
 				<div id="input_comment_div">
 					<div>
-						<input type="text" id="input_cmt">
+						<input type="text" id="input_cmt" onkeyup="chkCmtLength()">
 					</div>
 					<div id="addCmtBtn">
 						<p>게시</p>
 					</div>
+				</div>
+				<div id="cmtLength">
+						<p>0/100</p>
 				</div>
 			</div>
 		</div>
@@ -107,9 +105,9 @@
   var moveLeft = false;
   var moveRight = false;
 
-  //플레이어 시작 위치 (y, z축)
+  //플레이어 시작 위치 (z, x축)
   var player_position_z;
-  var player_position_y;
+  var player_position_x;
 
   // Velocity vector for the player
   var playerVelocity = new THREE.Vector3();
@@ -131,6 +129,23 @@
   var isPaintingShow = false;
 
   var isExit = false;
+  
+  //그림의 개수
+  var workListSize = ${workListSize};
+  
+  if(workListSize <= 5){
+	  workListSize = 5;
+  }else if(workListSize <= 10){
+	  workListSize = 10;
+  }else if(workListSize <= 15){
+	  workListSize = 15;
+  }else if(workListSize <= 20){
+	  workListSize = 20;
+  }else if(workListSize <= 25){
+	  workListSize = 25;
+  }
+  
+ 
 
   //작품 생성자 함수 선언
   function workDomain(i_work, work_image, work_title, work_ctnt) {
@@ -163,41 +178,17 @@
   <c:forEach var="item" items="${workList}">
   	paintingDomainArr.push(new workDomain('${item.i_work}', '${workImagePath}${item.i_user}/${item.work_image}', '${item.work_title}', `${item.work_ctnt}`));
   </c:forEach>
-
-  //그림정보 생성(나중에 Servlet에서 가져올 정보)
-  /*
-  paintingDomainArr.push(new paintingDomain(1, "testImg1.png", "반고흐", "설명이 없는 그림 1", 20, "반호그 따라쟁이"));
-  paintingDomainArr.push(new paintingDomain(2, "testImg2.jpeg", "렘브란트", "아무개 가 그린 그림1", 25, "루팡3세"));
-  paintingDomainArr.push(new paintingDomain(3, "testImg3.jpg", "초상화", "블라블라블라", 67, "동네 아제"));
-  paintingDomainArr.push(new paintingDomain(4, "testImg4.jpeg", "아무그림", "천제가 그린 그림 1", 89, "바나나맨"));
-  paintingDomainArr.push(new paintingDomain(5, "testImg1.png", "반고흐", "설명이 없는 그림 1", 20, "반호그 따라쟁이"));
-  paintingDomainArr.push(new paintingDomain(6, "testImg2.jpeg", "렘브란트", "아무개 가 그린 그림1", 25, "루팡3세"));
-  paintingDomainArr.push(new paintingDomain(7, "testImg3.jpg", "초상화", "블라블라블라", 67, "동네 아제"));
-  paintingDomainArr.push(new paintingDomain(8, "testImg4.jpeg", "아무그림", "천제가 그린 그림 1", 89, "바나나맨"));
-  paintingDomainArr.push(new paintingDomain(9, "testImg1.png", "반고흐", "설명이 없는 그림 1", 20, "반호그 따라쟁이"));
-  paintingDomainArr.push(new paintingDomain(10, "testImg2.jpeg", "렘브란트", "아무개 가 그린 그림1", 25, "루팡3세"));
-  paintingDomainArr.push(new paintingDomain(11, "testImg3.jpg", "초상화", "블라블라블라", 67, "동네 아제"));
-  paintingDomainArr.push(new paintingDomain(12, "testImg4.jpeg", "아무그림", "천제가 그린 그림 1", 89, "바나나맨"));
-  paintingDomainArr.push(new paintingDomain(13, "testImg1.png", "반고흐", "설명이 없는 그림 1", 20, "반호그 따라쟁이"));
-  paintingDomainArr.push(new paintingDomain(14, "testImg2.jpeg", "렘브란트", "아무개 가 그린 그림1", 25, "루팡3세"));
-  paintingDomainArr.push(new paintingDomain(15, "testImg3.jpg", "초상화", "블라블라블라", 67, "동네 아제"));
-  paintingDomainArr.push(new paintingDomain(16, "testImg4.jpeg", "아무그림", "천제가 그린 그림 1", 89, "바나나맨"));
-  paintingDomainArr.push(new paintingDomain(17, "testImg1.png", "반고흐", "설명이 없는 그림 1", 20, "반호그 따라쟁이"));
-  paintingDomainArr.push(new paintingDomain(18, "testImg2.jpeg", "렘브란트", "아무개 가 그린 그림1", 25, "루팡3세"));
-  paintingDomainArr.push(new paintingDomain(19, "testImg3.jpg", "초상화", "블라블라블라", 67, "동네 아제"));
-  paintingDomainArr.push(new paintingDomain(20, "testImg4.jpeg", "아무그림", "천제가 그린 그림 1", 89, "바나나맨"));
-  paintingDomainArr.push(new paintingDomain(21, "testImg1.png", "반고흐", "설명이 없는 그림 1", 20, "반호그 따라쟁이"));
-  paintingDomainArr.push(new paintingDomain(22, "testImg2.jpeg", "렘브란트", "아무개 가 그린 그림1", 25, "루팡3세"));
-  paintingDomainArr.push(new paintingDomain(23, "testImg3.jpg", "초상화", "블라블라블라", 67, "동네 아제"));
-  paintingDomainArr.push(new paintingDomain(24, "testImg4.jpeg", "아무그림", "천제가 그린 그림 1", 89, "바나나맨"));
-  paintingDomainArr.push(new paintingDomain(25, "testImg1.png", "반고흐", "설명이 없는 그림 1", 20, "반호그 따라쟁이"));
-
-  */
+  //만약 그림이 모자르다면
+  if(paintingDomainArr.length < workListSize){
+	  for(var i=paintingDomainArr.length; i<workListSize; i++){
+		  paintingDomainArr.push(new workDomain(0, "/resource/3d_gallay/images/default_image/logo.png", "대체 이미지", "이 그림은 대체 이미지 입니다."));
+	  }
+  }
 
   //맵(gallay)배열
 
-  //1번 전시관
-  var gallay1 = [
+  //25개 전시관
+  var gallay_25 = [
     [1, 1, 3, 1, 3, 1, 3, 1, 3, 1, 1, 1,],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,],
@@ -211,9 +202,71 @@
     [1, 0, 0, 1, 1, 1, 5, 5, 5, 5, 5, 1,],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,]
   ];
+  //20개 전시관
+  var gallay_20 = [
+	    [1, 1, 3, 1, 3, 1, 3, 1, 3, 1,],
+	    [4, 0, 0, 0, 0, 0, 0, 0, 0, 6,],
+	    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1,],
+	    [1, 0, 3, 5, 1, 5, 1, 5, 0, 1,],
+	    [4, 0, 0, 1, 1, 1, 1, 1, 0, 1,],
+	    [1, 0, 0, 6, 1, 1, 3, 3, 0, 1,],
+	    [4, 0, 0, 1, 1, 4, 0, 0, 0, 1,],
+	    [1, 0, 0, 6, 1, 1, 0, 0, 0, 1,],
+	    [4, 0, 0, 6, 1, 4, 0, 0, 0, 1,],
+	    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,]
+	  ];
+  
+  //15개 전시관
+  var gallay_15 = [
+	    [1, 1, 3, 1, 3, 1, 3, 1, 1,],
+	    [4, 0, 0, 0, 0, 0, 0, 0, 6,],
+	    [1, 0, 0, 0, 0, 0, 0, 0, 1,],
+	    [1, 0, 3, 5, 1, 5, 1, 0, 1,],
+	    [4, 0, 0, 1, 1, 1, 1, 0, 6,],
+	    [1, 0, 0, 6, 1, 1, 1, 0, 1,],
+	    [4, 0, 0, 1, 1, 4, 0, 0, 1,],
+	    [1, 0, 0, 6, 1, 1, 0, 0, 1,],
+	    [1, 1, 1, 1, 1, 1, 1, 5, 1,]
+	  ];
+  
+	//10개 전시관
+  var gallay_10 = [
+	    [1, 1, 3, 1, 3, 1, 3, 1,],
+	    [4, 0, 0, 0, 0, 0, 0, 1,],
+	    [1, 0, 0, 0, 0, 0, 0, 6,],
+	    [1, 0, 0, 5, 1, 5, 1, 1,],
+	    [4, 0, 0, 1, 1, 1, 1, 1,],
+	    [1, 0, 0, 6, 1, 1, 1, 1,],
+	    [4, 0, 0, 1, 1, 1, 1, 1,],
+	    [1, 1, 1, 1, 1, 1, 1, 1,]
+	  ];
+	  
+	//5개 전시관
+  var gallay_5 = [
+	    [1, 1, 1, 1, 1, 1, 1,],
+	    [1, 0, 1, 1, 3, 1, 1,],
+	    [1, 0, 1, 0, 0, 0, 6,],
+	    [1, 0, 0, 0, 0, 0, 6,],
+	    [1, 0, 0, 0, 0, 0, 1,],
+	    [1, 0, 1, 0, 0, 0, 6,],
+	    [1, 1, 1, 5, 1, 1, 1,]
+	   
+	  ];
 
-  //그림 개수
-  var gallay1PaintingNum = 25;
+
+  var cnt = 0;
+  
+  for(var i=0; i < gallay_10.length; i++) {
+	  for(var j=0; j<gallay_10[i].length; j++) {
+		  if(gallay_10[i][j] > 1)
+		{
+			  cnt++;
+		}
+	  }
+  }
+  
+  console.log('맵의 그림개수:' + cnt);
+ 
 
   // Get the pointer lock state
   getPointerLock();
@@ -293,18 +346,61 @@
     var container = document.getElementById('container');
     container.appendChild(renderer.domElement);
 
+    var containerWidth = document.getElementById('container').offsetWidth;
+    var containerHeight = document.getElementById('container').offsetHeight;
+    
     // Set camera position and view details
-    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+    camera = new THREE.PerspectiveCamera(60, containerWidth / containerHeight, 1, 2000);
 
     // Add the camera to the controller, then add to the scene
     controls = new THREE.PointerLockControls(camera);
     //카메라의 위치를 조정한다.
-    //카메라의 z축
-    controls.getObject().position.z = 400;
+   
     //카메라의 높이
     controls.getObject().position.y = 45;
+    
+    //작품수가 20개가 넘어 간다면
+    if(paintingDomainArr.length > 20){
+    	player_position_z = 400;
+    	player_position_x = -400;
+    	
+    	showGallay = gallay_25;
+    }
+    
+    if(paintingDomainArr.length <= 20 && paintingDomainArr.length > 15){
+    	player_position_z = 300;
+    	player_position_x = -300;
+    	
+    	showGallay = gallay_20;
+    }
+    
+    
+    if(paintingDomainArr.length <= 15 && paintingDomainArr.length > 10){
+    	player_position_z = 250;
+    	player_position_x = -250;
+    	
+    	showGallay = gallay_15;
+    }
+    
+    
+    if(paintingDomainArr.length <= 10 && paintingDomainArr.length > 5){
+    	player_position_z = 200;
+    	player_position_x = -200;
+    	
+    	showGallay = gallay_10;
+    }
+ 
+    if(paintingDomainArr.length <= 5){
+    	player_position_z = 200;
+    	player_position_x = -170;
+    	
+    	showGallay = gallay_5;
+    }
 
-    controls.getObject().position.x = -400;
+   	//카메라 x 축
+    controls.getObject().position.x = player_position_x;
+    //카메라의 z축
+    controls.getObject().position.z = player_position_z;
 
     scene.add(controls.getObject());
 
@@ -322,6 +418,7 @@
 
     // Listen for if the window changes sizes
     window.addEventListener('resize', onWindowResize, false);
+    renderer.setSize(containerWidth, containerHeight);
 
   }
 
@@ -359,7 +456,7 @@
 
     //1번 전시관 이라면
     if (gallay_num == 1) {
-      var map = gallay1;
+      var map = showGallay;
 
       // 일반벽-----------------------------------------------------------------------------
       var wallGeo = new THREE.BoxBufferGeometry(UNITWIDTH, UNITHEIGHT, UNITWIDTH);
@@ -465,13 +562,14 @@
       paintingGeoSideArr[2] = paintingGeoSide3;
 
       //그림객체에 텍스처 붙이기(그림 붙이기)
+      
       for(var i = 0; i<paintingDomainArr.length; i++) {
         texture = THREE.ImageUtils.loadTexture(paintingDomainArr[i].work_image);
         paintingMaterials.push(new THREE.MeshPhongMaterial({
           map: texture,
         }));
       }
-
+		
       //텍스처를 반복해서 촘촘하게 출력되게 한다(중요)
       wallMaterial.map.repeat.x = 1;  //20번반복
       wallMaterial.map.repeat.y = 1;  //20번반복
@@ -489,7 +587,9 @@
 
       // Place walls where 1`s are
     }
-
+	//Mesh모음
+	
+   	
     // 맵 생성 부문
     for (var i = 0; i < totalCubesWide; i++) {
       for (var j = 0; j < map[i].length; j++) {
@@ -501,10 +601,11 @@
           var pointLight;
           var color = 0xFFFFFF;
           var intensity = 2;
-
           var photoFrame;
           var photo;
           var wall = new THREE.Mesh(wallGeo, wallMaterial);
+          
+         
           wall.position.z = (i - totalCubesWide / 2) * UNITWIDTH + widthOffset;
           wall.position.y = heightOffset;
           wall.position.x = (j - totalCubesWide / 2) * UNITWIDTH + widthOffset;
@@ -710,10 +811,13 @@
   // Update the camera and renderer when the window changes size
   function onWindowResize() {
 
-    camera.aspect = window.innerWidth / window.innerHeight;
+	  var containerWidth = document.getElementById('container').offsetWidth;
+	    var containerHeight = document.getElementById('container').offsetHeight;
+	  
+    camera.aspect = containerWidth / containerHeight;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(containerWidth, containerHeight);
 
   }
 
@@ -978,6 +1082,18 @@
   
   function doAddCmt(i) {
 	  var cmt = document.getElementById('input_cmt').value;
+	  var chk_cmt = document.getElementById('input_cmt').value;
+	  var i_work_origin = paintingDomainArr[i].i_work;
+	  
+	  if(chk_cmt.replace(/ /g,"").length == 0) {
+		alert('댓글을 입력하여주십시오.');  
+		return;
+	  }
+	  if(chk_cmt.length > 100) {
+		  alert('최대 100자 이내로 작성해주세요.');  
+			return;
+	  }
+	  
 	  $.post("/gallay/gallay3d",
 			  {
 			  	method : "doAddCmt",
@@ -985,11 +1101,13 @@
 			  	cmt : cmt
 			  },
 				  function(data) {
-				  document.getElementById('input_cmt').value = "";
+					document.getElementById('input_cmt').value = "";
 				  
 				  var user_commnets_div = document.getElementById('user_commnets_div');
 		 	      user_commnets_div.innerHTML = "";
 			 	      for(var i =0; i<data.length; i++) {
+			 	    	  //cmt_i_user 값을 가져온다.
+			 	    	 var cmt_i_user = data[i].i_user;
 			 	    	 var user_commnets = document.createElement('div');
 			 	    		user_commnets.setAttribute('id', `user_commnets`);
 			 	    		user_commnets.innerHTML = `
@@ -997,24 +1115,113 @@
 										<p id="nickname_p">\${data[i].nickname}</p>
 									</div>
 									<div id="comment">
-										<p id="comment_p">\${data[i].cmt}</p>
+										<p id="comment_p" class="cmt_idx_\${i}">\${data[i].cmt}</p>
 									</div>
-									<div id="like_cmt">
-										<img src="/resource/3d_gallay/images/icons/cmt_like_icon.png"
-											alt="">
-										<p>100++</p>
-									</div>
-									
 								`;
+							//자기가 달은 댓글이라면  아이콘을 붙여준다.
+							if(${loginUser.i_user} == cmt_i_user)
+							{
+								user_commnets.innerHTML += `
+										<div id="cmt_icon_div">
+										
+										<img src="/resource/3d_gallay/images/icons/edit_icon.png"
+											alt="" id="cmt_edit_icon" onclick="doCmtEdit(\${i_work_origin}, \${i})" style="cursor:pointer">
+									
+									
+										<img src="/resource/3d_gallay/images/icons/delete_icon.png"
+											alt="" id="cmt_delete_icon" onclick="doCmtDelete(\${i_work_origin}, \${i})" style="cursor:pointer">
+									
+										</div>
+										<input type="hidden" value="\${data[i].i_work_cmt}" id="i_work_cmt_\${i}">`
+							}
 			 	    	
 			 	    	user_commnets_div.append(user_commnets);
+			 	    	chkCmtLength();
 			 	      }
 			 	      
 			 	    });
   }
+  //댓글 수정 함수
+  function doEditCmt(i_work, i_work_cmt) {
+	  var cmt = document.getElementById('input_cmt').value;
+	  var chk_cmt = document.getElementById('input_cmt').value;
+	  var i_work_origin = i_work;
+	  
+	  chkCmtLength();
+	  
+	  if(chk_cmt.replace(/ /g,"").length == 0) {
+			alert('댓글을 입력하여주십시오.');  
+			return;
+		  }
+		  if(chk_cmt.length > 100) {
+			  alert('최대 100자 이내로 작성해주세요.');  
+				return;
+		  }
+	  
+	  $.post("/gallay/gallay3d",
+			  {
+			  	method : "doEditCmt",
+			  	'i_work' : i_work,
+			  	'i_work_cmt' : i_work_cmt,
+			  	cmt : cmt
+			  },
+				  function(data) {
+				  document.getElementById('input_cmt').value = "";
+				  
+				  var user_commnets_div = document.getElementById('user_commnets_div');
+				  user_commnets_div.innerHTML = "";
+		 	      for(var i =0; i<data.length; i++) {
+		 	    	  //cmt_i_user 값을 가져온다.
+		 	    	 var cmt_i_user = data[i].i_user;
+		 	    	 var user_commnets = document.createElement('div');
+		 	    		user_commnets.setAttribute('id', `user_commnets`);
+		 	    		user_commnets.innerHTML = `
+								<div id="nickname">
+									<p id="nickname_p">\${data[i].nickname}</p>
+								</div>
+								<div id="comment">
+									<p id="comment_p" class="cmt_idx_\${i}">\${data[i].cmt}</p>
+								</div>
+							`;
+						//자기가 달은 댓글이라면  아이콘을 붙여준다.
+						if(${loginUser.i_user} == cmt_i_user)
+						{
+							user_commnets.innerHTML += `
+									<div id="cmt_icon_div">
+									
+									<img src="/resource/3d_gallay/images/icons/edit_icon.png"
+										alt="" id="cmt_edit_icon" onclick="doCmtEdit(\${i_work_origin}, \${i})" style="cursor:pointer">
+								
+								
+									<img src="/resource/3d_gallay/images/icons/delete_icon.png"
+										alt="" id="cmt_delete_icon" onclick="doCmtDelete(\${i_work_origin}, \${i})" style="cursor:pointer">
+								
+									</div>
+									<input type="hidden" value="\${data[i].i_work_cmt}" id="i_work_cmt_\${i}">`
+						}
+		 	    	
+		 	    	user_commnets_div.append(user_commnets);
+		 	    	 document.getElementById('addCmtBtn').innerHTML = '<p>게시</p>';
+		 	      }
+			 	      
+			 	      
+			 	     //그림의 배열 인덱스
+			 		  var idx;
+			 		  for(var i=0; i<paintingDomainArr.length; i++){
+			 			 if(data[0].i_work == paintingDomainArr[i].i_work){
+			 				 idx = i;
+			 				 break;
+			 			 }
+			 		  }
+			 		  document.getElementById('addCmtBtn').setAttribute('onclick', `doAddCmt(\${idx})`);
+			 		 chkCmtLength();
+			 	    });
+	 
+  }
   
   function doReadCmt(i) {
 	  var cmt = document.getElementById('input_cmt').value;
+	  var i_work_origin = paintingDomainArr[i].i_work;
 	  $.post("/gallay/gallay3d",
 			  {
 			  	method : "doReadCmt",
@@ -1027,6 +1234,8 @@
 				  var user_commnets_div = document.getElementById('user_commnets_div');
 		 	      user_commnets_div.innerHTML = "";
 			 	      for(var i =0; i<data.length; i++) {
+			 	    	  //cmt_i_user 값을 가져온다.
+			 	    	 var cmt_i_user = data[i].i_user;
 			 	    	 var user_commnets = document.createElement('div');
 			 	    		user_commnets.setAttribute('id', `user_commnets`);
 			 	    		user_commnets.innerHTML = `
@@ -1034,22 +1243,103 @@
 										<p id="nickname_p">\${data[i].nickname}</p>
 									</div>
 									<div id="comment">
-										<p id="comment_p">\${data[i].cmt}</p>
+										<p id="comment_p" class="cmt_idx_\${i}">\${data[i].cmt}</p>
 									</div>
-									<div id="like_cmt">
-										<img src="/resource/3d_gallay/images/icons/cmt_like_icon.png"
-											alt="">
-										<p>100++</p>
-									</div>
-									
 								`;
+							//자기가 달은 댓글이라면  아이콘을 붙여준다.
+							if(${loginUser.i_user} == cmt_i_user)
+							{
+								user_commnets.innerHTML += `
+										<div id="cmt_icon_div">
+										
+										<img src="/resource/3d_gallay/images/icons/edit_icon.png"
+											alt="" id="cmt_edit_icon" onclick="doCmtEdit(\${i_work_origin},\${i})" style="cursor:pointer">
+									
+									
+										<img src="/resource/3d_gallay/images/icons/delete_icon.png"
+											alt="" id="cmt_delete_icon" onclick="doCmtDelete(\${i_work_origin}, \${i})" style="cursor:pointer">
+									
+										</div>
+										<input type="hidden" value="\${data[i].i_work_cmt}" id="i_work_cmt_\${i}">`
+							}
 			 	    	
 			 	    	user_commnets_div.append(user_commnets);
+			 	    	chkCmtLength();
 			 	      }
 			 	      
 			 	    });
   }
-
+  
+  function doCmtEdit(i_work, i){
+	  //댓글 인덱스 값 받아옴
+	  var i_work_cmt = document.getElementById(`i_work_cmt_\${i}`).value;
+	  var cmt = document.getElementsByClassName(`cmt_idx_\${i}`);
+	  document.getElementById('input_cmt').value = cmt[0].innerText;
+	  document.getElementById('addCmtBtn').innerHTML = '<p>수정</p>';
+	  document.getElementById('addCmtBtn').setAttribute('onclick', `doEditCmt(\${i_work}, \${i_work_cmt})`);
+	  chkCmtLength();
+  }
+  
+  function doCmtDelete(i_work, i){
+	  //댓글 인덱스 값 받아옴
+	  var i_work_cmt = document.getElementById(`i_work_cmt_\${i}`).value;
+	  
+	  if(!confirm('댓글을 삭제하시겠습니까?')){
+		  return;
+	  }
+	  
+	  $.post("/gallay/gallay3d",
+			  {
+			  	method : "doDelCmt",
+			  	i_work : i_work,
+			  	i_work_cmt : i_work_cmt
+			  },
+			function(data) {
+				document.getElementById('input_cmt').value = "";
+				  
+				  var user_commnets_div = document.getElementById('user_commnets_div');
+		 	      user_commnets_div.innerHTML = "";
+			 	      for(var i =0; i<data.length; i++) {
+			 	    	  //cmt_i_user 값을 가져온다.
+			 	    	 var cmt_i_user = data[i].i_user;
+			 	    	 var user_commnets = document.createElement('div');
+			 	    		user_commnets.setAttribute('id', `user_commnets`);
+			 	    		user_commnets.innerHTML = `
+									<div id="nickname">
+										<p id="nickname_p">\${data[i].nickname}</p>
+									</div>
+									<div id="comment">
+										<p id="comment_p" class="cmt_idx_\${i}">\${data[i].cmt}</p>
+									</div>
+								`;
+							//자기가 달은 댓글이라면  아이콘을 붙여준다.
+							if(${loginUser.i_user} == cmt_i_user)
+							{
+								user_commnets.innerHTML += `
+										<div id="cmt_icon_div">
+										
+										<img src="/resource/3d_gallay/images/icons/edit_icon.png"
+											alt="" id="cmt_edit_icon" onclick="doCmtEdit(\${i_work},\${i})" style="cursor:pointer">
+									
+									
+										<img src="/resource/3d_gallay/images/icons/delete_icon.png"
+											alt="" id="cmt_delete_icon" onclick="doCmtDelete(\${i_work}, \${i})" style="cursor:pointer">
+									
+										</div>
+										<input type="hidden" value="\${data[i].i_work_cmt}" id="i_work_cmt_\${i}">`
+							}
+			 	    	
+			 	    	user_commnets_div.append(user_commnets);
+			 	    	chkCmtLength();
+			 	      }
+			});
+	  
+  }
+  
+  function chkCmtLength() {
+	  var cmtLength = document.getElementById('input_cmt').value.length;
+	  document.getElementById('cmtLength').innerHTML = `<p>\${cmtLength}/100</p>`;
+  }
 
   function doExit() {
     blocker2.style.display = "none";
