@@ -11,18 +11,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lsl.wm.vo.WorkVO;
+import com.lsl.wm.vo.ShowVO;
 
 @WebServlet("/exhibit_page1")
 public class ExihibitPage1Ser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<WorkVO> list = new ArrayList();
+		List<ShowVO> list = new ArrayList();
 		for(int i=0; i<3; i++) {
-			WorkVO vo = new WorkVO();
-			vo.setTitle("Á¦¸ñ" + i);
-			vo.setComment("³»¿ë-" + i);
+			ShowVO vo = new ShowVO();
+			vo.setTitle("ï¿½ï¿½ï¿½ï¿½" + i);
+			vo.setComment("ï¿½ï¿½ï¿½ï¿½-" + i);
 			vo.setPainting("test_img" + (i+1) + ".jpeg");
 			list.add(vo);
 		}
