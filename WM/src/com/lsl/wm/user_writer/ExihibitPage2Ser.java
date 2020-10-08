@@ -27,27 +27,27 @@ public class ExihibitPage2Ser extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String jsp = "/WEB-INF/user_writer/exhibit_page2.jsp";
-		//·Î±×ÀÎÇÑ »ç¿ëÀÚ Á¤º¸¸¦ ¹Ş¾Æ¿Â´Ù.
+		//ë¡œê·¸ì¸í•œ ì‚¬ìš©ì ì •ë³´ë¥¼ ë°›ì•„ì˜¨ë‹¤.
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		//Àü½ÃÈ¸ Á¤º¸¸¦ ¹Ş¾Æ¿Â´Ù.
+		//ì „ì‹œíšŒ ì •ë³´ë¥¼ ë°›ì•„ì˜¨ë‹¤.
 		ShowVO showParam = ShowDAO.selLatestExhibition();
-		//exhibit_page1 ¼­ºí¸´ ÆÄÀÏ¿¡¼­ ³Ñ¾î¿Â i_user, i_show°ªÀ» ¹Ş´Â´Ù.
+		//exhibit_page1 ì„œë¸”ë¦¿ íŒŒì¼ì—ì„œ ë„˜ì–´ì˜¨ i_user, i_showê°’ì„ ë°›ëŠ”ë‹¤.
 		int i_user = loginUser.getI_user();
 		int i_show = showParam.getI_show();
 		
-		System.out.println("³Ñ¾î¿Â ÆÄ¶ó¹ÌÅÍ°ª:" + i_user);
-		//³Ñ¾î¿Â ÆÄ¶ó¹ÌÅÍ °ªÀ» ³Ö¾îÁÙ WorkVO °´Ã¼
+		System.out.println("ë„˜ì–´ì˜¨ íŒŒë¼ë¯¸í„°ê°’:" + i_user);
+		//ë„˜ì–´ì˜¨ íŒŒë¼ë¯¸í„° ê°’ì„ ë„£ì–´ì¤„ WorkVO ê°ì²´
 		WorkVO vo = new WorkVO();
 		
 		ShowVO vo2 = new ShowVO();
 		
-		//°ªÀ» ³Ö´Â´Ù.
+		//ê°’ì„ ë„£ëŠ”ë‹¤.
 		vo.setI_user(i_user);
 		vo.setI_show(i_show);
 		
 		vo2.setI_show(i_show);
 		
-		//selWorkList i_user¿Í i_work°¡ ÀÏÄ¡ÇÏ´Â ¸Ş¼Òµå¸¦ »ç¿ëÇÏ¿© ÀÛÇ° ¸ñ·ÏÀ» ¹Şˆf´Ù
+		//selWorkList i_userì™€ i_workê°€ ì¼ì¹˜í•˜ëŠ” ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•˜ì—¬ ì‘í’ˆ ëª©ë¡ì„ ë°›Âˆfë‹¤
 		List<WorkVO> list = WorkDAO.selWorkList(vo);
 		
 		ShowVO param = ShowDAO.selShow(vo2);
@@ -55,21 +55,21 @@ public class ExihibitPage2Ser extends HttpServlet {
 		for(int i=0; i<list.size(); i++) {
 			System.out.println(list.get(i).getWork_title());
 		}
-		//list¸¦ jsp·Î º¸³»±â À§ÇØ ´ã¾ÆÁØ´Ù.
-		//ÀÛÇ°Á¤º¸
+		//listë¥¼ jspë¡œ ë³´ë‚´ê¸° ìœ„í•´ ë‹´ì•„ì¤€ë‹¤.
+		//ì‘í’ˆì •ë³´
 		request.setAttribute("workList", list);
-		//Àü½ÃÈ¸ Á¤º¸
+		//ì „ì‹œíšŒ ì •ë³´
 		request.setAttribute("showParam", param);
 		
 		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserVO loginUser = MyUtils.getLoginUser(request);
+UserVO loginUser = MyUtils.getLoginUser(request);
 		
-		/*»èÁ¦ ±â´É ±¸ÇöºÎ*/
+		/*ì‚­ì œ ê¸°ëŠ¥ êµ¬í˜„ë¶€*/
 		int i_show = Integer.parseInt(request.getParameter("i_show"));
-		//»èÁ¦ÇÒ ÀÛÇ°ÀÇ i_work°ªÀ» °¡Á®¿Â´Ù.
+		//ì‚­ì œí•  ì‘í’ˆì˜ i_workê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
 		int i_work = Integer.parseInt(request.getParameter("i_work"));
 		int i_user = loginUser.getI_user();
 		
@@ -81,8 +81,8 @@ public class ExihibitPage2Ser extends HttpServlet {
 		
 		param = WorkDAO.selWork(param);
 		
-		System.out.println("°¡Á®¿Â ÀÌ¹ÌÁö Á¦¸ñ " + param.getWork_image());
-		//¸ÕÀú ÆÄÀÏÀ» »èÁ¦ ÇÑ´Ù.
+		System.out.println("ê°€ì ¸ì˜¨ ì´ë¯¸ì§€ ì œëª© " + param.getWork_image());
+		//ë¨¼ì € íŒŒì¼ì„ ì‚­ì œ í•œë‹¤.
 		String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
 		System.out.println("path : " + savePath);
 		
@@ -90,23 +90,20 @@ public class ExihibitPage2Ser extends HttpServlet {
 		File f = new File(savePath + "/" + param.getWork_image());		
 		if(f.exists()){
 			f.delete();
-			System.out.println("ÆÄÀÏ »èÁ¦µÊ");
+			System.out.println("íŒŒì¼ ì‚­ì œë¨");
 		}else{
-			System.out.println("ÆÄÀÏ ¾øÀ½");
+			System.out.println("íŒŒì¼ ì—†ìŒ");
 		}
 		
 		WorkDAO.delWork(param);
-		/*Àü½ÃÈ¸ ¸®½ºÆ® ¿¡¼­µµ »èÁ¦ÇÑ´Ù.*/
+		/*ì „ì‹œíšŒ ë¦¬ìŠ¤íŠ¸ ì—ì„œë„ ì‚­ì œí•œë‹¤.*/
 		ShowListDomain vo = new ShowListDomain();
 		vo.setI_work(i_work);
 		
 		ShowListDAO.delShowList(vo);
 		
-		System.out.println("³Ñ¾î¿Â °ª" + i_work);
+		System.out.println("ë„˜ì–´ì˜¨ ê°’" + i_work);
 		
 		response.sendRedirect("/exhibit_page2?i_user="+ i_user + "&i_show=" + i_show);
-		
-		
 	}
-
 }

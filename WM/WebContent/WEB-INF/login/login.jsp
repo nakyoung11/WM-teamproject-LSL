@@ -86,7 +86,7 @@ input {
                     <input type="submit" value="로그인" id="submit_btn">
                 </div>
                    <div id="join"><a href="/join" >회원가입</a></div>
-                   <div id="forget"><a href="/join" >이메일, 비밀번호 찾기</a></div>
+                   <div id="forget" onclick="window.open('/findpassword','비밀번호 변경' ,'height=500, width=500, top=200, left=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')">비밀번호 찾기</div>
                 </form>
         </div>
  
