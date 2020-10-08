@@ -30,16 +30,16 @@ public class ExihibitPage1Ser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//·Î±×ÀÎÇÑ »ç¿ëÀÚ Á¤º¸¸¦ ¹Þ¾Æ¿Â´Ù.
+		//ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Â´ï¿½.
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		//Àü½ÃÈ¸ Á¤º¸¸¦ ¹Þ¾Æ¿Â´Ù.
+		//ï¿½ï¿½ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Â´ï¿½.
 		ShowVO param = ShowDAO.selLatestExhibition();
 		
 		String savePath = "/resource/show/images/posters/" + param.getI_show() + "/";
 		
-		//Àü½ÃÈ¸ Á¤º¸¸¦ º¸³»ÁØ´Ù.
+		//ï¿½ï¿½ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		request.setAttribute("data", param);
-		//jsp¿¡¼­ Ãâ·ÂÇØÁÙ Æ÷½ºÅÍÀÇ °æ·Î¸¦ º¸³»ÁØ´Ù.
+		//jspï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		request.setAttribute("imagePath", savePath);
 		
 		String jsp = "/WEB-INF/user_writer/exhibit_page1.jsp";
@@ -48,35 +48,35 @@ public class ExihibitPage1Ser extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		//ÀúÀå°æ·Î ÁöÁ¤
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
 
-		//¸¸¾à Æú´õ(µð·ºÅä¸®)°¡ ¾ø´Ù¸é Æú´õ »ý¼º
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ä¸®)ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		File directory = new File(savePath);
 		if(!directory.exists()) {
 			directory.mkdirs();
 		}
 		
-		int maxFileSize = 10_485_760; //1024 * 1024 * 10 (10mb) //ÃÖ´ë ÆÄÀÏ »çÀÌÁî Å©±â
+		int maxFileSize = 10_485_760; //1024 * 1024 * 10 (10mb) //ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½
 		String fileNm = "";
 		String saveFileNm = null;
 		
-		//¿©·¯ ÆÄÀÏÀ» ¹Þ±â À§ÇØ ¸ÖÆ¼ ¸®Äù½ºÆ® °´Ã¼ ¼±¾ð ÀÏ¹Ý requestµµ ÀÌ°É·Î ¹Þ¾Æ¾ßÇÑ´Ù.
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¹ï¿½ requestï¿½ï¿½ ï¿½Ì°É·ï¿½ ï¿½Þ¾Æ¾ï¿½ï¿½Ñ´ï¿½.
 		MultipartRequest mr = new MultipartRequest(request, savePath
 				, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		/*jsp·Î ºÎÅÍ ÀÛÇ° Á¤º¸¸¦ ¹Þ¾Æ¿Â´Ù.*/
-		//¸®½ºÆ®°¡ ¸î°³ ÀÎÁö
+		/*jspï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Â´ï¿½.*/
+		//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½î°³ ï¿½ï¿½ï¿½ï¿½
 		int list_cnt = Integer.parseInt(mr.getParameter("list_cnt"));
-		//¾î´À Àü½ÃÈ¸ ÀÎÁö
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½
 		int i_show = Integer.parseInt(mr.getParameter("i_show"));
 		
-		//Æû¿¡¼­ ³Ñ¾î¿Â Á¤º¸¸¦ DBÀÇ t_work¿¡ ³Ö¾îÁØ´Ù
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ t_workï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½
 		for(int i=0; i<list_cnt; i++) {
 			String work_image = mr.getParameter("work_image_idx_" + i);
 			String work_title = mr.getParameter("input_title_" + i);
 			String work_ctnt = mr.getParameter("input_comment_" + i);
-			//½ÇÁ¦ ÀúÀåµÉ ÆÄÀÏ ÀÌ¸§ (Àü½ÃÈ¸idx_À¯Àúidx_ÆÄÀÏ¸í) À§¿¡ work_iamge´Â ÆÄÀÏ¸í¸¸ ¹Þ¾Æ¿Â °ÍÀÌ´Ù.
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ (ï¿½ï¿½ï¿½ï¿½È¸idx_ï¿½ï¿½ï¿½ï¿½idx_ï¿½ï¿½ï¿½Ï¸ï¿½) ï¿½ï¿½ï¿½ï¿½ work_iamgeï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Þ¾Æ¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½.
 			String saveImageName = i_show  + "_" + loginUser.getI_user() + "_" +  work_image; 
 			
 			WorkVO param = new WorkVO();
@@ -88,9 +88,9 @@ public class ExihibitPage1Ser extends HttpServlet {
 			
 			WorkDAO.insWork(param);
 			param.setI_user(loginUser.getI_user());
-			//°¡Àå ÃÖ±Ù¿¡ µé¾î°£ i_work°ªÀ» °¡Á®¿Â´Ù.
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±Ù¿ï¿½ ï¿½ï¿½î°£ i_workï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 			param = WorkDAO.selLatestWork(param);
-			//³Ñ¾î¿Â Á¤º¸¸¦ Àü½ÃÈ¸ ¸®½ºÆ®(t_show_list)¿¡ ³Î¾îÁØ´Ù.
+			//ï¿½Ñ¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½Æ®(t_show_list)ï¿½ï¿½ ï¿½Î¾ï¿½ï¿½Ø´ï¿½.
 			ShowListVO vo2 = new ShowListVO(); 
 			vo2.setI_show(i_show);
 			vo2.setI_work(param.getI_work());

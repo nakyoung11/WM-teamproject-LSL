@@ -84,9 +84,6 @@
 </head>
 <body>
  	<jsp:include page="../../header.jsp"></jsp:include>
-	<div id="container">
-
-        <div id="contents">
             <nav class="my_nav">
                 <ul>
                   <li id="pro">  <a href="mypage-both-profile.html">프로필 관리</li></a>                

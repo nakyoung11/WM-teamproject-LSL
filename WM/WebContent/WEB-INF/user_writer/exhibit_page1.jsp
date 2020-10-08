@@ -42,12 +42,15 @@ input, textarea {background: none; }
 	margin: 5% auto;
 }
 
+
 #exhibit_list table {
-	border-collapse: separate;
-	width: 100%;
-	height: 280px;
-	margin-bottom: 5%;
-	border-bottom: 1px solid #3f3d55;
+    border-collapse: separate;
+    width: 100%;
+    height: 280px;
+    padding-bottom: 30px;
+    margin-bottom: 5%;
+    border-bottom: 1px solid #3f3d55;
+}
 	
 }
 
