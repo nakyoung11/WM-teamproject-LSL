@@ -56,6 +56,36 @@ public class UserDAO {
 		});
 	}
 	
+	public static int findPass(UserVO param) {
+		String sql = " SELECT user_year, user_month, user_date "
+				   + " FROM t_user "
+				   + " WHERE user_email = ? ";
+			
+		return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setNString(1, param.getUser_email());
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				if(rs.next()) {
+					String user_year = rs.getNString("user_year");
+					String user_month = rs.getNString("user_month");
+					String user_date = rs.getNString("user_date");
+					if(user_year.equals(param.getUser_year()) && user_month.equals(param.getUser_month()) && user_date.equals(param.getUser_date())) {
+						return 2;
+					} else {
+						return 3;
+					}
+				} else {
+					return 3;
+				}
+			}
+		});
+	}
+	
 	public static int login(UserVO param) {
 		String sql = " SELECT i_user, nickname, user_pw "
 				   + " FROM t_user "
@@ -79,6 +109,7 @@ public class UserDAO {
 						param.setNickname(nickname);
 						param.setUser_pw(null);
 						param.setI_user(i_user);
+						
 						return 1; // 로그인 성공
 					} else {
 						return 2; // 비밀번호 틀림
@@ -136,6 +167,19 @@ public class UserDAO {
 			
 			@Override
 			public void update(PreparedStatement ps) throws SQLException {}
+		});
+	}
+	
+	public static int changePw(UserVO param) {
+		String sql = " UPDATE t_user SET user_pw = ? WHERE user_email = ? ";
+		
+		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setNString(1, param.getUser_pw());
+				ps.setNString(2, param.getUser_email());
+			}
 		});
 	}
 }
