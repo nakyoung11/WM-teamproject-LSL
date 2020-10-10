@@ -7,9 +7,9 @@ CREATE TABLE t_user (
     user_month varchar(2) not null, -- 월
     user_date varchar(2) not null, -- 일
     news varchar(1) default 0 not null, -- 소식여부
-    profile_img varchar(50),
-    r_dt datetime default now(),
-    m_dt datetime default now()
+    profile_img varchar(50), -- 프로필 이미지
+    r_dt datetime default now(), -- 등록 시간
+    m_dt datetime default now() -- 
 );
 
 CREATE TABLE t_work (
