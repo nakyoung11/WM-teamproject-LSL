@@ -9,7 +9,7 @@ CREATE TABLE t_user (
     news varchar(1) default 0 not null, -- 소식여부
     profile_img varchar(50), -- 프로필 이미지
     r_dt datetime default now(), -- 등록 시간
-    m_dt datetime default now() -- 
+    m_dt datetime default now() -- 수정 시간
 );
 
 CREATE TABLE t_work (
