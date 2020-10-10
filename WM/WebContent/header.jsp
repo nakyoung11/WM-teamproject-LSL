@@ -45,8 +45,8 @@
 
                 <ul>
                 <li><a href="/main">메인</a></li>
-                 <li><a href="">전시둘러보기</a></li>
-                 <li><a href="">공지사항</a></li>
+                 <li><a href="/showlist">전시둘러보기</a></li>
+                 <li><a href="/gallay/gallay3d">3D 가는 길</a></li>
                  <li><a href="/writer/mypage_profile">마이페이지</a></li>
                  <li><a href="">이용안내</a></li>
                	</ul>
