@@ -93,7 +93,7 @@ body{padding-top: 250px;}
 	<div id="container">
 		<div id="contents">
 			<div class="poster">
-				<a href="/introduce"><img src="resource/main/images/poster.JPG"
+				<a href="/showlist"><img src="resource/main/images/poster.JPG"
 					id="main"></a> <span id="people">000명</span>
 			</div>
 
