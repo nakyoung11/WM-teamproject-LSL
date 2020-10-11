@@ -9,14 +9,15 @@
 
 
     <style>
-body{background-image:url('/resource/background/background.png');}
+body{width:100%; height:100%; background-image:url('/resource/background/background.png'); 
+display: flex; justify-content: center;align-items: center;}
 
 #loginFrm {
     width: 300px;
-    margin: 150px auto;
+    margin: 40% auto;
     padding: 40px;
     background-color: rgba(255, 255, 255, 0.911);
-
+ 
  
 }
 label {
@@ -91,7 +92,7 @@ input {
         </div>
  
         <div id="footer">
-            <h3>푸터 영역</h3>        
+     
         </div>
 </body>
 </html>

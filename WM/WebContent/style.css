@@ -99,8 +99,6 @@ body, h1, h2, h3, h4, h5, h6, p, ul, li, span {
 	padding: 0;
 }
 
-
-
 body {
 	display: flex;
 	flex-flow: column;
@@ -108,7 +106,7 @@ body {
 	position: relative;
 	align-items: center;
 	padding-top: 220px;
-font-family: 'NanumBarunGothic';
+	font-family: 'NanumBarunGothic';
 	background: #FCFBF7;
 }
 
@@ -129,34 +127,34 @@ a {
 
 /*헤더*/
 #headerWrap {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-   height: 219px;
-  width: 100%;
-  min-width: 1000px;
-  z-index: 988;
-  background: #FCFBF7;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 205px;
+	width: 100%;
+	min-width: 1000px;
+	z-index: 988;
+	background: #FCFBF7;
 }
 
 #header {
 	position: relative;
-	flex:1;
+	flex: 1;
 	display: flex;
 	flex-flow: column;
 	width: 1000px;
-	height: 220px;
+	height: 200px;
 	margin: 10px auto;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 700;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
 }
 
 #header nav {
 	display: flex;
 }
 
-#header #menu ul {
+#header #menu>ul {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
@@ -173,16 +171,18 @@ a {
 
 #header #member {
 	align-self: flex-end;
-	margin-bottom: 30px;
+	margin: 20px 0 20px 0;
 }
 
 #footer {
-    align-self: flex-end;
-    width: 100%;
-    height: 134px;
-    background: rgba(199, 207, 195, 1);
-
+	align-self: flex-end;
+	display: flex;
+	align-items: center; width : 100%;
+	height: 95px;
+	background: rgba(199, 207, 195, 1);
+	width: 100%;
 }
+
 #footer ul {
 	margin: 20px;
 	margin-left: 300px
@@ -210,4 +210,42 @@ a {
 
 .menu ul li:last-child a {
 	border: none;
+}
+
+#mypage {
+	position: relative;
+}
+
+#mypage #my_nav {
+	position: absolute;
+	top: 40px;
+	left: 2px;
+	border-radius: 0 0 10px 10px;	
+	opacity:0;
+	 width : 100%;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-content: center;
+	width: 100%;
+	border:none;
+}
+
+#menu #mypage:hover>ul{
+	opacity: 1;
+}
+
+#menu #mypage #my_nav li {
+	margin: 0;
+	padding: 10px; background : rgba( 199, 207, 195, 1);
+	width: 150px;
+	text-align: center;
+	font-size:17px;
+	background: rgba(199, 207, 195, 1); width : 150px; text-align : center;
+}
+
+#menu #mypage #my_nav li:last-child {
+	
+	border-radius: 0 0 10px 10px;
+	padding-bottom: 20px;
 }
