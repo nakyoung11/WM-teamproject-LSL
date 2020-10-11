@@ -11,7 +11,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
 <style>
-#headerWrap{flex: 1}
+#headerWrap{flex: 1; height: 180px}
 
 body{padding-top: 250px;}
 #container {
@@ -377,7 +377,7 @@ button:focus {
                 <button id="min_work_btn_\${listLastIndex}" onclick="deleteWorkInfo(\${listLastIndex}); return false;">－</button>
                 </td>
                 <td rowspan="2">
-                <div id="input_painting_\${listLastIndex}" onclick="document.all.file\${listLastIndex}.click()" style="background-image:url()">
+                <div id="input_painting_\${listLastIndex}" onclick="document.all.file\${listLastIndex}.click()" >
                 <input type="file" name="file\${listLastIndex}" id="file\${listLastIndex}" style="display:none" accept="image/*" onchange="updatePainting(\${listLastIndex})">
                 <input type="hidden" name="input_image_\${listLastIndex}" id="input_image_\${listLastIndex}">
                 <span>\${listLastIndex+1}. 이미지 등록/수정</span>
