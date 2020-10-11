@@ -8,69 +8,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WM 웹 전시관</title>
     <style>
-#headerWrap{flex: 1; height: 179px;}
 
-body{padding-top: 250px;}
-#container {
-    display: flex;
-    width: 1000px;
- 	margin-bottom:400px;
-    justify-content: center;
-    align-content: center;
-    align-items:center;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300; 
-    flex: 1;
-}
-	
-
-#contents {
-	margin-top: 40px;
-	display: flex;
-	flex-flow: column;
-
-}
-/*----------------------- 추가 사항 ----------------- */
-.main{display: flex;
-	flex-flow: row nowrap;
-	align-items:center;
-	height:100%;}
-.left{display: flex; flex-flow: column; justify-content:center;   align-items: center;
- margin-right: 50px}
-input{background: none; border:none ; cursor: pointer;font-size: 16px}
-#profile{display: flex; flex-flow:column;justify-content: center; text-align: center;}
-#profile input:first-child{overflow: hidden; }
-#profile .align{display: flex; flex-flow: row nowrap; align-items: center; }
-.material-icons{transition: all ease 0.5s; }
-.material-icons:hover {transform: rotate( 90deg ); color: red}
-.btn{margin-right: 10px; margin-left: 10px}
-.profile_img img{
-	width: 250px;
-	height: 250px;
-	border-radius: 10px;
-	margin-bottom: 10px;
-
+#container{
+    position: relative;
+    width: 1382px;
+    height: 1356px;
+    left: calc(50% - 1382px/2);
+    top: calc(50% - 1356px/2 + 42px);
+    
 }
 
-.right label, input{margin-top: 20px}
-.nickname{display: flex; flex-flow: row;margin-top: 15px; margin-bottom: 15px}
-.msg{color: red; font-size:small; margin-left: 5px}
-.nickname #nick{margin-left: 5px; border-bottom: 1px solid gray;}
-.pwc_box{margin-top: 20px}
-.right #pw, #pwc{border-bottom: 1px solid gray; width:260px; font-size: 18px}
-
-#change_btn{margin-top: 30px; height: 140px; text-align: center; line-height: 140px}
-
+        .side {
+            float: left;
+            position: fixed;
+            top: 40%;
+        }
+        .side li {
+            color: black;
+            width: 130%;
+            margin-top: 50%;
+            font-size: 1.5em;
+            padding: 10%;
+            text-align: center;
+            border-radius: 50%;
+        }
+        .side li:hover {
+            background-color: #927E9C;
+            cursor: pointer;
+        }
+        .side a {
+            text-decoration: none;
+        }
+        .main {
+            float: left;
+            margin-left: 40%;
+            width: 50%;
+        }
+        .main input {
+            float: left;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            width: 70%;
+            background-color: #F9F9F9;
+            font-size: 1em;
+            height: 3em;
+        }
+        .main div {
+            margin-top: 10%;
+        }
+        #nick {
+            width: 50%;
+        }
+        #conf {
+            width: 10%;
+            height: 3em;
+            margin-left: 5%;
+            background-color: #927E9C;
+            border-radius: 50%;
+        }
+        #btn {
+            margin-left: 10%;
+            width: 100%;
+        }
+        #btn button {
+            margin-left: 20%;
+            height: 3em;
+            width: 10%;
+            background-color: #927E9C;
+        }
+        #pro {
+           background-color:  #927E9C;
+       }
     </style>
 </head>
 <body>
  	<jsp:include page="../../header.jsp"></jsp:include>
-    <div id="container">
-      <div id="contents">
-      <div class="main">
-		<div class="left">
-            <div class="profile_img"> 
-           
+            <nav class="my_nav">
+                <ul>
+                  <li id="pro">  <a href="mypage-both-profile.html">프로필 관리</li></a>                
+                    <li><a href="mypage-artist-his.html">나의 출품 목록</li></a>
+                </ul>
+            </nav>
+            <div class="main">
+            <div>
 				<c:choose>
 					<c:when test="${data.profile_img != null}">
 						<img src="/img/user/${loginUser.i_user}/${data.profile_img}">
@@ -80,69 +101,49 @@ input{background: none; border:none ; cursor: pointer;font-size: 16px}
 					</c:otherwise>
 				</c:choose>
 			</div>
-		
-				<form action="/profile" method="post" enctype="multipart/form-data" id="profile">
-				 <label for="imgchange">프로필이미지 바꾸기 </label>
-						
+			<div>
+				<form action="/profile" method="post" enctype="multipart/form-data">
+					<div>
+						<label>프로필 이미지 : <br><input type="file" name="profile_img" accept="image/*"></label>
 						<br>
-						<div class="align">
-						<input type="file" name="profile_img" accept="image/*" id="imgchange">
-		
-						<input type="submit"  class="material-icons" style="font-size:28px" value="add_circle_outline" >
-
-						</div>				
+						<input type="submit" value="업로드">
+					</div>				
 				</form>
 			</div>
-		
-				
-				<div class="right">
+			<br>
                 	<div>
                     	이메일 : ${data.user_email}
                     </div>
                     <form id="nicknameFrm" action="/changeNickname" method="post" onsubmit="return chkChangeNickname()"> 
 	                    <div class="nickname">
-	                    	<label for="nick">닉네임 : </label>
-		                    <input type="text" name="nickname" id="nick" value="${data.nickname}"> 
-		                    <input id="conf" type="button" value="중복확인" class="btn" id="double_check" onclick="chkNickname()">
-		                 
-		                   	<input type="hidden" name="nicknameCheck" value="nicknameUnCheck">
-	                  	 	
+	                    	<label for="nick">닉네임</label> <br>
+		                    <input type="text" name="nickname" id="nick" value="${data.nickname}">
+		                    <input id="conf" type="button" value="중복확인" id="double_check" onclick="chkNickname()">
+		                    <input type="hidden" name="nicknameCheck" value="nicknameUnCheck">
+	                    	<div id="nicknameChkResult" class="msg"></div>
 	                    	<div id="btn">
-	                      		<input type="submit" value="변경하기" class="btn">
-	                   	 	</div> 
-	                   
-	                    </div>	 	<div id="nicknameChkResult" class="msg"></div> 
+	                      		<input type="submit" value="변경하기">
+	                   	 	</div>
+	                    </div>
                     </form>
                    	<br>
 	                <form id="pwFrm" action="/changePw" method="post" onsubmit="return chkChangePw()">
 	                    <div>
 	                        <label for="pw">변경 비밀번호</label><br>
-	                        <input type="password" name="pw" id="pw">
+	                        <input type="password" name="pw" id="pw"><br>
 	                    </div>
-	                    <div class="pwc_box">
+	                    <div>
 	                        <label for="pwc">변경 비밀번호 확인</label><br>
-	                        <input type="password" name="pwc" id="pwc">
-	                    </div>  
-	                    
+	                        <input type="password" name="pwc" id="pwc"><br>
 	                    </div>
-	                   </div> 
-	                    <div id="change_btn">
-	                      	<input type="submit" value="변경하기" >
+	                    <div id="btn">
+	                      	<input type="submit" value="변경하기">
 	                    </div> 
 	                </form>
 	                 
-       
+            </div>
         </div>
     </div>
-    
-		<footer id="footer">
-		<ul>
-			<li>jumoney15@naver.com: 아이디어 제공, 3D</li>
-			<li>dlehdud1653@kakao.com: 로그인 및 게시판</li>
-			<li>nakihome@naver.com: 디자인</li>
-		</ul>
-
-	</footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
