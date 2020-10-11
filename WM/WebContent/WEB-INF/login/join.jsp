@@ -9,12 +9,11 @@
     <title>회원가입</title>
 
     <style>
-body{width:100%; height:100%; background-image:url('/resource/background/background.png'); 
-display: flex; justify-content: center;align-items: center;}
+body{background-image:url('/resource/background/background.png');}
 
 #joinFrm {
-	margin:10% auto;
     width: 500px;
+    margin:50px auto;
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.767);
     
@@ -142,9 +141,8 @@ input {
 <body>
 
         <div id="contents">
-         
-            <form action="/join" id="joinFrm" method="post" onsubmit="return chk()"> 
-              <h2 id="join_title">회원가입</h2>
+            <h2 id="join_title">회원가입</h2>
+            <form action="/join" id="joinFrm" method="post" onsubmit="return chk()">
                <div class="user_email"><label for="user_email">이메일</label>
 
                     <input type="email" name="user_email" id="user_email" required autofocus>
@@ -181,7 +179,7 @@ input {
              </form>
         </div>
         <div id="footer">
-          
+            <h3>푸터 영역</h3>
         </div>
 
 
