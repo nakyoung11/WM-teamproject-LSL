@@ -9,10 +9,10 @@ import java.util.List;
 import com.lsl.wm.vo.NoticeVO;
 
 public class NoticeDAO {
-	public static List<NoticeVO> selBoardList(NoticeVO param) {
+	public static List<NoticeVO> selNoticeList(NoticeVO param) {
 		List<NoticeVO> list = new ArrayList<NoticeVO>();
 		
-		String sql = " SELECT A.i_notice, A.title, A.ctnt, B.nickname as nm, A.r_dt "
+		String sql = " SELECT A.i_notice, A.title, B.nickname as nm, A.r_dt "
 				   + " FROM t_notice A "
 				   + " INNER JOIN t_user B "
 				   + " ON A.i_user = B.i_user "
@@ -30,14 +30,12 @@ public class NoticeDAO {
 				while(rs.next()) {
 					int i_notice = rs.getInt("i_notice");
 					String title = rs.getString("title");
-					String ctnt = rs.getString("ctnt");
 					String nm = rs.getString("nm");
 					String r_dt = rs.getString("r_dt");
 					
 					NoticeVO vo = new NoticeVO();
 					vo.setI_notice(i_notice);
 					vo.setTitle(title);
-					vo.setCtnt(ctnt);
 					vo.setNm(nm);
 					vo.setR_dt(r_dt);
 					
@@ -49,4 +47,33 @@ public class NoticeDAO {
 		
 		return list;
 	}
+	
+	public static NoticeVO selNotice(NoticeVO param) {
+		String sql = " SELECT title, ctnt "
+				   + " FROM t_notice "
+				   + " WHERE i_notice = ? ";
+		
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getI_notice());
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				if(rs.next()) {
+					String title = rs.getNString("title");
+					String ctnt = rs.getNString("ctnt");
+					
+					param.setTitle(title);
+					param.setCtnt(ctnt);
+				}
+				return 0;
+			}
+		});
+		
+		return param;
+	}
+	
 }
