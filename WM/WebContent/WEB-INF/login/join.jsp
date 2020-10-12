@@ -1,25 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-
-    <style>
-body{background-image:url('/resource/background/background.png');}
-
+   <style>
+body{width:100%; height:100%; background-image:url('/resource/background/background.png'); 
+display: flex; justify-content: center;align-items: center;}
+ 
 #joinFrm {
+	margin:10% auto;
     width: 500px;
-    margin:50px auto;
     padding: 30px;
     background-color: rgba(255, 255, 255, 0.767);
-    
- 
 }
-
+ 
 #join_title{text-align: center;}
 label {
     display: block;
@@ -28,7 +25,6 @@ label {
     font-size: 18px;
     font-size-adjust:0.6em
 }
-
 #pw_guide {
     display: block;
     padding-left: 2em;
@@ -37,7 +33,7 @@ label {
     color: rgb(170, 14, 14);
     font-size-adjust:0.6em
 }
-
+ 
 input {
     width: 55%;
     height: 2.5em;
@@ -52,8 +48,8 @@ input {
     font-size-adjust:0.6em;
     cursor:pointer;
 }
-
-
+ 
+ 
 #birthday {
     padding-left: 1em;
     display: block;
@@ -61,32 +57,28 @@ input {
     font-size: 18px;
     font-size-adjust:0.6em
 }
-
+ 
 .birthday>label {
     display: inline-block;
     width: 5%;
     margin-right: 10px;
     font-size-adjust:0.6em
 }
-
+ 
 .birthday>input {
     width: 100px;
-
-  
 }
 
 .birthday>#month, #date {
     width: 10%;
     margin-left: 3px;
-    
 }
-
+ 
 #join_title{
     position: relative;
     color: #4C3C50;
     font-size:2em;
     margin: 1% 0% 10% 3%}
-
 .nickname>input{width:45%}
 .news{height: 10%;}
 #user_pw{margin-bottom: 10px }
@@ -94,15 +86,12 @@ input {
     font-size:18px;
     height: 1em;
     width: 1.3em;
-
-}
-
+ }
 #news_guide {
     margin-left: 0;
     margin-top: 15px;
     font-size: 18px;
     
-   
 }
 
 #double_check {
@@ -113,14 +102,15 @@ input {
     background: #544E57;
     border-radius:1em;
     font-size: 1em;
-    padding:10px;
+	   padding:10px;
     color: white;
 
 }
-
+ 
+.submit_btn{display: flex; justify-content: center; align-content: center;}
 #submit_btn {
-    display:block;
-    margin: 10px auto;
+    display:lock;
+    margin: 50px auto;
     width: 300px;
     height:3.5em;
     background: #927E9C;
@@ -129,22 +119,22 @@ input {
     font-size: 1em;
     padding:10px;
     color: white;
-
-}
+ }
 .msg {
    margin-top: 10px;
    margin-left: 30px; 
    color: red;
 }  
     </style>
+
 </head>
+
 <body>
-
-        <div id="contents">
-            <h2 id="join_title">회원가입</h2>
-            <form action="/join" id="joinFrm" method="post" onsubmit="return chk()">
+       <div id="contents">
+            <form action="/join" id="joinFrm" method="post" onsubmit="return chk()"> 
+              <h2 id="join_title">회원가입</h2>
                <div class="user_email"><label for="user_email">이메일</label>
-
+ 
                     <input type="email" name="user_email" id="user_email" required autofocus>
                      <input type="button" value="중복확인" id="double_check" onclick="chkEmail()">
                      <input type="hidden" name="emailCheck" value="emailUnCheck">
@@ -177,10 +167,14 @@ input {
                     <input type="submit" value="가입하기" id="submit_btn">
                 </div>
              </form>
+
         </div>
+
         <div id="footer">
-            <h3>푸터 영역</h3>
-        </div>
+
+         
+
+       </div>
 
 
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -195,8 +189,8 @@ input {
 					joinFrm.user_pw.focus()
 					return false
 				} 
-				
-				
+			
+
 				if(joinFrm.emailCheck.value != "emailCheck") {
 					alert('이메일 중복확인을 해주세요.')
 					return false
@@ -260,11 +254,11 @@ input {
 					} else {
 						alert('이메일을 입력해주세요')
 					}
-					
-				})
+				
+			})
 			}
 			
-			function chkNickname() {
+		function chkNickname() {
 				const nickname = joinFrm.nickname.value
 				axios.get('/ajaxnickname', {
 					params: {
@@ -287,6 +281,6 @@ input {
 				})
 			}
       </script>
-
+ 
 </body>
 </html>
