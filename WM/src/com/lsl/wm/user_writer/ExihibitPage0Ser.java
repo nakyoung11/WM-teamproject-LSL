@@ -25,38 +25,24 @@ import com.lsl.wm.vo.WorkVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-@WebServlet("/exhibit_page1")
-public class ExihibitPage1Ser extends HttpServlet {
+@WebServlet("/exhibit_page0")
+public class ExihibitPage0Ser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//�α����� ����� ������ �޾ƿ´�.
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		int i_show = Integer.parseInt(request.getParameter("i_show"));
-		ShowVO param = new ShowVO();
 		
-		param.setI_show(i_show);
 		
-		param = ShowDAO.selShow(param);
-		
-		String savePath = "/resource/show/images/posters/" + loginUser.getI_user() + "/";
-		
-		System.out.println("i_show: " +  param.getI_show());
-		System.out.println("title: " + param.getShow_title());
-		
-		//����ȸ ������ �����ش�.
-		request.setAttribute("data", param);
-		//jsp���� ������� �������� ��θ� �����ش�.
-		request.setAttribute("imagePath", savePath);
-		
-		String jsp = "/WEB-INF/user_writer/exhibit_page1.jsp";
+	
+		String jsp = "/WEB-INF/user_writer/exhibit_page0.jsp";
 		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		//������ ����
-		String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
+		
+		String savePath = getServletContext().getRealPath("resource") + "/show/images/posters/"  + loginUser.getI_user() + "/";
 
 		//���� ����(���丮)�� ���ٸ� ���� ����
 		File directory = new File(savePath);
@@ -72,42 +58,26 @@ public class ExihibitPage1Ser extends HttpServlet {
 		MultipartRequest mr = new MultipartRequest(request, savePath
 				, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		/*jsp�� ���� ��ǰ ������ �޾ƿ´�.*/
-		//����Ʈ�� � ����
-		int list_cnt = Integer.parseInt(mr.getParameter("list_cnt"));
-		//��� ����ȸ ����
-		int i_show = Integer.parseInt(mr.getParameter("i_show"));
-		
-		//������ �Ѿ�� ������ DB�� t_work�� �־��ش�
-		for(int i=0; i<list_cnt; i++) {
-			String work_image = mr.getParameter("work_image_idx_" + i);
-			String work_title = mr.getParameter("input_title_" + i);
-			String work_ctnt = mr.getParameter("input_comment_" + i);
-			//���� ����� ���� �̸� (����ȸidx_����idx_���ϸ�) ���� work_iamge�� ���ϸ� �޾ƿ� ���̴�.
-			String saveImageName = i_show  + "_" + loginUser.getI_user() + "_" +  work_image; 
+		//jsp파일의 자료들을 받아온다.
+
+			String show_image = mr.getParameter("show_image");
+			String show_title = mr.getParameter("show_title");
+			String show_ctnt = mr.getParameter("show_ctnt");
 			
-			WorkVO param = new WorkVO();
-			param.setI_show(i_show);
+			//데이터 베이스에 삽입
+			ShowVO param = new ShowVO();
 			param.setI_user(loginUser.getI_user());
-			param.setWork_image(saveImageName);
-			param.setWork_title(work_title);
-			param.setWork_ctnt(work_ctnt);
+			param.setShow_poster(show_image);
+			param.setShow_title(show_title);
+			param.setShow_ctnt(show_ctnt);
 			
-			WorkDAO.insWork(param);
-			param.setI_user(loginUser.getI_user());
-			//���� �ֱٿ� �� i_work���� �����´�.
-			param = WorkDAO.selLatestWork(param);
-			//�Ѿ�� ������ ����ȸ ����Ʈ(t_show_list)�� �ξ��ش�.
-			ShowListVO vo2 = new ShowListVO(); 
-			vo2.setI_show(i_show);
-			vo2.setI_work(param.getI_work());
-			System.out.println(param.getI_work());
-			ShowListDAO.insShowList(vo2);
-		}
+			ShowDAO.insShow(param);
+			
+			param = ShowDAO.selLatestI_show(param);
+			
 		
-		
-		
-		System.out.println("savePath : " + savePath);
+		System.out.println("타이틀 : " + param.getShow_title());
+		System.out.println("이미지명 : " + param.getShow_poster());
 		
 		try {
 			Enumeration files = mr.getFileNames();
@@ -116,7 +86,7 @@ public class ExihibitPage1Ser extends HttpServlet {
 				String key = (String)files.nextElement();
 				fileNm = mr.getFilesystemName(key);
 				String ext = fileNm.substring(fileNm.lastIndexOf("."));
-				saveFileNm = i_show  + "_" + loginUser.getI_user() + "_" + fileNm;				
+				saveFileNm = show_image;				
 				System.out.println("key : " + key);
 				System.out.println("fileNm : " + fileNm);
 				System.out.println("saveFileNm : " + saveFileNm);				
@@ -127,10 +97,8 @@ public class ExihibitPage1Ser extends HttpServlet {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 			
-		response.sendRedirect("/exhibit_page2");
-	
+		response.sendRedirect("/exhibit_page1?i_show=" +  param.getI_show());
 	}
 
 }
