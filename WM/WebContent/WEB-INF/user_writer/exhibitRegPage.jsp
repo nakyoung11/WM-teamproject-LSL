@@ -207,17 +207,11 @@ button:focus {
 <body>
 	<div id="container">
 		<div id="contents">
-			<div>
-				<img src="${imagePath}${data.show_poster}">
-				<h1>전시회 제목: ${data.show_title}</h1>
-				<h2>전시회 설명: ${data.show_ctnt}</h2>
-				<h3>전시회 기간: ${data.start_dt} ~ ${data.end_dt}</h3>
-			</div>
 			<form action="/exhibitRegPage" method="POST" name="exhibit_frm"
 				enctype="multipart/form-data" accept-charset="UTF-8">
 				<!-- 어느 전시회인지를  POST로 보내주기 위해 i_show정보를 담아놓는다. -->
 				<input type="hidden" name="i_show" id="i_show"
-					value="${data.i_show}"> <input type="hidden"
+					value="${data}"> <input type="hidden"
 					name="list_cnt" id="list_cnt" value="">
 				<input type="hidden" name="i_work" id="i_work"
 					value="${workData.i_work}"> <input type="hidden"

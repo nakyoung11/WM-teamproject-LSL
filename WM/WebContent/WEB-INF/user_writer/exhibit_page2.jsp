@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>작품 등록2</title>
+<title>등록 페이지2</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
@@ -174,17 +174,8 @@
 		<div id="contents">
 			<div id="my_exihibit">
 				<div>
-					<h2>나의 출품 목록</h2>
-					<table>
-						<tr>
-							<td>${showParam.show_title}</td>
-							<td>
-								<ul id="exhibit_list">
-
-								</ul>
-							</td>
-						</tr>
-					</table>
+					<h2 id="title_div">나의 출품 목록</h2>
+				
 				</div>
 				<div>
 					<h2>전시 목록</h2>
@@ -222,34 +213,47 @@
     /*작품정보를 받아와 콘텐츠영역안에 테이블을 생성하여 보여주는 함수*/
      // 출품한 작품목록
         function displayExhibitWorkInfo() {
-    		var i = 0;
-            var exhibitList = document.getElementById('exhibit_list');
+        	var i = 0;
+        	var tempI_show;
+        	<c:forEach items="${showList}" var="item">
+        	tempI_show = ${item.i_show};
+        	console.log("asdasdasd: " + tempI_show);
+        	
+        	title = document.getElementById("title_div");
+    		var table = document.createElement('table');
+    		table.innerHTML = `
+    			<tr>
+				<td>${item.show_title}</td>
+				<td>
+					<ul id="exhibit_list_\${i}">
+
+					</ul>
+				</td>
+			</tr>
+			`;
+			title.append(table);
+			
+			var j = 0;
+            var exhibitList = document.getElementById(`exhibit_list_\${i}`);
             exhibitList.innerHTML = "";
-            <c:forEach items="${workList}" var="item">
+            <c:forEach items="${item.showDomainList}" var="item2">
+            	
                 var li = document.createElement('li');
-                li.innerHTML = `<input type="hidden" id="i_work_idx_\${i}" name="i_work_idx_\${i}" value="${item.i_work}">
-                <span style="cursor: default" id="work_title_idx_\${i}">\${i+1}.${item.work_title}</span><a id="mod_exhibit" style="cursor: pointer" onclick="modExhibit(\${i})">수정</a>
-                <a id="del_exhibit" style="cursor: pointer" onclick="delExhibit(\${i})">삭제</a>`;
+                li.innerHTML = `<input type="hidden" id="i_show_idx_\${i}\${j}" value="\${tempI_show}">
+                <input type="hidden" id="i_work_idx_\${i}\${j}" name="i_work_idx_\${i}\${j}" value="${item2.i_work}">
+                <span style="cursor: default" id="work_title_idx_\${i}\${j}">\${j+1}.${item2.work_title}</span><a id="mod_exhibit" style="cursor: pointer" onclick="modExhibit('\${i}\${j}')">수정</a>
+                <a id="del_exhibit" style="cursor: pointer" onclick="delExhibit('\${i}\${j}')">삭제</a>`;
                 exhibitList.append(li);
-                i++;
+                j++;
+            	</c:forEach>
+            	i++;
             </c:forEach>
         }
-    /*
-        // 전시한 작품목록
-        function displayExhibitionWorkInfo(paramArr) {
-            var exhibitionList = document.getElementById('exhibition_list');
-            exhibitionList.innerHTML = "";
-            for (var i = 0; i < paramArr.length; i++) {
-                var li = document.createElement('li');
-                li.setAttribute('onclick', `movePage(\${i})`);
-                li.innerHTML = `<span>\${i+1}.\${paramArr[i].title}</span><div id="cnt_div"><img id="like_cnt_icon" src="/resource/user_writer/images/like_icon.png"><span id="like_cnt">\${paramArr[i].like_cnt}++</span>&nbsp&nbsp&nbsp&nbsp&nbsp<img id="cmt_cnt_icon" src="/resource/user_writer/images/cmt_icon.png"><span id="cmt_cnt">\${paramArr[i].cmt_cnt}++</span></div>`;
-                exhibitionList.append(li);
-            }
-        }
-    */
+  
 
 	/*출품신청 작품 수정/삭제 하는 함수*/
     function delExhibit(i){
+    	var i_show = document.getElementById(`i_show_idx_\${i}`).value;
     	var title = document.getElementById(`work_title_idx_\${i}`).innerHTML;
         if(confirm(`제목: \${title}\n삭제하시겠습니까?`)){
         	var form = document.createElement('form'); // 폼객체 생성
@@ -263,7 +267,7 @@
         	objs2 = document.createElement('input'); // 값이 들어있는 녀석의 형식
         	objs2.setAttribute('type', 'text'); // 값이 들어있는 녀석의 type
         	objs2.setAttribute('name', 'i_show'); // 객체이름
-        	objs2.setAttribute('value', ${showParam.i_show}); //객체값
+        	objs2.setAttribute('value', i_show); //객체값
         	form.appendChild(objs2);
         	form.setAttribute('method', 'post'); //get,post 가능
         	form.setAttribute('action', "/exhibit_page2"); //보내는 url
@@ -275,9 +279,10 @@
 
     function modExhibit(i){
         if(confirm('수정 페이지로 이동하시겠습니까?')){
+        	var i_show = document.getElementById(`i_show_idx_\${i}`).value;
+        	console.log("아이쇼 " + i_show);
         	var i_work = document.getElementById(`i_work_idx_\${i}`).value;
-       
-            location.href = "/exhibitRegPage?i_work=" + i_work;
+            location.href = "/exhibitRegPage?i_work=" + i_work + "&i_show=" + i_show;
         }
        
     }

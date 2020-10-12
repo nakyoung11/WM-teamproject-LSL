@@ -26,27 +26,26 @@ public class ExhibitRegPageSer extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// ·Î±×ÀÎÇÑ »ç¿ëÀÚ Á¤º¸¸¦ ¹Þ¾Æ¿Â´Ù.
+		// ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Â´ï¿½.
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		// Àü½ÃÈ¸ Á¤º¸¸¦ ¹Þ¾Æ¿Â´Ù.
-		ShowVO param = ShowDAO.selLatestExhibition();
-		//¼öÁ¤ÇÒ ÀÛÇ°ÀÇ i_work °ªÀ» ¹Þ¾Æ¿Â´Ù.
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ i_work ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Â´ï¿½.
+		int i_show = Integer.parseInt(request.getParameter("i_show"));
 		int i_work = Integer.parseInt(request.getParameter("i_work"));
 		WorkVO vo = new WorkVO();
 		vo.setI_work(i_work);
-		//ÀÛÇ°Á¤º¸¸¦ °¡Á®¿Â´Ù.
+		//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 		WorkVO workParam = WorkDAO.selWork(vo);
 
-		String savePath = "/resource/show/images/posters/" + param.getI_show() + "/";
+		String savePath = "/resource/show/images/posters/" + i_show + "/";
 		String workImagePath = "/resource/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
 
-		// Àü½ÃÈ¸ Á¤º¸¸¦ º¸³»ÁØ´Ù.
-		request.setAttribute("data", param);
-		// jsp¿¡¼­ Ãâ·ÂÇØÁÙ Æ÷½ºÅÍÀÇ °æ·Î¸¦ º¸³»ÁØ´Ù.
+		// ï¿½ï¿½ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+		request.setAttribute("data", i_show);
+		// jspï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		request.setAttribute("imagePath", savePath);
-		//ÀÛÇ°Á¤º¸¸¦ º¸³»ÁØ´Ù.
+		//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		request.setAttribute("workData", workParam);
-		//ÀÛÇ° °æ·Î
+		//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½
 		request.setAttribute("workPath", workImagePath);
 		
 		String jsp = "/WEB-INF/user_writer/exhibitRegPage.jsp";
@@ -56,27 +55,27 @@ public class ExhibitRegPageSer extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		//ÀúÀå°æ·Î ÁöÁ¤
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
 
-		//¸¸¾à Æú´õ(µð·ºÅä¸®)°¡ ¾ø´Ù¸é Æú´õ »ý¼º
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ä¸®)ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		File directory = new File(savePath);
 		if(!directory.exists()) {
 			directory.mkdirs();
 		}
 		
-		int maxFileSize = 10_485_760; //1024 * 1024 * 10 (10mb) //ÃÖ´ë ÆÄÀÏ »çÀÌÁî Å©±â
+		int maxFileSize = 10_485_760; //1024 * 1024 * 10 (10mb) //ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½
 		String fileNm = "";
 		String saveFileNm = null;
 		
-		//¿©·¯ ÆÄÀÏÀ» ¹Þ±â À§ÇØ ¸ÖÆ¼ ¸®Äù½ºÆ® °´Ã¼ ¼±¾ð ÀÏ¹Ý requestµµ ÀÌ°É·Î ¹Þ¾Æ¾ßÇÑ´Ù.
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¹ï¿½ requestï¿½ï¿½ ï¿½Ì°É·ï¿½ ï¿½Þ¾Æ¾ï¿½ï¿½Ñ´ï¿½.
 		MultipartRequest mr = new MultipartRequest(request, savePath
 				, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		/*jsp·Î ºÎÅÍ ÀÛÇ° Á¤º¸¸¦ ¹Þ¾Æ¿Â´Ù.*/
-		//¾î´À Àü½ÃÈ¸ ÀÎÁö
+		/*jspï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Â´ï¿½.*/
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½
 		int i_show = Integer.parseInt(mr.getParameter("i_show"));
-		//¾î´À ÀÛÇ°ÀÎÁö
+		//ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 		int i_work = Integer.parseInt(mr.getParameter("i_work"));
 		
 		
@@ -85,20 +84,20 @@ public class ExhibitRegPageSer extends HttpServlet {
 		
 			WorkVO param = new WorkVO();
 			String saveImageName ="";
-			//¸¸¾à¿¡ ±×¸²¿¡ ¼öÁ¤ÀÌÀÖ´Ù¸é
+			//ï¿½ï¿½ï¿½à¿¡ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ù¸ï¿½
 			if(!(mr.getParameter("work_image").equals(""))) {
 				String work_image = mr.getParameter("work_image");
 				
-				/*±âÁ¸¿¡ ÆÄÀÏ »èÁ¦*/
+				/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 				param.setI_work(i_work);
 				param = WorkDAO.selWork(param);
 				
 				File f = new File(savePath + "/" + param.getWork_image());		
 				if(f.exists()){
 					f.delete();
-					System.out.println("ÆÄÀÏ »èÁ¦µÊ");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				}else{
-					System.out.println("ÆÄÀÏ ¾øÀ½");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				}
 				
 				try {
@@ -140,7 +139,7 @@ public class ExhibitRegPageSer extends HttpServlet {
 		
 		
 		
-			System.out.println("postµé¾î¿È");
+			System.out.println("postï¿½ï¿½ï¿½ï¿½");
 		
 		
 		

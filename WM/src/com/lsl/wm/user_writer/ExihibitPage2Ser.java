@@ -16,7 +16,9 @@ import com.lsl.wm.MyUtils;
 import com.lsl.wm.db.ShowDAO;
 import com.lsl.wm.db.ShowListDAO;
 import com.lsl.wm.db.WorkDAO;
+import com.lsl.wm.vo.ShowArrDomain;
 import com.lsl.wm.vo.ShowListDomain;
+import com.lsl.wm.vo.ShowListVO;
 import com.lsl.wm.vo.ShowVO;
 import com.lsl.wm.vo.UserVO;
 import com.lsl.wm.vo.WorkVO;
@@ -27,69 +29,47 @@ public class ExihibitPage2Ser extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String jsp = "/WEB-INF/user_writer/exhibit_page2.jsp";
-		//로그인한 사용자 정보를 받아온다.
+		//�α����� ����� ������ �޾ƿ´�.
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		//전시회 정보를 받아온다. 
+		//����ȸ ������ �޾ƿ´�.
+		ShowVO param = new ShowVO();
+		param.setI_user(loginUser.getI_user());
+		List<ShowVO> showParam = ShowDAO.selI_showList(param);
 		
+		List<ShowArrDomain> list = new ArrayList(); 
 		
-		if(loginUser == null) {
-			response.sendRedirect("/login"); //
-			return;
-		} 		
-		
-		
-		ShowVO showParam = ShowDAO.selLatestExhibition();
-		//exhibit_page1 서블릿 파일에서 넘어온 i_user, i_show값을 받는다.
-		int i_user = loginUser.getI_user();
-		int i_show = showParam.getI_show();
-		System.out.println(i_show);
-		
-		if(i_show==0) {
-			String jsp1 = "/WEB-INF/user_writer/err_null.jsp";
-			request.getRequestDispatcher(jsp1).forward(request, response);
-			return;
+		for(int i=0; i<showParam.size(); i++) {
+			ShowArrDomain domain = new ShowArrDomain();
+			domain.setI_show(showParam.get(i).getI_show());
+			domain.setShow_title(showParam.get(i).getShow_title());
+			domain.setShow_ctnt(showParam.get(i).getShow_ctnt());
+			ShowListVO vo = new ShowListVO();
+			vo.setI_show(showParam.get(i).getI_show());
+			domain.setShowDomainList(ShowListDAO.selShowList(vo));
+			list.add(domain);
 		}
-		//작품이 없다면 에러페이지로 이동
-		
-		
-		System.out.println("넘어온 파라미터값:" + i_user);
-		//넘어온 파라미터 값을 넣어줄 WorkVO 객체
-		
-		
-		
-		WorkVO vo = new WorkVO();
-		
-		ShowVO vo2 = new ShowVO();
-		
-		//값을 넣는다.
-		vo.setI_user(i_user);
-		vo.setI_show(i_show);
-		
-		vo2.setI_show(i_show);
-		
-		//selWorkList i_user와 i_work가 일치하는 메소드를 사용하여 작품 목록을 받f다
-		List<WorkVO> list = WorkDAO.selWorkList(vo);
-		
-		ShowVO param = ShowDAO.selShow(vo2);
 		
 		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getWork_title());
+			System.out.println("i_show: " + list.get(i).getShow_title());
+			for(int j=0; j<list.get(i).getShowDomainList().size(); j++) {
+				System.out.println("작품 제목: " + list.get(i).getShowDomainList().get(j).getWork_title());
+			}
+			System.out.println();
+			System.out.println();
 		}
-		//list를 jsp로 보내기 위해 담아준다.
-		//작품정보
-		request.setAttribute("workList", list);
-		//전시회 정보
-		request.setAttribute("showParam", param);
+			
+		request.setAttribute("showList", list);
+		
 		
 		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-UserVO loginUser = MyUtils.getLoginUser(request);
+		UserVO loginUser = MyUtils.getLoginUser(request);
 		
-		/*삭제 기능 구현부*/
+		/*���� ��� ������*/
 		int i_show = Integer.parseInt(request.getParameter("i_show"));
-		//삭제할 작품의 i_work값을 가져온다.
+		//������ ��ǰ�� i_work���� �����´�.
 		int i_work = Integer.parseInt(request.getParameter("i_work"));
 		int i_user = loginUser.getI_user();
 		
@@ -101,8 +81,8 @@ UserVO loginUser = MyUtils.getLoginUser(request);
 		
 		param = WorkDAO.selWork(param);
 		
-		System.out.println("가져온 이미지 제목 " + param.getWork_image());
-		//먼저 파일을 삭제 한다.
+		System.out.println("������ �̹��� ���� " + param.getWork_image());
+		//���� ������ ���� �Ѵ�.
 		String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
 		System.out.println("path : " + savePath);
 		
@@ -110,20 +90,23 @@ UserVO loginUser = MyUtils.getLoginUser(request);
 		File f = new File(savePath + "/" + param.getWork_image());		
 		if(f.exists()){
 			f.delete();
-			System.out.println("파일 삭제됨");
+			System.out.println("���� ������");
 		}else{
-			System.out.println("파일 없음");
+			System.out.println("���� ����");
 		}
 		
 		WorkDAO.delWork(param);
-		/*전시회 리스트 에서도 삭제한다.*/
+		/*����ȸ ����Ʈ ������ �����Ѵ�.*/
 		ShowListDomain vo = new ShowListDomain();
 		vo.setI_work(i_work);
 		
 		ShowListDAO.delShowList(vo);
 		
-		System.out.println("넘어온 값" + i_work);
+		System.out.println("�Ѿ�� ��" + i_work);
 		
 		response.sendRedirect("/exhibit_page2?i_user="+ i_user + "&i_show=" + i_show);
+		
+		
 	}
+
 }
