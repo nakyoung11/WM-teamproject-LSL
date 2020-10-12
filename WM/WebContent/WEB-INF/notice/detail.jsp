@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +62,9 @@
 				</tr>
             </table>
             <button class="listBtn" onclick="moveToList()">목록</button>
+            <c:if test="${i_user == 1}">
+            	<a href="/notice/regmod?i_notice=${list.i_notice}">수정</a>
+            </c:if>
 		</div>
 	</div>
 	<script>
