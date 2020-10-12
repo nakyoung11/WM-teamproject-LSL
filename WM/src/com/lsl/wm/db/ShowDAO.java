@@ -6,13 +6,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lsl.wm.vo.ShowListDomain;
 import com.lsl.wm.vo.ShowVO;
+import com.lsl.wm.vo.WorkVO;
 
 public class ShowDAO {
-	/*
-	public static int insWork(WorkVO param) {
-		String sql = " INSERT INTO t_work " 
-				+ " (i_user, work_images, work_title, work_ctnt) " 
+	
+	public static int insShow(ShowVO param) {
+		String sql = " INSERT INTO t_show " 
+				+ " (i_user, show_poster, show_title, show_ctnt) " 
 				+ " VALUES " 
 				+ " ( ?, ?, ?, ?) ";
 		
@@ -21,19 +23,19 @@ public class ShowDAO {
 			@Override
 			public void update(PreparedStatement ps) throws SQLException {
 				ps.setInt(1, param.getI_user());
-				ps.setNString(2, param.getWork_image());
-				ps.setNString(3, param.getWork_title());
-				ps.setNString(4, param.getWork_ctnt());
+				ps.setNString(2, param.getShow_poster());
+				ps.setNString(3, param.getShow_title());
+				ps.setNString(4, param.getShow_ctnt());
 			
 			}
 		});
 	}
-	*/
+	
 	public static int selPagingCnt(ShowVO param) {
 		String sql = " SELECT CEIL(count(i_show) / 6) as pagingCnt "
 				   + " FROM t_show "
 				   + " WHERE show_title LIKE ? "
-				   + " ORDER BY start_dt DESC ";
+				   + " ORDER BY r_dt DESC ";
 		
 		return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
 			
@@ -56,7 +58,7 @@ public class ShowDAO {
 		List<ShowVO> list = new ArrayList<ShowVO>();
 		
 		String sql = " SELECT A.* "
-				   + " FROM (SELECT show_title FROM t_show WHERE show_title LIKE ? ORDER BY start_dt DESC) A "
+				   + " FROM (SELECT show_title FROM t_show WHERE show_title LIKE ? ORDER BY r_dt DESC) A "
 				   + " LIMIT ?, 6 ";
 		
 		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
@@ -85,11 +87,11 @@ public class ShowDAO {
 		return list;
 	}
 	
+	
 	public static ShowVO selShow(ShowVO param) {
 		String sql = " SELECT "
-				+ " i_show, start_dt, end_dt, show_ctnt, "
-				+ " exhibit_start_dt, exhibit_end_dt,"
-				+ " show_title, show_ctnt, show_poster "
+				+ " i_show, i_user, show_ctnt, "
+				+ " show_title, show_poster "
 				   + " FROM t_show "
 				   + " WHERE i_show = ? ";
 		
@@ -106,11 +108,8 @@ public class ShowDAO {
 			public int executeQuery(ResultSet rs) throws SQLException {
 				while(rs.next()) {
 					vo.setI_show(rs.getInt("i_show"));
+					vo.setI_user(rs.getInt("i_user"));
 					vo.setShow_poster(rs.getString("show_poster"));
-					vo.setStart_dt(rs.getString("start_dt"));
-					vo.setEnd_dt(rs.getString("end_dt"));
-					vo.setExhibit_start_dt(rs.getString("exhibit_start_dt"));
-					vo.setExhibit_end_dt(rs.getString("exhibit_end_dt"));
 					vo.setShow_title(rs.getString("show_title"));
 					vo.setShow_ctnt(rs.getString("show_ctnt"));
 				}
@@ -121,29 +120,65 @@ public class ShowDAO {
 		return vo;
 	}
 	
-	public static ShowVO selLatestExhibition() {
+	public static List<ShowVO> selI_showList(ShowVO param) {
 		String sql = " SELECT "
-				+ " MAX(i_show) as i_show, start_dt, end_dt, show_ctnt, "
-				+ " exhibit_start_dt, exhibit_end_dt,"
-				+ " show_title, show_ctnt, show_poster "
-				   + " FROM t_show ";
+				+ " i_show, i_user, show_ctnt, "
+				+ " show_title, show_poster "
+				   + " FROM t_show "
+				   + " WHERE i_user = ? ";
+		
+		List<ShowVO> list = new ArrayList();
+		
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getI_user());
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				while(rs.next()) {
+					ShowVO vo = new ShowVO();
+					vo.setI_show(rs.getInt("i_show"));
+					vo.setI_user(rs.getInt("i_user"));
+					vo.setShow_poster(rs.getString("show_poster"));
+					vo.setShow_title(rs.getString("show_title"));
+					vo.setShow_ctnt(rs.getString("show_ctnt"));
+					list.add(vo);
+				}
+				return 1;
+			}
+		});
+		
+		return list;
+	}
+	
+	//가장 최근 전시회 정보를 가져온다.
+	public static ShowVO selLatestI_show(ShowVO param) {
+		String sql = " SELECT "
+				+ " i_show, i_user, show_ctnt, "
+				+ " show_title, show_poster "
+				   + " FROM t_show "
+				   + " WHERE i_show = (SELECT MAX(i_show)"
+				   + "FROM t_show "
+				   + "WHERE i_user = ?) ";
 		
 		ShowVO vo = new ShowVO();
 		
 		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
 			
 			@Override
-			public void prepared(PreparedStatement ps) throws SQLException {}
+			public void prepared(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getI_user());
+			}
 			
 			@Override
 			public int executeQuery(ResultSet rs) throws SQLException {
 				while(rs.next()) {
 					vo.setI_show(rs.getInt("i_show"));
+					vo.setI_user(rs.getInt("i_user"));
 					vo.setShow_poster(rs.getString("show_poster"));
-					vo.setStart_dt(rs.getString("start_dt"));
-					vo.setEnd_dt(rs.getString("end_dt"));
-					vo.setExhibit_start_dt(rs.getString("exhibit_start_dt"));
-					vo.setExhibit_end_dt(rs.getString("exhibit_end_dt"));
 					vo.setShow_title(rs.getString("show_title"));
 					vo.setShow_ctnt(rs.getString("show_ctnt"));
 				}
