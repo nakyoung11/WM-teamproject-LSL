@@ -76,4 +76,36 @@ public class NoticeDAO {
 		return param;
 	}
 	
+	public static int insNotice(NoticeVO param) {
+		String sql = " INSERT INTO t_notice "
+				   + " (title, ctnt, i_user) "
+				   + " VALUES "
+				   + " (?, ?, ?) ";
+		
+		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setNString(1, param.getTitle());
+				ps.setNString(2, param.getCtnt());
+				ps.setInt(3, param.getI_user());
+			}
+		});
+	}
+	
+	public static int updNotice(NoticeVO param) {
+		String sql = " UPDATE t_notice "
+				   + " SET title = ?, ctnt = ?, m_dt = now() "
+				   + " WHERE i_notice = ? ";
+		
+		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setNString(1, param.getTitle());
+				ps.setNString(2, param.getCtnt());
+				ps.setInt(3, param.getI_notice());
+			}
+		});
+	}
 }

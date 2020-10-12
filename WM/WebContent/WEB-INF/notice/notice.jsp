@@ -78,7 +78,7 @@
 	
 	<script>
 		function moveToReg() {
-			location.href="/notice/reg"	
+			location.href="/notice/regmod"	
 		}
 		
 		function moveToDetail(i_notice) {
