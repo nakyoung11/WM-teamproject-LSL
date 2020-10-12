@@ -58,7 +58,8 @@ public class ShowDAO {
 		List<ShowVO> list = new ArrayList<ShowVO>();
 		
 		String sql = " SELECT A.* "
-				   + " FROM (SELECT show_title FROM t_show WHERE show_title LIKE ? ORDER BY r_dt DESC) A "
+				   + " FROM (SELECT show_title, show_poster, i_user, r_dt FROM t_show WHERE show_title LIKE ?) A"
+				   + " ORDER BY A.r_dt DESC "
 				   + " LIMIT ?, 6 ";
 		
 		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
@@ -73,11 +74,14 @@ public class ShowDAO {
 			public int executeQuery(ResultSet rs) throws SQLException {
 				while(rs.next()) {
 					
+					int i_user = rs.getInt("i_user");
 					String show_title = rs.getNString("show_title");
-					
+					String show_poster = rs.getNString("show_poster");
 					ShowVO vo = new ShowVO();
 					
+					vo.setI_user(i_user);
 					vo.setShow_title(show_title);
+					vo.setShow_poster(show_poster);
 					
 					list.add(vo);
 				}

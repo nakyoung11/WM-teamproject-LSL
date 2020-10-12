@@ -80,7 +80,7 @@ select, input{border: none; background: none;cursor: pointer;}
 						<tr>
 						</c:if>
 						<td class="posterName">
-							<img src="/resource/show/images/posters/1/고전명화작품전 포스터.jpg" class="poster">
+							<img src="${posterPath}${item.i_user}/${item.show_poster}" class="poster">
 							<div class="showTitle"><p>${item.show_title}</p></div>
 						</td>
 						<c:if test="${i%j == j-1 }">

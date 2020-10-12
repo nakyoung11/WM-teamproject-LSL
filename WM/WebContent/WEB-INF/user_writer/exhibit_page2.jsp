@@ -177,21 +177,7 @@
 					<h2 id="title_div">나의 출품 목록</h2>
 				
 				</div>
-				<div>
-					<h2>전시 목록</h2>
-					<table>
-						<tr>
-							<td>루브르전</td>
-							<td>
-								<ul id="exhibition_list">
-
-								</ul>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
+				
 		<div id="footer">
 			<h3>푸터 영역</h3>
 		</div>

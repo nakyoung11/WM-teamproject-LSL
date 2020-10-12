@@ -36,7 +36,12 @@ public class ShowListSer extends HttpServlet {
 		
 		List<ShowVO> list = ShowDAO.selShowList(param);
 		
+		String savePath = "/resource/show/images/posters/";
+		
+		System.out.println("sadasdasd: " + list.get(0).getShow_poster());
+		
 		request.setAttribute("list", list);
+		request.setAttribute("posterPath", savePath);
 		request.setAttribute("pagingCnt", pagingCnt);
 		
 		request.getRequestDispatcher("/WEB-INF/view/showList.jsp").forward(request, response);
