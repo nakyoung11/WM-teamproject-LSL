@@ -31,12 +31,27 @@ public class ExihibitPage2Ser extends HttpServlet {
 		String jsp = "/WEB-INF/user_writer/exhibit_page2.jsp";
 		//�α����� ����� ������ �޾ƿ´�.
 		UserVO loginUser = MyUtils.getLoginUser(request);
+		
+		 if(loginUser == null) {
+	         response.sendRedirect("/login"); //
+	         return;
+	      }       
+
+	
+
+		
 		//����ȸ ������ �޾ƿ´�.
 		ShowVO param = new ShowVO();
 		param.setI_user(loginUser.getI_user());
 		List<ShowVO> showParam = ShowDAO.selI_showList(param);
 		
 		List<ShowArrDomain> list = new ArrayList(); 
+		
+		 if(showParam.size() == 0) {
+	         String jsp1 = "/WEB-INF/user_writer/err_null.jsp";
+	         request.getRequestDispatcher(jsp1).forward(request, response);
+	         return;
+	      }
 		
 		for(int i=0; i<showParam.size(); i++) {
 			ShowArrDomain domain = new ShowArrDomain();
@@ -48,6 +63,8 @@ public class ExihibitPage2Ser extends HttpServlet {
 			domain.setShowDomainList(ShowListDAO.selShowList(vo));
 			list.add(domain);
 		}
+		
+		
 		
 		for(int i=0; i<list.size(); i++) {
 			System.out.println("i_show: " + list.get(i).getShow_title());

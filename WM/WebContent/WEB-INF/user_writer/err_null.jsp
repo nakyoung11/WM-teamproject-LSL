@@ -53,7 +53,7 @@ background: #625569; width: 100px; height: 100px; border-radius: 50%}
 	        <p>등록된 작품이 없습니다.</p>   
 	        <p class="material-icons" style="margin: 10px;font-size: 80px;">mood_bad</span>  
 	      </div> 
-	       <div class="add"><a href="/exhibit_open">작품등록</a></div>
+	       <div class="add"><a href="/exhibit_page0">작품등록</a></div>
       </div>  
 
       </div>

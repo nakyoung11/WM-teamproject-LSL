@@ -104,13 +104,13 @@ body{padding-top: 250px;}
 		<div id="contents">
 			<div class="poster">
 				<a href="/showlist"><img src="resource/main/images/poster.JPG"
-					id="main"></a> <span id="people">000명</span>
+					id="main"></a> <span id="people">${userCnt}명</span>
 			</div>
  
 			<div class="sub_manu">
 				<ul>
 					<li><a href="">인기전시보기</a></li>
-					<li><a href="/exhibit_page1">전시회 열기</a></li>
+					<li><a href="/exhibit_page0">전시회 열기</a></li>
 					<li><a href="/exhibit_page2">나의 전시관리</a></li>
 				</ul>
 			</div>

@@ -7,6 +7,27 @@ import java.sql.SQLException;
 import com.lsl.wm.vo.UserVO;
 
 public class UserDAO {
+	public static int selUserCnt() {
+		String sql = " SELECT COUNT(i_user) as userCnt FROM t_user ";
+		
+		return JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {
+
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				int i_user = 0;
+				if(rs.next()) {
+					i_user = rs.getInt("userCnt");
+				}
+				return i_user;
+			}
+		});
+	}
+	
 	public static UserVO selUser(final int i_user) {
 		String sql = " SELECT user_email, nickname, profile_img "
 				   + " FROM t_user "
