@@ -7,18 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
 
-
     <style>
-body{background-image:url('/resource/background/background.png');}
-
+body{width:100%; height:100%; background-image:url('/resource/background/background.png'); 
+display: flex; justify-content: center;align-items: center;}
+ 
 #loginFrm {
     width: 300px;
-    margin: 150px auto;
+    margin: 40% auto;
     padding: 40px;
     background-color: rgba(255, 255, 255, 0.911);
-
- 
+  
 }
+
 label {
     padding-left: 15px;
     display:inline-block;
@@ -26,7 +26,7 @@ label {
     font-size: 18px;
     font-size-adjust:0.6em;
 }
-
+ 
 input {
     clear: both;
     width: 280px;
@@ -40,17 +40,15 @@ input {
     font-size-adjust:0.6em;
     cursor:pointer;
 }
-
-
+  
 #login_title{
     position: relative;
     color: #4C3C50;
     font-size:25px;
     text-align: center;}
-
-
+  
 #submit_btn {
-    display:block;
+   display:block;
     margin: 15px auto;
     width: 250px;
     height:40px;
@@ -60,19 +58,16 @@ input {
     font-size: 1em;
     padding:10px;
     color: white;
+ }
 
-}
 #msg{margin-bottom: 20px; margin-left: 10px;}
 #join{margin: 10px auto; text-align: center;}
-#forget{margin: 10px auto; text-align: center;}
-    
+#forget{margin: 10px auto; text-align: center; cursor: pointer}
     </style>
 </head>
 <body>
         <div id="contents">
-          
-         
-            <form action="/login" id="loginFrm" method="post" onsubmit="return chk()">      
+                 <form action="/login" id="loginFrm" method="post" onsubmit="return chk()">      
               <h2 id="login_title">로그인</h2>
                  <div id="msg">${msg}</div> 
                   <div class="user_email"><label for="user_email">이메일</label><br>
@@ -91,7 +86,7 @@ input {
         </div>
  
         <div id="footer">
-            <h3>푸터 영역</h3>        
+     
         </div>
 </body>
 </html>
