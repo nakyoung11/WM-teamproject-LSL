@@ -29,14 +29,34 @@ public class ExihibitPage2Ser extends HttpServlet {
 		String jsp = "/WEB-INF/user_writer/exhibit_page2.jsp";
 		//로그인한 사용자 정보를 받아온다.
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		//전시회 정보를 받아온다.
+		//전시회 정보를 받아온다. 
+		
+		
+		if(loginUser == null) {
+			response.sendRedirect("/login"); //
+			return;
+		} 		
+		
+		
 		ShowVO showParam = ShowDAO.selLatestExhibition();
 		//exhibit_page1 서블릿 파일에서 넘어온 i_user, i_show값을 받는다.
 		int i_user = loginUser.getI_user();
 		int i_show = showParam.getI_show();
+		System.out.println(i_show);
+		
+		if(i_show==0) {
+			String jsp1 = "/WEB-INF/user_writer/err_null.jsp";
+			request.getRequestDispatcher(jsp1).forward(request, response);
+			return;
+		}
+		//작품이 없다면 에러페이지로 이동
+		
 		
 		System.out.println("넘어온 파라미터값:" + i_user);
 		//넘어온 파라미터 값을 넣어줄 WorkVO 객체
+		
+		
+		
 		WorkVO vo = new WorkVO();
 		
 		ShowVO vo2 = new ShowVO();

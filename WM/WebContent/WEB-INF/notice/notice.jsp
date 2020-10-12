@@ -60,10 +60,14 @@
 					<th class="nm">작성자</th>
 					<th class="r_dt">등록시간</th>									
 				</tr>
+				<c:if test="${i_user == 1}">
+					<button onclick="moveToReg()">글쓰기</button>
+				</c:if>
 				<c:forEach items="${list}" var="item">
 					<tr>
+						<input type="hidden" name="${item.i_notice}"> 
 						<td class="i_notice">${item.i_notice}</td>
-						<td class="imporTitle title"><div class="imporMark">!</div>${item.title}</td>
+						<td class="imporTitle title" onclick="moveToDetail(${item.i_notice})"><div class="imporMark">!</div>${item.title}</td>
 						<td class="nm imporNm">${item.nm}</td>
 						<td class="r_dt">${item.r_dt}</td>
 					</tr>
@@ -71,5 +75,15 @@
 			</table>
 		</div>
 	</div>
+	
+	<script>
+		function moveToReg() {
+			location.href="/notice/regmod"	
+		}
+		
+		function moveToDetail(i_notice) {
+			location.href="/notice/detail?i_notice="+i_notice
+		}
+	</script>
 </body>
 </html>

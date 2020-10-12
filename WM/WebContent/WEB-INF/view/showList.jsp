@@ -9,76 +9,100 @@
 <title>전시회 목록</title>
 <style>
 	#container {
-		display: flex;
-		width: 1000px;
-		margin: 5px auto;
-		justify-content: center;
-		font-family: 'RIDIBatang';
-		font-weight: 300;
+    display: flex;
+    width: 1000px;
+ 	margin-bottom:400px;
+    justify-content: center;
+    align-content: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300; 
+    flex: 1;
+}
+	
+
+#contents {
+	display: flex;
+	flex-flow: column;
+
+	height:100%;
+
+}
+
+select, input{border: none; background: none;cursor: pointer;}
+.posterName{position: relative;}
+.poster {
+	width: 300px;
+	height: 300px;
+	margin-right:30px;
+	border-radius: 20px;
 	}
-	#contents {
-		position: relative;
-		width: 900px;
-		margin-top: 280px;
-	}
-	.poster {
-		width: 200px;
-		height: 200px;
-		margin-left: 100px;
-	}
-	.showTitle {
-		margin-left: 100px;
-	}
-	.pageCnt {
+	
+.showTitle{position: absolute; top:0; left:0;width: 301px;
+	height: 301px;
+	margin-right:30px;
+	border-radius: 20px;text-align: center;
+	background: #484661;
+	opacity: 0; 
+	transition: all ease 0.7s}
+	
+.showTitle>p{margin-top:120px; padding: 10px}
+
+.showTitle:hover{opacity: 0.9; color:white;}
+.selectbox{margin: 40px 0 30px 0; align-self: center; display: flex; align-items: center; width: 75%}
+#search_input{width: 900px; padding: 5px; border-bottom: 1px solid gray;}	
+.listClass{margin: 0; display: flex; align-items: stretch;}
+.pageCnt {
 		margin-top: 10%;
 		margin-left: 50%;
 		margin-bottom: 10%;
 	}
 </style>
 </head>
-<body>
+<body style="padding-top: 197px;">
 	<jsp:include page="../../header.jsp"></jsp:include>
 	<div id="container">
 		<div id="contents">
-			<div>
-				<form action="/showlist">
+	
+				<form action="/showlist" class="selectbox">
 				<select>
 					<option>전시회</option>
 				</select>
-					<input type="search" name="searchText" value="${param.searchText}">
-					<input type="submit" value="검색">			
+					<input type="search" name="searchText" value="${param.searchText}" id="search_input">
+					<input type="submit" class="material-icons" value="search">	
+
 				</form>
 				<div class="listClass">
 				<c:set var="i" value="0" /> 
 				<c:set var="j" value="3" />
 				<table>		  
-					<c:forEach items="${list}" var="item">
+			<c:forEach items="${list}" var="item">
 						<c:if test="${i%j == 0 }">
 						<tr>
 						</c:if>
 						<td class="posterName">
 							<img src="/resource/show/images/posters/1/고전명화작품전 포스터.jpg" class="poster">
-							<br>
-							<div class="showTitle">전시회 : ${item.show_title}</div>
+							<div class="showTitle"><p>${item.show_title}</p></div>
 						</td>
 						<c:if test="${i%j == j-1 }">
 						  </tr>
 						 </c:if>
 						<c:set var="i" value="${i+1}" />
-					</c:forEach>
+			</c:forEach> 
+					
+	
 				</table>
 				</div>
-			</div>
-		</div>
-		<input type="hidden" name="page" value="${page}">
-		
-		
-	</div>
-	<div class="pageCnt">
+			<div class="pageCnt">
 		<c:forEach var="item" begin="1" end="${pagingCnt}" step="1">
 		<c:if test="${page != item}"><span><a href="/showlist?page=${item}&searchText=${param.searchText}">${item}</a></span></c:if>
 		<c:if test="${page == item}"><span style="color:red">${item}</span></c:if>
 		</c:forEach>
 	</div>
+		</div>
+		<input type="hidden" name="page" value="${page}">
+		
+		
+	</div>
+
 </body>
 </html>
