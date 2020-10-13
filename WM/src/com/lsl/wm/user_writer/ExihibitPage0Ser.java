@@ -36,7 +36,7 @@ public class ExihibitPage0Ser extends HttpServlet {
 		String jsp;
 		
 		if(loginUser == null) {
-			jsp = "/WEB-INF/view/main.jsp";
+			jsp = "/WEB-INF/login/login.jsp";
 		}else {
 			jsp = "/WEB-INF/user_writer/exhibit_page0.jsp";
 		}

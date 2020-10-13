@@ -12,7 +12,7 @@ public class NoticeDAO {
 	public static List<NoticeVO> selNoticeList(NoticeVO param) {
 		List<NoticeVO> list = new ArrayList<NoticeVO>();
 		
-		String sql = " SELECT A.i_notice, A.title, B.nickname as nm, A.r_dt "
+		String sql = " SELECT A.i_notice, A.title, B.nickname as nm, A.r_dt, A.m_dt "
 				   + " FROM t_notice A "
 				   + " INNER JOIN t_user B "
 				   + " ON A.i_user = B.i_user "
@@ -32,12 +32,14 @@ public class NoticeDAO {
 					String title = rs.getString("title");
 					String nm = rs.getString("nm");
 					String r_dt = rs.getString("r_dt");
+					String m_dt = rs.getString("m_dt");
 					
 					NoticeVO vo = new NoticeVO();
 					vo.setI_notice(i_notice);
 					vo.setTitle(title);
 					vo.setNm(nm);
 					vo.setR_dt(r_dt);
+					vo.setM_dt(m_dt);
 					
 					list.add(vo);
 				}
