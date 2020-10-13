@@ -55,6 +55,17 @@ public class ShowListSer extends HttpServlet {
 	         return;
 	      }
 		
+		//좋아요 및 댓글 개수 가져오기
+		for(int i=0; i< list.size(); i++) {
+			ShowVO vo = new ShowVO();
+			vo.setI_show(list.get(i).getI_show());
+			vo = ShowDAO.selShowlikeCnt(vo);
+			list.get(i).setLikeCnt(vo.getLikeCnt());
+			vo.setI_show(list.get(i).getI_show());
+			vo = ShowDAO.selShowCmtCnt(vo);
+			list.get(i).setCmtCnt(vo.getCmtCnt());
+		}
+		 
 		String savePath = "/resource/show/images/posters/";
 		
 		System.out.println("sadasdasd: " + list.get(0).getShow_poster());
