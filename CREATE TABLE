@@ -65,3 +65,13 @@ i_work_cmt INT UNSIGNED NOT NULL,
 i_user INT UNSIGNED NOT NULL,
 PRIMARY KEY(i_work_cmt, i_user)
 );
+
+create table t_notice(
+    i_notice int UNSIGNED auto_increment primary key,
+    title varchar(100) not null,
+    ctnt varchar(2000) not null,
+    i_user int UNSIGNED not null,
+    r_dt datetime DEFAULT now(),
+    m_dt datetime DEFAULT now(),
+    FOREIGN key(i_user) REFERENCES t_user(i_user)
+);
