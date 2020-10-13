@@ -79,7 +79,8 @@ select, input{border: none; background: none;cursor: pointer;}
 						<c:if test="${i%j == 0 }">
 						<tr>
 						</c:if>
-						<td class="posterName">
+						<td class="posterName" onclick="moveDetail('${i}')" style="cursor: pointer;">
+							<input type="hidden" value="${item.i_show}" id="idx_${i}">
 							<img src="${posterPath}${item.i_user}/${item.show_poster}" class="poster">
 							<div class="showTitle"><p>${item.show_title}</p></div>
 						</td>
@@ -103,6 +104,14 @@ select, input{border: none; background: none;cursor: pointer;}
 		
 		
 	</div>
+	
+	<script type="text/javascript">
+		function moveDetail(i) {
+			var i_show = document.getElementById(`idx_\${i}`).value;
+			
+			location.href="/showDetail?i_show=" + i_show;
+		}
+	</script>
 
 </body>
 </html>

@@ -39,12 +39,12 @@ public class Gallay3dSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//占싸깍옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쌨아온댐옙.
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		//占쏙옙占쏙옙회 占쏙옙占쏙옙占쏙옙 占쌨아온댐옙.
-		//ShowVO param = ShowDAO.selLatestExhibition();
+		//어느 전시회 인지를 받아 온다.
+		int i_show = Integer.parseInt(request.getParameter("i_show"));
 		//占쏙옙占쏙옙회 占쏙옙품 占쏙옙占쏙옙占� 占쏙옙占쏙옙占승댐옙.
 		ShowListVO vo = new ShowListVO();
 		
-		vo.setI_show(23);
+		vo.setI_show(i_show);
 		List<ShowListDomain> list = new ArrayList();
 		list = ShowListDAO.selShowList(vo);
 		

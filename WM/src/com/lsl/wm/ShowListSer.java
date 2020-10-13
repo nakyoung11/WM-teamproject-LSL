@@ -40,19 +40,19 @@ public class ShowListSer extends HttpServlet {
 		request.setAttribute("page", page);
 		
 		ShowVO param = new ShowVO();
-		List<ShowVO> showParam = ShowDAO.selI_showList(param);
-		
-		 if(showParam.size() == 0) {
-	         String jsp1 = "/WEB-INF/user_writer/err_null.jsp";
-	         request.getRequestDispatcher(jsp1).forward(request, response);
-	         return;
-	      }
+
 		param.setI_user(loginUser.getI_user());
 		param.setRow(page * 6 - 6);
 		param.setSearchText("%" + searchText + "%");
 		int pagingCnt = ShowDAO.selPagingCnt(param);
 		
 		List<ShowVO> list = ShowDAO.selShowList(param);
+		
+		 if(list.size() == 0) {
+	         String jsp1 = "/WEB-INF/user_writer/err_null.jsp";
+	         request.getRequestDispatcher(jsp1).forward(request, response);
+	         return;
+	      }
 		
 		String savePath = "/resource/show/images/posters/";
 		
