@@ -40,23 +40,29 @@ body {
 	height: 100%;
 }
 /*----------------------- 추가 사항 ----------------- */
+
+table{border-bottom: 1px solid #765D9E;}
 #my_exihibit {
 	width: 100%;
 	margin: 0 auto;
 }
 
 #my_exihibit div:nth-child(1) {
-	margin-bottom: 5%;
+	margin-bottom: 7%;
+}
+#my_exihibit div:nth-child(1)>.material-icons {
+	font-size: 30px;
+	color: red;
 }
 
 #my_exihibit div:nth-child(1) table {
 	width: 100%;
 }
 
-#my_exihibit div:nth-child(1) table tr td:nth-child(1) {
+#my_exihibit div:nth-child(1) table tr td:nth-child(2) {
 	width: 30%;
 	text-align: center;
-	font-size: 150%;
+	font-size: 20px;
 	padding: 7%;
 	padding-bottom: 30%;
 	padding-top: 10%;
@@ -65,62 +71,65 @@ body {
 	;
 }
 
-#my_exihibit div:nth-child(1) table tr td:nth-child(2) {
+#my_exihibit div:nth-child(1) table tr td:nth-child(3) {
 	position: relative;
 	padding: 0;
 	margin: 0;
 }
 
-#my_exihibit div:nth-child(1) table tr td:nth-child(2) ul {
+#my_exihibit div:nth-child(1) table tr td:nth-child(3) ul {
 	position: absolute;
 	top: 0;
 	height: 100%;
 	width: 100%;
 	padding: 0;
-	background-color: #DCD3C0;;
 	margin: 0;
 	list-style-type: none;
 }
 
-#my_exihibit div:nth-child(1) table tr td:nth-child(2) ul li {
+#my_exihibit div:nth-child(1) table tr td:nth-child(3) ul li {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
 	position: relative;
 	font-weight: bold;
-	font-size: 150%;
-	margin: 0;
-	padding: 2% 0;
-	margin-top: 3%;
+	font-size: 20px;
+	padding: 1%;
 	padding-left: 2%;
 	animation: fadeInDown;
-	animation-duration: 1s;
+	animation-duration: 0.7s;
 }
 
-#my_exihibit div:nth-child(1) table tr td:nth-child(2) ul li:hover {
+#my_exihibit div:nth-child(1) table tr td:nth-child(3) ul li:hover {
 	background-color: #C4C4C4;
 	transition-duration: 1s;
 }
 
-#my_exihibit div:nth-child(1) table tr td:nth-child(2) ul li #mod_exhibit
+#my_exihibit div:nth-child(1) table tr td:nth-child(3) ul li #mod_exhibit
 	{
 	position: absolute;
 	right: 120px;
 	top: 20%;
-	font-size: 1em;
+	font-size: 20px;
 	height: 100%;
 	border: 0;
 	outline: 0;
 }
 
-#my_exihibit div:nth-child(1) table tr td:nth-child(2) ul li #del_exhibit
+#my_exihibit div:nth-child(1) table tr td:nth-child(3) ul li #del_exhibit
 	{
 	position: absolute;
 	right: 20px;
 	top: 20%;
-	font-size: 1em;
+	font-size: 20px;
 	height: 100%;
 	border: 0;
 	outline: 0;
 }
 
+.title {
+	display: flex; flex-flow: row nowrap;
+}
 /* 두번째 테이블 */
 #my_exihibit div:nth-child(2) {
 	margin-bottom: 5%;
@@ -130,26 +139,26 @@ body {
 	width: 100%;
 }
 
-#my_exihibit div:nth-child(2) table tr td:nth-child(1) {
+#my_exihibit div:nth-child(2) table tr td:nth-child(2) {
 	width: 30%;
 	text-align: center;
-	font-size: 150%;
-	padding: 7%;
-	padding-bottom: 15%;
-	padding-top: 10%;
+	font-size: 20px;
+	padding: 10px;
+	padding-bottom: 5%;
+	padding-top: 5%;
 	font-weight: bold;
-	background-color: #F7F9EE;
+	
 	;
 }
 
-#my_exihibit div:nth-child(2) table tr td:nth-child(2) {
+#my_exihibit div:nth-child(2) table tr td:nth-child(3) {
 	position: relative;
-	padding: 0;
+	padding: 25px;
 	margin: 0;
-	background-color: #DCD3C0;
+
 }
 
-#my_exihibit div:nth-child(2) table tr td:nth-child(2) ul {
+#my_exihibit div:nth-child(2) table tr td:nth-child(3) ul {
 	top: 0%;
 	height: 100%;
 	width: 100%;
@@ -158,31 +167,48 @@ body {
 	list-style-type: none;
 }
 
-#my_exihibit div:nth-child(2) table tr td:nth-child(2) ul li {
-	width: 96%;
+#my_exihibit div:nth-child(2) table tr td:nth-child(3) ul li {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center; width : 96%;
 	height: 100%;
 	font-weight: bold;
-	font-size: 150%;
+	font-size: 20px;
 	padding: 0.3% 2%;
 	margin-top: 2%;
 	animation: fadeInDown;
 	animation-duration: 1s;
+	width: 96%;
 }
 
-#my_exihibit div:nth-child(2) table tr td:nth-child(2) ul li:hover {
+.title {
+	flex: 1
+}
+
+.like_cmt {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 30px;
+}
+.remove_reg{margin-top: 20px}
+.remove_reg>a{font-size: 13px; background: #82629E; color:#FCF1E7;padding: 10px; border-radius: 30px} 
+.like_cmt>span{margin: 5px}
+
+#my_exihibit div:nth-child(2) table tr td:nth-child(3) ul li:hover {
 	background-color: #C4C4C4;
 	cursor: pointer;
 	transition-duration: 1s;
 }
 
-#my_exihibit div:nth-child(2) table tr td:nth-child(2) ul li span:nth-child(1)
+#my_exihibit div:nth-child(2) table tr td:nth-child(3) ul li span:nth-child(1)
 	{
 	float: left;
 	width: 40%;
 	margin-top: 4%;
 }
 
-#my_exihibit div:nth-child(2) table tr td:nth-child(2) ul li #cnt_div {
+#my_exihibit div:nth-child(2) table tr td:nth-child(3) ul li #cnt_div {
 	margin-top: 3%;
 	width: 100%
 }
@@ -193,16 +219,18 @@ body {
 	<div id="container">
 		<div id="contents">
 			<div id="my_exihibit">
-				<div>
-					<h2 id="title_div">나의 출품 목록</h2>
 
+				<div class="title">
+					<h4>전시 및 작품 관리</h4>
 				</div>
+				<div id="title_div"></div>
+
 
 
 			</div>
 		</div>
 	</div>
-	 <jsp:include page="../../footer.jsp"></jsp:include>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 
 	<script>	
 	/*작품 정보 생성자함수(자바의 클래스 개념) 선언*/
@@ -230,7 +258,13 @@ body {
     		var table = document.createElement('table');
     		table.innerHTML = `
     			<tr>
-				<td>${item.show_title}</td>
+    			<td><a href="#" class="material-icons" style="font-size:30px; color:red">remove_circle_outline</a> </td>
+				<td>${item.show_title}	
+				<div class="remove_reg">
+				
+				<a href="#">작품 추가</a><div>
+				</td>
+			
 				<td>
 					<ul id="exhibit_list_\${i}">
 					</ul>
@@ -247,8 +281,14 @@ body {
                 var li = document.createElement('li');
                 li.innerHTML = `<input type="hidden" id="i_show_idx_\${i}\${j}" value="\${tempI_show}">
                 <input type="hidden" id="i_work_idx_\${i}\${j}" name="i_work_idx_\${i}\${j}" value="${item2.i_work}">
-                <span style="cursor: default" id="work_title_idx_\${i}\${j}">\${j+1}.${item2.work_title}</span><a id="mod_exhibit" style="cursor: pointer" onclick="modExhibit('\${i}\${j}')">수정</a>
-                <a id="del_exhibit" style="cursor: pointer" onclick="delExhibit('\${i}\${j}')">삭제</a>`;
+                <span style="cursor: default" id="work_title_idx_\${i}\${j}" class="title">\${j+1}.${item2.work_title}</span>
+                <div class="like_cmt">
+                <span class="material-icons">favorite</span><span>100</span>
+                <span class="material-icons">insert_comment</span><span>100</span>
+                </div>
+                <div class="Reg_remove">
+                <a id="mod_exhibit" style="cursor: pointer" onclick="modExhibit('\${i}\${j}')">수정</a>
+                <a id="del_exhibit" style="cursor: pointer" onclick="delExhibit('\${i}\${j}')">삭제</a></div>`;
                 exhibitList.append(li);
                 j++;
             	</c:forEach>

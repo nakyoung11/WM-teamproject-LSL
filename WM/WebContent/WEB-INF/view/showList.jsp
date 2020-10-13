@@ -105,7 +105,7 @@ select, input{border: none; background: none;cursor: pointer;}
 		
 		
 	</div>
-	
+	<jsp:include page="../../footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		function moveDetail(i) {
 			var i_show = document.getElementById(`idx_\${i}`).value;

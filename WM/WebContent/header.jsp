@@ -23,8 +23,8 @@
 					</c:when>
 					<c:otherwise>
 					 <ul id="userLogin" style="display: flex; align-items: center;">
-	                    <li id="login"><a href="/login" style="display: flex;flex-flow: column;align-items: center;"><span style="font-size: 11px;">LOGIN</span></a></li>
-	                    <li id="join"><a href="/join" style="display: flex;flex-flow: column; align-items: center; margin-left:10px"><span style="font-size: 11px;">JOIN</span></a></li>
+	                    <li id="login"><a href="/login" style="display: flex;flex-flow: column;align-items: center;"><span style="font-size: 15px;">LOGIN</span></a></li>
+	                    <li id="join"><a href="/join" style="display: flex;flex-flow: column; align-items: center; margin-left:10px"><span style="font-size: 15px;">JOIN</span></a></li>
 	                </ul>
 					</c:otherwise>
 				</c:choose>     
