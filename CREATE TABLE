@@ -31,13 +31,12 @@ CREATE TABLE t_work (
 
 CREATE TABLE t_show (
 i_show INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+i_user INT UNSIGNED,
 show_poster VARCHAR(50) NOT NULL,
-start_dt DATETIME NOT NULL,
-end_dt DATETIME NOT NULL,
-exhibit_start_dt DATETIME NOT NULL,
-exhibit_end_dt DATETIME NOT NULL,
 show_title VARCHAR(30) NOT NULL,
-show_ctnt VARCHAR(1000) NOT NULL
+show_ctnt VARCHAR(1000) NOT NULL,
+r_dt DATETIME DEFAULT NOW() NOT NULL,
+CONSTRAINT show_fk_1 FOREIGN KEY (i_user) REFERENCES t_user(i_user)
 );
 
 CREATE TABLE t_show_list (
