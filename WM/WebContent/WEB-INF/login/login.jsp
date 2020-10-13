@@ -11,6 +11,10 @@
 body{width:100%; height:100%; background-image:url('/resource/background/background.png'); 
 display: flex; justify-content: center;align-items: center;}
  
+ a {
+	text-decoration: none;
+	color: #333;
+}
 #loginFrm {
     width: 300px;
     margin: 40% auto;

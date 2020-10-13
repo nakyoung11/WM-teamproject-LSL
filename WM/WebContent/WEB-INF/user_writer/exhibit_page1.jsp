@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -8,258 +8,258 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
 <style>
-#headerWrap{flex: 1}
-
-body{padding-top: 250px;}
-#container {
-    display: flex;
-    width: 1000px;
-    margin-bottom:400px;
-    justify-content: center;
-    align-content: center;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300; 
-    flex: 1;
-    background-image: 
+#headerWrap {
+	flex: 1
 }
-   
+
+body {
+	padding-top: 250px;
+}
+
+#container {
+	display: flex;
+	width: 1000px;
+	margin-bottom: 400px;
+	justify-content: center;
+	align-content: center;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	flex: 1;
+	background-image:
+}
 
 #contents {
-   display: flex;
-   flex-flow: column;
-    flex: 1;
-   height:100%;
-
+	display: flex;
+	flex-flow: column;
+	flex: 1;
+	height: 100%;
 }
 /*----------------------- 추가 사항 ----------------- */
-
-input, textarea {background: none; }
-#exhibit_list {
-   width: 100%;
-   margin: 5% auto;
+input, textarea {
+	background: none;
 }
 
+#exhibit_list {
+	width: 100%;
+	margin: 5% auto;
+}
 
 #exhibit_list table {
-    border-collapse: separate;
-    width: 100%;
-    height: 280px;
-    padding-bottom: 30px;
-    margin-bottom: 5%;
-    border-bottom: 1px solid #3f3d55;
-}
-   
+	border-collapse: separate;
+	width: 100%;
+	height: 280px;
+	padding-bottom: 30px;
+	margin-bottom: 5%;
+	border-bottom: 1px solid #3f3d55;
 }
 
+}
 #exhibit_list table:nth-last-child(1) {
-   animation: fadeInDown;
-   animation-duration: 1s;
+	animation: fadeInDown;
+	animation-duration: 1s;
 }
 
 #exhibit_list table tr:nth-child(1) td:nth-child(1) {
-   width: 7%;
+	width: 7%;
 }
 
 #exhibit_list table td:nth-child(1) button {
-   border-style: none;
-   color: white;
-   text-align: center;
-   font-size: 1em;
-   padding-bottom: 10%;
-   border-radius: 50%;
-   cursor: pointer;
+	border-style: none;
+	color: white;
+	text-align: center;
+	font-size: 1em;
+	padding-bottom: 10%;
+	border-radius: 50%;
+	cursor: pointer;
+	background: #FF798A;
 }
 
 #exhibit_list table td:nth-child(1) button:hover {
-   background-color: rgb(214, 18, 18);
-   transition-duration: 0.7s;
+	background-color: rgb(214, 18, 18);
+	transition-duration: 0.7s;
 }
 
 #exhibit_list table td:nth-child(2) {
-   position: relative;
-   width: 25%;
+	position: relative;
+	width: 25%;
 }
 
 #exhibit_list table td:nth-child(2) div {
-   position: absolute;
-   top: 0;
-   width: 90%;
-   height: 100%;
-   background-size: 100% 100%;
-   cursor: pointer;
-   display: table;
-   background-image: url("/resource/exhibit/imgbox.JPG");
-   background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+	position: absolute;
+	top: 0;
+	width: 90%;
+	height: 100%;
+	background-size: 100% 100%;
+	cursor: pointer;
+	display: table;
+	background-image: url("/resource/exhibit/imgbox.JPG");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 }
 
 #exhibit_list table td:nth-child(2) div:hover {
-   opacity: 1;
-   transition-duration: 0.3s;
-   background-image: none;
-   
+	opacity: 1;
+	transition-duration: 0.3s;
+	background-image: none;
 }
 
 #exhibit_list table td:nth-child(2) div span {
-   text-align: center;
-   display: table-cell;
-   vertical-align: middle;
-   font-size: 1.5em;
-   font-weight: bold;
-   color: black;
-   opacity: 0;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: black;
+	opacity: 0;
 }
 
 #exhibit_list table td:nth-child(2) div span:hover {
-   text-align: center;
-   display: table-cell;
-   vertical-align: middle;
-   font-size: 1.5em;
-   font-weight: bold;
-   color: black;
-   opacity: 1;
-
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: black;
+	opacity: 1;
 }
 
 #exhibit_list table td:nth-child(3) {
-   width: 12%;
-   height: 5%;
-   text-align: center;
-   font-size: 1.2em;
-   font-weight:bold;
-   border: 0;
-   margin: 0;
-   font-weight: bolder;
+	width: 12%;
+	height: 5%;
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: bold;
+	border: 0;
+	margin: 0;
+	font-weight: bolder;
 }
 
 #exhibit_list table td:nth-child(4) {
-   position: relative;
-   border: 0;
-   width: 100%;
-
+	position: relative;
+	border: 0;
+	width: 100%;
 }
 
 #exhibit_list table td:nth-child(4) input {
-   position: absolute;
-   top: 0;
-   left: 5%;
-   border: 0;
-   font-size: 1.5em;
-   font-weight: bold;
-   width: 90%;
-   height: 100%;
-   border-bottom: 1px solid #3f3d55;
-   
+	position: absolute;
+	top: 0;
+	left: 5%;
+	border: 0;
+	font-size: 1.5em;
+	font-weight: bold;
+	width: 90%;
+	height: 100%;
+	border-bottom: 1px solid #3f3d55;
 }
 
 #exhibit_list table tr:nth-child(2) td:nth-child(1) {
-
-   text-align: center;
-   font-size: 1em;
+	text-align: center;
+	font-size: 1em;
+	font-weight: bolder;
 }
 
 #exhibit_list table tr:nth-child(2) td:nth-child(2) {
-   position: relative;
-   width: 100%;
-   height: 150px;
-   font-weight: bold;
-   border: 0;
-   padding: 0;
+	position: relative;
+	width: 100%;
+	height: 150px;
+	font-weight: bold;
+	border: 0;
+	padding: 0;
 }
 
 #exhibit_list table tr:nth-child(2) td:nth-child(2) textarea {
    position: absolute;
-   top: 5%;
-   left: 5%;
-   width: 90%;
-   height: 90%;
-   resize: none;
-   border-bottom: 1px solid #3f3d55;
-   font-weight: bolder;
-   font-size: 2em;
-   border: 0;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    resize: none;
+    border-bottom: 1px solid #3f3d55;
+    font-weight: bolder;
+    font-size: 1.3EM;
+    border: none;
+    padding: 30px 0 20px 0px;
 }
 
 #add_work_btn {
-   display: block;
-   border: none;
-   width: 85px;
-   height: 85px;
-   border-radius: 50%;
-   background-color: #ACA6CF;
-   font-size: 4.5em;
-   color: white;
-   margin: 0% auto;
-   cursor: pointer;
+	display: block;
+	border: none;
+	width: 85px;
+	height: 85px;
+	border-radius: 50%;
+	background-color: #ACA6CF;
+	font-size: 4.5em;
+	color: white;
+	margin: 0% auto;
+	cursor: pointer;
 }
 
 #add_work_btn:hover {
-   transition-duration: 0.7s;
-   background-color: #5a5095;
+	transition-duration: 0.7s;
+	background-color: #5a5095;
 }
 
 #exhibit_work_btn {
-   display: block;
-   border: none;
-   width: 150px;
-   height: 65px;
-   border-radius: 10px;
-   background-color: #92809B;
-   font-size: 140%;
-   padding: 0% 0%;
-   color: white;
-   margin: 10% auto;
-   cursor: pointer;
+	display: block;
+	border: none;
+	width: 150px;
+	height: 65px;
+	border-radius: 10px;
+	background-color: #92809B;
+	font-size: 140%;
+	padding: 0% 0%;
+	color: white;
+	margin: 10% auto;
+	cursor: pointer;
 }
 
 #exhibit_work_btn:hover {
-   transition-duration: 0.7s;
-   background-color: #70348e;
+	transition-duration: 0.7s;
+	background-color: #70348e;
 }
 
 input:focus {
-   outline: none;
+	outline: none;
 }
 
 textarea:focus {
-   outline: none;
+	outline: none;
 }
 
 button:focus {
-   outline: none;
+	outline: none;
 }
 </style>
 <body>
-   <jsp:include page="../../header.jsp"></jsp:include>
-      <div id="container">
-      <div id="contents">
-         <form action="/exhibit_page1" method="POST" name="exhibit_frm" enctype="multipart/form-data"
-            accept-charset="UTF-8">
-            <!-- 어느 전시회인지를  POST로 보내주기 위해 i_show정보를 담아놓는다. -->
-            <input type="hidden" name="i_show" id="i_show" value="${data.i_show}">
-            <input type="hidden" name="list_cnt" id="list_cnt" value="">
-            <div id="exhibit_list">
-            
-            </div>
-            <button id="add_work_btn" onclick='insertWorkInfo();return false;'>+</button>
-         </form>
-         <button id="exhibit_work_btn" onclick="submitExihibit()">출품하기</button>
-      </div>
-      </div>
+	<jsp:include page="../../header.jsp"></jsp:include>
+	<div id="container">
+		<div id="contents">
+			<form action="/exhibit_page1" method="POST" name="exhibit_frm"
+				enctype="multipart/form-data" accept-charset="UTF-8">
+				<!-- 어느 전시회인지를  POST로 보내주기 위해 i_show정보를 담아놓는다. -->
+				<input type="hidden" name="i_show" id="i_show"
+					value="${data.i_show}"> <input type="hidden"
+					name="list_cnt" id="list_cnt" value="">
+				<div id="exhibit_list"></div>
+				<button id="add_work_btn" onclick='insertWorkInfo();return false;'>+</button>
+			</form>
+			<button id="exhibit_work_btn" onclick="submitExihibit()">출품하기</button>
+		</div>
+	</div>
 
-      <footer id="footer">
-      <ul>
-         <li>jumoney15@naver.com: 아이디어 제공, 3D</li>
-         <li>dlehdud1653@kakao.com: 로그인 및 게시판</li>
-         <li>nakihome@naver.com: 디자인</li>
-      </ul>
+	<footer id="footer">
+		<ul>
+			<li>jumoney15@naver.com: 아이디어 제공, 3D</li>
+			<li>dlehdud1653@kakao.com: 로그인 및 게시판</li>
+			<li>nakihome@naver.com: 디자인</li>
+		</ul>
 
-   </footer>
-  <script>
+	</footer>
+	<script>
         /*작품정보를 받아와 콘텐츠영역안에 테이블을 생성하여 보여주는 함수*/
         function displayWorkInfo() {
            
@@ -282,7 +282,7 @@ button:focus {
                 </td>
                 <td>제목</td>
                 <td>
-                <input type="text" name="input_title_0" id="input_title_0" value=""></td>
+                <input type="text" name="input_title_0" id="input_title_0" value="" required autofocus></td>
                 </tr>
                 <tr>
                 <td>작품설명</td>
@@ -437,7 +437,7 @@ button:focus {
         }
          
         displayWorkInfo();
-    </script>   
+    </script>
 </body>
 
 </html>

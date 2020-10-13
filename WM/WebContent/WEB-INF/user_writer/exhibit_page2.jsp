@@ -13,12 +13,32 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
 <style>
-#container {
-	width: 100%;
-	margin: 0 auto;
-	border: 1px solid black;
+#headerWrap {
+	flex: 1
 }
 
+body {
+	padding-top: 250px;
+}
+
+#container {
+	display: flex;
+	width: 1000px;
+	margin-bottom: 400px;
+	justify-content: center;
+	align-content: center;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	flex: 1;
+	background-image:
+}
+
+#contents {
+	display: flex;
+	flex-flow: column;
+	flex: 1;
+	height: 100%;
+}
 /*----------------------- 추가 사항 ----------------- */
 #my_exihibit {
 	width: 100%;
@@ -169,19 +189,28 @@
 </style>
 
 <body>
-	<!--<jsp:include page="../../header.jsp"></jsp:include>-->
+	<jsp:include page="../../header.jsp"></jsp:include>
 	<div id="container">
 		<div id="contents">
 			<div id="my_exihibit">
 				<div>
 					<h2 id="title_div">나의 출품 목록</h2>
-				
+
 				</div>
-				
-		<div id="footer">
-			<h3>푸터 영역</h3>
+
+
+			</div>
 		</div>
 	</div>
+	<footer id="footer">
+		<ul>
+			<li>jumoney15@naver.com: 아이디어 제공, 3D</li>
+			<li>dlehdud1653@kakao.com: 로그인 및 게시판</li>
+			<li>nakihome@naver.com: 디자인</li>
+		</ul>
+
+	</footer>
+
 	<script>	
 	/*작품 정보 생성자함수(자바의 클래스 개념) 선언*/
 	/*출품신청 목록*/
@@ -195,7 +224,6 @@
         this.cmt_cnt = cmt_cnt;
     }
    
-
     /*작품정보를 받아와 콘텐츠영역안에 테이블을 생성하여 보여주는 함수*/
      // 출품한 작품목록
         function displayExhibitWorkInfo() {
@@ -212,7 +240,6 @@
 				<td>${item.show_title}</td>
 				<td>
 					<ul id="exhibit_list_\${i}">
-
 					</ul>
 				</td>
 			</tr>
@@ -236,7 +263,6 @@
             </c:forEach>
         }
   
-
 	/*출품신청 작품 수정/삭제 하는 함수*/
     function delExhibit(i){
     	var i_show = document.getElementById(`i_show_idx_\${i}`).value;
@@ -262,7 +288,6 @@
             
         }
     }
-
     function modExhibit(i){
         if(confirm('수정 페이지로 이동하시겠습니까?')){
         	var i_show = document.getElementById(`i_show_idx_\${i}`).value;
@@ -272,11 +297,9 @@
         }
        
     }
-
     function movePage(idx) {
         alert('페이지 이동Index :' + idx);
     }
-
     displayExhibitWorkInfo();
     //displayExhibitionWorkInfo(exhibitionWorkInfoArr);
     </script>
