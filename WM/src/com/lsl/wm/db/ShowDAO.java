@@ -58,7 +58,7 @@ public class ShowDAO {
 		List<ShowVO> list = new ArrayList<ShowVO>();
 		
 		String sql = " SELECT A.* "
-				   + " FROM (SELECT show_title, show_poster, i_user, r_dt FROM t_show WHERE show_title LIKE ?) A"
+				   + " FROM (SELECT i_show, show_title, show_poster, i_user, r_dt FROM t_show WHERE show_title LIKE ?) A"
 				   + " ORDER BY A.r_dt DESC "
 				   + " LIMIT ?, 6 ";
 		
@@ -75,11 +75,13 @@ public class ShowDAO {
 				while(rs.next()) {
 					
 					int i_user = rs.getInt("i_user");
+					int i_show = rs.getInt("i_show");
 					String show_title = rs.getNString("show_title");
 					String show_poster = rs.getNString("show_poster");
 					ShowVO vo = new ShowVO();
 					
 					vo.setI_user(i_user);
+					vo.setI_show(i_show);
 					vo.setShow_title(show_title);
 					vo.setShow_poster(show_poster);
 					
