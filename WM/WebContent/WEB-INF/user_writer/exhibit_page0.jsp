@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>전시 등록</title>
 <style>
 #input_iamge_div {
 	float: left;
@@ -100,11 +100,8 @@
     		  document.exhibit_frm.submit();
     		}else {
     			alert('작성이 완료되지 않았습니다.')
-    		}
-       
-       
-    }
-    
+    		}  
+    } 
     </script>
 </body>
 </html>

@@ -21,12 +21,19 @@ public class ShowListSer extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO loginUser = MyUtils.getLoginUser(request);
-		
-		 if(loginUser == null) {
-	         response.sendRedirect("/login"); //
-	         return;
+	      
+	       if(loginUser == null) {
+	            response.sendRedirect("/login"); //
+	            return;
+	         }
+	       
+	      String searchText = request.getParameter("searchText");
+	      searchText = (searchText == null ? "" : searchText);
+	      String strPage = request.getParameter("page");
+	      if(strPage == null) {
+	         strPage = "0";
 	      }
-		 
+    
 		String searchText = request.getParameter("searchText");
 		searchText = (searchText == null ? "" : searchText);
 		String strPage = request.getParameter("page");
