@@ -96,6 +96,9 @@ body{padding-top: 250px;}
 	margin-right:30px;
 	border-radius: 20px;
 	}
+	.span {
+	font-size: 18px;
+	}
 </style>
 
  
@@ -131,6 +134,10 @@ body{padding-top: 250px;}
 									<input type="hidden" value="${item.i_show}" id="idx_${i}">
 									<img src="${posterPath}${item.i_user}/${item.show_poster}" class="smallPoster">
 									<div class="showTitle"><p>${item.show_title}</p></div>
+									<p><span class="material-icons">favorite</span>
+									<span class="span">${item.likeCnt}</span>
+									<span class="material-icons">comment</span>
+									<span class="span">${item.cmtCnt}</span></p>
 								</td>
 								<c:if test="${i%j == j-1 }">
 								  </tr>

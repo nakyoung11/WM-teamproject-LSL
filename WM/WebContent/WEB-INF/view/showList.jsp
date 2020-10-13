@@ -56,6 +56,9 @@ select, input{border: none; background: none;cursor: pointer;}
 		margin-left: 50%;
 		margin-bottom: 10%;
 	}
+	.span {
+	font-size: 18px;
+	}
 </style>
 </head>
 <body style="padding-top: 197px;">
@@ -83,7 +86,10 @@ select, input{border: none; background: none;cursor: pointer;}
 							<input type="hidden" value="${item.i_show}" id="idx_${i}">
 							<img src="${posterPath}${item.i_user}/${item.show_poster}" class="poster">
 							<div class="showTitle"><p>${item.show_title}</p></div>
-							<p>좋아요:${item.likeCnt} 댓글: ${item.cmtCnt}</p>
+							<p><span class="material-icons">favorite</span>
+							<span class="span">${item.likeCnt}</span>
+							<span class="material-icons">comment</span>
+							<span class="span">${item.cmtCnt}</span></p>
 						</td>
 						<c:if test="${i%j == j-1 }">
 						  </tr>
