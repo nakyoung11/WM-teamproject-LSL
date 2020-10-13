@@ -53,7 +53,14 @@ public class ShowDetailSer extends HttpServlet {
 		//전시회 이미지 저장 경로
 		String showImagePath = "/resource/show/images/posters/" + param.getI_user() + "/";
 		//유저 프로필 이미지 저장경로
-		String userImagePath = "/img/user/" + param.getI_user() + "/";
+		String userImagePath;
+		if(param2.getProfile_img() != null) {
+			userImagePath = "/img/user/" + param.getI_user() + "/";
+		}else {
+			userImagePath = "/resource/profile/";
+			param2.setProfile_img("default_profile.jpg");
+		}
+		
 		
 		//전시회 정보를 세팅.
 		request.setAttribute("showData", param);
