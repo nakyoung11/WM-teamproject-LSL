@@ -36,6 +36,10 @@
         }
         .title {
             width: 500px;
+            cursor: pointer;
+        }
+        .hoverColor:hover {
+        	background-color: #dfe6e9;
         }
         .nm {
             width: 50px;
@@ -64,12 +68,14 @@
 					<button onclick="moveToReg()">글쓰기</button>
 				</c:if>
 				<c:forEach items="${list}" var="item">
-					<tr>
+					<tr class="hoverColor">
 						<input type="hidden" name="${item.i_notice}"> 
 						<td class="i_notice">${item.i_notice}</td>
 						<td class="imporTitle title" onclick="moveToDetail(${item.i_notice})"><div class="imporMark">!</div>${item.title}</td>
 						<td class="nm imporNm">${item.nm}</td>
-						<td class="r_dt">${item.r_dt}</td>
+						<td class="r_dt">
+							${item.m_dt}
+						</td>
 					</tr>
 				</c:forEach>			
 			</table>
