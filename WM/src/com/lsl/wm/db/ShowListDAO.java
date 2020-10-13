@@ -29,7 +29,7 @@ public class ShowListDAO {
 		});
 	}
 	
-	//ÀÛÇ° ¸®½ºÆ®¸¦ °¡Á®¿À´Â ¸Þ¼Òµå
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 		public static List<ShowListDomain> selShowList(ShowListVO param) {
 			String sql = " SELECT B.i_work, B.i_user, B.work_title, B.work_images, B.work_ctnt"
 					   + " FROM t_show_list A"
@@ -64,6 +64,39 @@ public class ShowListDAO {
 			
 			return list;
 		}
+		
+		//ì „ì‹œíšŒ ì¢‹ì•„ìš” ìˆ˜ë¥¼ êµ¬í•˜ëŠ” ë©”ì†Œë“œ
+				public static List<ShowListDomain> selShowLikeCnt(ShowListVO param) {
+					String sql = " SELECT COUNT(B.i_user) AS like_cnt "
+							   + " FROM t_show_list A"
+							   + " JOIN t_work_like B "
+							   + " ON B.i_work = A.i_work "
+							   + " WHERE A.i_show = ? ";
+							  
+					
+					List<ShowListDomain> list = new ArrayList();
+					
+					JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+						
+						@Override
+						public void prepared(PreparedStatement ps) throws SQLException {
+							ps.setInt(1, param.getI_show());
+						}
+						
+						@Override
+						public int executeQuery(ResultSet rs) throws SQLException {
+							while(rs.next()) {
+								ShowListDomain vo = new ShowListDomain();
+								vo.setLike_cnt(rs.getInt("like_cnt"));
+								
+								list.add(vo);
+							}
+							return 1;
+						}
+					});
+					
+					return list;
+				}
 		
 		public static int delShowList(ShowListDomain param) {
 			String sql = " DELETE " 

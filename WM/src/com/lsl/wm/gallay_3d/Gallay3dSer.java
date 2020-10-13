@@ -102,7 +102,12 @@ public class Gallay3dSer extends HttpServlet {
 			jobj.put("user_email", param2.getUser_email());
 			jobj.put("workLikeCnt", domain.getWorkLikeCnt());
 			jobj.put("isLike", domain2.getIsLike());
-			jobj.put("profilePath", "/img/user/" + param.getI_user() + "/" + param2.getProfile_img());
+			if(param2.getProfile_img() != null) {
+				jobj.put("profilePath", "/img/user/" + param.getI_user() + "/" + param2.getProfile_img());
+			}else {
+				jobj.put("profilePath", "/resource/profile/default_profile.jpg");
+			}
+			
 			out.print(jobj.toJSONString()); // json 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占�
 	     }
 	     
