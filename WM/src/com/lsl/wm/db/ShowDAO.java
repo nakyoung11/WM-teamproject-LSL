@@ -295,4 +295,20 @@ public class ShowDAO {
 		
 		return vo;
 	}
+	
+	public static int delShow(ShowVO param) {
+		String sql = " DELETE " 
+				+ " FROM t_show " 
+				+ " WHERE " 
+				+ " i_show = ? ";
+		
+		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, param.getI_show());
+			
+			}
+		});
+	}
 }

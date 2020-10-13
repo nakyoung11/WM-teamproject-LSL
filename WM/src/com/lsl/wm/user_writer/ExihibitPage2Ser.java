@@ -110,46 +110,58 @@ public class ExihibitPage2Ser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO loginUser = MyUtils.getLoginUser(request);
 		
-		/*���� ��� ������*/
-		int i_show = Integer.parseInt(request.getParameter("i_show"));
-		//������ ��ǰ�� i_work���� �����´�.
-		int i_work = Integer.parseInt(request.getParameter("i_work"));
 		int i_user = loginUser.getI_user();
-		
-		WorkVO param = new WorkVO();
-		
-		param.setI_show(i_show);
-		param.setI_work(i_work);
-		param.setI_user(i_user);
-		
-		param = WorkDAO.selWork(param);
-		
-		System.out.println("������ �̹��� ���� " + param.getWork_image());
-		//���� ������ ���� �Ѵ�.
-		String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
-		System.out.println("path : " + savePath);
-		
+		int i_show = Integer.parseInt(request.getParameter("i_show"));
+		//글을 삭제하는 post 요청 이라면
+		if(request.getParameter("i_work") != null) {
+			//������ ��ǰ�� i_work���� �����´�.
+			int i_work = Integer.parseInt(request.getParameter("i_work"));
+			
+			
+			WorkVO param = new WorkVO();
+			
+			param.setI_show(i_show);
+			param.setI_work(i_work);
+			param.setI_user(i_user);
+			
+			param = WorkDAO.selWork(param);
+			
+			System.out.println("������ �̹��� ���� " + param.getWork_image());
+			//���� ������ ���� �Ѵ�.
+			String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
+			System.out.println("path : " + savePath);
+			
 
-		File f = new File(savePath + "/" + param.getWork_image());		
-		if(f.exists()){
-			f.delete();
-			System.out.println("���� ������");
-		}else{
-			System.out.println("���� ����");
+			File f = new File(savePath + "/" + param.getWork_image());		
+			if(f.exists()){
+				f.delete();
+				System.out.println("���� ������");
+			}else{
+				System.out.println("���� ����");
+			}
+			
+			WorkDAO.delWork(param);
+			/*����ȸ ����Ʈ ������ �����Ѵ�.*/
+			ShowListDomain vo = new ShowListDomain();
+			vo.setI_work(i_work);
+			
+			ShowListDAO.delShowList(vo);
+			
+			System.out.println("�Ѿ�� ��" + i_work);
+			
+			response.sendRedirect("/exhibit_page2?i_user="+ i_user + "&i_show=" + i_show);	
+			return;
+		}else {
+			ShowVO param = new ShowVO();
+			param.setI_show(i_show);
+			ShowDAO.delShow(param);
+			
+			response.sendRedirect("/exhibit_page2?i_user="+ i_user + "&i_show=" + i_show);	
+			return;
 		}
 		
-		WorkDAO.delWork(param);
-		/*����ȸ ����Ʈ ������ �����Ѵ�.*/
-		ShowListDomain vo = new ShowListDomain();
-		vo.setI_work(i_work);
 		
-		ShowListDAO.delShowList(vo);
-		
-		System.out.println("�Ѿ�� ��" + i_work);
-		
-		response.sendRedirect("/exhibit_page2?i_user="+ i_user + "&i_show=" + i_show);
-		
-		
+	
 	}
 
 }
