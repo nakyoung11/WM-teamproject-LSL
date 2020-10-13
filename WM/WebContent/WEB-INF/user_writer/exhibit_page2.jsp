@@ -258,7 +258,7 @@ table{border-bottom: 1px solid #765D9E;}
     		var table = document.createElement('table');
     		table.innerHTML = `
     			<tr>
-    			<td><a href="#" class="material-icons" style="font-size:30px; color:red">remove_circle_outline</a> </td>
+    			<td><a href="#" class="material-icons" style="font-size:30px; color:red" onclick="doShowRemove(\${tempI_show})">remove_circle_outline</a> </td>
 				<td>${item.show_title}	
 				<div class="remove_reg">
 				
@@ -333,6 +333,22 @@ table{border-bottom: 1px solid #765D9E;}
     function movePage(idx) {
         alert('페이지 이동Index :' + idx);
     }
+    
+    function doShowRemove(i_show) {
+    	
+    	var form = document.createElement('form'); // 폼객체 생성
+    	var objs;
+    	objs = document.createElement('input'); // 값이 들어있는 녀석의 형식
+    	objs.setAttribute('type', 'text'); // 값이 들어있는 녀석의 type
+    	objs.setAttribute('name', 'i_show'); // 객체이름
+    	objs.setAttribute('value', `\${i_show}`); //객체값
+    	form.appendChild(objs);
+    	form.setAttribute('method', 'post'); //get,post 가능
+    	form.setAttribute('action', "/exhibit_page2"); //보내는 url
+    	document.body.appendChild(form);
+    	form.submit();
+    }
+    
     displayExhibitWorkInfo();
     //displayExhibitionWorkInfo(exhibitionWorkInfoArr);
     </script>
