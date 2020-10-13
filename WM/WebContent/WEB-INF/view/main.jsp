@@ -109,21 +109,15 @@ body{padding-top: 250px;}
  
 			<div class="sub_manu">
 				<ul>
-					<li><a href="">인기전시보기</a></li>
+					<li><a href="">인기작품보기</a></li>
 					<li><a href="/exhibit_page0">전시회 열기</a></li>
 					<li><a href="/exhibit_page2">나의 전시관리</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	<footer id="footer">
-		<ul>
-			<li>jumoney15@naver.com: 아이디어 제공, 3D</li>
-			<li>dlehdud1653@kakao.com: 로그인 및 게시판</li>
-			<li>nakihome@naver.com: 디자인</li>
-		</ul>
-	</footer>
-
+	
+<jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 
 </html>

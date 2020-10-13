@@ -19,13 +19,13 @@
                 <h2 class="hidden">회원로그인/ 가입/ 로그아웃</h2>
               <c:choose>
 					<c:when test="${loginUser.nickname != null}">
-						<ul><li style="font-size:13px">${loginUser.nickname}님 환영합니다. <a href="/logout"><span> 로그아웃</span></a></li></ul>  
+						<ul><li style="font-size:13px">${loginUser.nickname}님 환영합니다. <a href="/logout"><span style="color:red;font-size:9px" > 로그아웃</span></a></li></ul>  
 					</c:when>
 					<c:otherwise>
-						  <ul>
-	                    <li><a href="/login"><span class="material-icons md-36">login</samp></a></li>
-	                    <li><a href="/join">JOIN</a></li>
-	                	</ul>
+					 <ul id="userLogin" style="display: flex; align-items: center;">
+	                    <li id="login"><a href="/login" style="display: flex;flex-flow: column;align-items: center;"><span style="font-size: 11px;">LOGIN</span></a></li>
+	                    <li id="join"><a href="/join" style="display: flex;flex-flow: column; align-items: center; margin-left:10px"><span style="font-size: 11px;">JOIN</span></a></li>
+	                </ul>
 					</c:otherwise>
 				</c:choose>     
             </nav>

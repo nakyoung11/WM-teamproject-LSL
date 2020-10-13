@@ -51,7 +51,7 @@ input{background: none; border:none ; cursor: pointer;font-size: 16px}
 #profile .align{display: flex; flex-flow: row nowrap; align-items: center; }
 .material-icons{transition: all ease 0.5s; }
 .material-icons:hover {transform: rotate( 90deg ); color: red}
-.btn{margin-right: 5px; margin-left: 5px; font-size: small;}
+.btn{margin-right: 5px; margin-left: 5px; font-size: small;transition: all ease 0.8s;}
 .right{margin-bottom: 40px}
 
 
@@ -62,20 +62,16 @@ input{background: none; border:none ; cursor: pointer;font-size: 16px}
 	margin-bottom: 10px;
 }
 
- 
-.btn{transition: all ease 0.8s;} 
 .btn:hover{background: linear-gradient(to top, #DE9849 10%, transparent 10%)}
 .right label, input{margin-top: 20px}
-.nickname{display: flex; flex-flow: row;margin-top: 15px; margin-bottom: 15px}
+.nickname, .pwc_box {display: flex; flex-flow: row;margin-top: 15px;}
+.pwc_box {margin: 0}
+.pw_box{display: flex; flex-flow: column;}
+.pw_box{margin: 0}
 .msg{color: red; font-size:small; margin-left: 5px}
 .nickname #nick{margin-left: 5px; border-bottom: 1px solid gray;}
-.pwc_box{margin-top: 20px}
 .right #pw, #pwc{border-bottom: 1px solid gray; width:260px; font-size: 18px}
-#change_btn{margin-top: 30px; height: 140px; text-align: center; line-height: 140px;}
-#_change_btn{background: #625569; width: 100px; height: 100px; border-radius: 50%; color: #FFFFFC}
-#_change_btn:hover {
-	background:#F5455A
-}
+#imgchange{width: 220px}
 
   </style>
 
@@ -104,7 +100,7 @@ input{background: none; border:none ; cursor: pointer;font-size: 16px}
 					<br>
 					<div class="align">
 						<input type="file" name="profile_img" accept="image/*" id="imgchange">
-					    <input type="submit"  class="material-icons" style="font-size:28px" value="add_circle_outline" >
+					    <input type="submit" value="변경하기" class="btn" >
 					</div>				
 				</form>
 			</div>
@@ -127,19 +123,19 @@ input{background: none; border:none ; cursor: pointer;font-size: 16px}
                     </form>
                    	<br>
 	                <form id="pwFrm" action="/changePw" method="post" onsubmit="return chkChangePw()">
-                   <div>
-	                        <label for="pw">변경 비밀번호</label><br>
-	                        <input type="password" name="pw" id="pw">
-	                    </div>
-	                    <div class="pwc_box">
-	                        <label for="pwc">변경 비밀번호 확인</label><br>
-	                        <input type="password" name="pwc" id="pwc">
-	                    </div>  
+                   <div class="pw_box">
+	                        <label for="pw">변경 비밀번호</label>
+	                        <input type="password" name="pw" id="pw">	                             
+	                        <label for="pwc">변경 비밀번호 확인</label>
+	                        
+	                   <div class="pwc_box">
+	                        <input type="password" name="pwc" id="pwc">               
+	                      	<input type="submit" value="변경하기" class="btn"> 
+	                  </div> 
+	              </div>  
 	                    </div>
 	                   </div> 
-	                    <div id="change_btn">
-	                      	<input type="submit" value="변경하기" id="_change_btn">
-	                    </div> 
+	                  
 
 	                </form>
        </div>

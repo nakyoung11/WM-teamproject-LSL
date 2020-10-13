@@ -26,14 +26,14 @@ public class ShowListSer extends HttpServlet {
 	            response.sendRedirect("/login"); //
 	            return;
 	         }
-	       
-	      String searchText = request.getParameter("searchText");
-	      searchText = (searchText == null ? "" : searchText);
-	      String strPage = request.getParameter("page");
-	      if(strPage == null) {
-	         strPage = "0";
-	      }
-   
+
+		String searchText = request.getParameter("searchText");
+		searchText = (searchText == null ? "" : searchText);
+		String strPage = request.getParameter("page");
+		if(strPage == null) {
+			strPage = "0";
+		}
+
 		int page = Integer.parseInt(strPage);
 		
 		page = (page == 0 ? 1 : page);
