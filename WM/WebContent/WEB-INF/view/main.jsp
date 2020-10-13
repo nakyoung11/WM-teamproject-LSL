@@ -89,7 +89,13 @@ body{padding-top: 250px;}
 
 }
  
-
+.listClass{margin-left: 10%; display: flex; align-items: stretch;}
+.smallPoster {
+	width: 300px;
+	height: 300px;
+	margin-right:30px;
+	border-radius: 20px;
+	}
 </style>
 
  
@@ -113,9 +119,31 @@ body{padding-top: 250px;}
 					<li><a href="/exhibit_page0">전시회 열기</a></li>
 					<li><a href="/exhibit_page2">나의 전시관리</a></li>
 				</ul>
+				<div class="listClass">
+						<c:set var="i" value="0" /> 
+						<c:set var="j" value="3" />
+						<table>		  
+						<c:forEach items="${list}" var="item">
+								<c:if test="${i%j == 0 }">
+								<tr>
+								</c:if>
+								<td class="posterName" onclick="moveDetail('${i}')" style="cursor: pointer;">
+									<input type="hidden" value="${item.i_show}" id="idx_${i}">
+									<img src="${posterPath}${item.i_user}/${item.show_poster}" class="smallPoster">
+									<div class="showTitle"><p>${item.show_title}</p></div>
+								</td>
+								<c:if test="${i%j == j-1 }">
+								  </tr>
+								 </c:if>
+								<c:set var="i" value="${i+1}" />
+					</c:forEach> 
+					</table>
+				</div>
 			</div>
-		</div>
+			
+		</div>	
 	</div>
+				
 <jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 
