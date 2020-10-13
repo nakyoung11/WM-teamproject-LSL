@@ -89,15 +89,34 @@ body{padding-top: 250px;}
 
 }
  
-.listClass{margin-left: 10%; display: flex; align-items: stretch;}
+.listClass{margin-left: 8%; display: flex; align-items: stretch;}
 .smallPoster {
-	width: 300px;
-	height: 300px;
+	width: 150px;
+	height: 150px;
 	margin-right:30px;
 	border-radius: 20px;
 	}
 	.span {
 	font-size: 18px;
+	}
+	fieldset {
+		padding: 5%;
+		width: 80%;
+	}
+	legend {
+		font-size: 1.5em;
+	}
+	.crown1 {
+		color: #f1c40f;
+		margin-left: 5%;
+	}
+	.crown2 {
+		color: #7f8c8d;
+		margin-left: 14%;
+	}
+	.crown3 {
+		color: #cd6133;
+		margin-left: 16%;
 	}
 </style>
 
@@ -118,13 +137,23 @@ body{padding-top: 250px;}
  
 			<div class="sub_manu">
 				<ul>
-					<li><a href="">인기작품보기</a></li>
 					<li><a href="/exhibit_page0">전시회 열기</a></li>
 					<li><a href="/exhibit_page2">나의 전시관리</a></li>
 				</ul>
 				<div class="listClass">
+						<fieldset>
+						<legend>인기 전시회</legend>
+						<span class="material-icons crown1"  style="font-size: 60px;">
+						emoji_events
+						</span>
+						<span class="material-icons crown2"  style="font-size: 50px;">
+						emoji_events
+						</span>
+						<span class="material-icons crown3"  style="font-size: 40px;">
+						emoji_events
+						</span>
 						<c:set var="i" value="0" /> 
-						<c:set var="j" value="3" />
+						<c:set var="j" value="5" />
 						<table>		  
 						<c:forEach items="${list}" var="item">
 								<c:if test="${i%j == 0 }">
@@ -145,6 +174,7 @@ body{padding-top: 250px;}
 								<c:set var="i" value="${i+1}" />
 					</c:forEach> 
 					</table>
+					</fieldset>
 				</div>
 			</div>
 			
