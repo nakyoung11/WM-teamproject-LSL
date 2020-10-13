@@ -1,5 +1,6 @@
 package com.lsl.wm.vo;
 
+
 public class ShowVO {
 	private int i_show;
 	private int i_user;
@@ -9,7 +10,22 @@ public class ShowVO {
 	private String r_dt;
 	private String searchText;
 	private int row;
+	private int likeCnt;
+	private int cmtCnt;
 	
+	
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
+	public int getCmtCnt() {
+		return cmtCnt;
+	}
+	public void setCmtCnt(int cmtCnt) {
+		this.cmtCnt = cmtCnt;
+	}
 	public String getSearchText() {
 		return searchText;
 	}

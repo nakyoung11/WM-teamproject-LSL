@@ -21,6 +21,7 @@ import com.lsl.wm.vo.ShowListDomain;
 import com.lsl.wm.vo.ShowListVO;
 import com.lsl.wm.vo.ShowVO;
 import com.lsl.wm.vo.UserVO;
+import com.lsl.wm.vo.WorkDomain;
 import com.lsl.wm.vo.WorkVO;
 
 @WebServlet("/exhibit_page2")
@@ -52,6 +53,7 @@ public class ExihibitPage2Ser extends HttpServlet {
 	         request.getRequestDispatcher(jsp1).forward(request, response);
 	         return;
 	      }
+		 
 		
 		for(int i=0; i<showParam.size(); i++) {
 			ShowArrDomain domain = new ShowArrDomain();
@@ -70,6 +72,30 @@ public class ExihibitPage2Ser extends HttpServlet {
 			System.out.println("i_show: " + list.get(i).getShow_title());
 			for(int j=0; j<list.get(i).getShowDomainList().size(); j++) {
 				System.out.println("작품 제목: " + list.get(i).getShowDomainList().get(j).getWork_title());
+			}
+			System.out.println();
+			System.out.println();
+		}
+		
+		//작품의 좋아요 , 댓글 가져오기
+		for(int i=0; i<list.size(); i++) {
+			System.out.println("i_show: " + list.get(i).getShow_title());
+			for(int j=0; j<list.get(i).getShowDomainList().size(); j++) {
+				
+				//좋아요 개수
+				WorkDomain domain = new WorkDomain();
+				domain.setI_work(list.get(i).getShowDomainList().get(j).getI_work());
+				domain = WorkDAO.selWorklikeCnt(domain);
+				list.get(i).getShowDomainList().get(j).setLike_cnt(domain.getLikeCnt());
+				//댓글 개수
+				domain.setI_work(list.get(i).getShowDomainList().get(j).getI_work());
+				domain = WorkDAO.selWorkCmtCnt(domain);
+				list.get(i).getShowDomainList().get(j).setCmt_cnt(domain.getCmtCnt());
+				
+				System.out.println("작품 제목: " + list.get(i).getShowDomainList().get(j).getWork_title());
+				System.out.println("좋아요: " + list.get(i).getShowDomainList().get(j).getLike_cnt()
+						+ "댓글: " + list.get(i).getShowDomainList().get(j).getCmt_cnt());
+				
 			}
 			System.out.println();
 			System.out.println();

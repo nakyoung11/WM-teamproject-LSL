@@ -92,6 +92,69 @@ public class ShowDAO {
 		});
 		return list;
 	}
+	//전시회의 좋아요 개수 가져오기
+	public static ShowVO selShowlikeCnt(ShowVO param) {
+		ShowVO vo = new ShowVO();
+		
+		String sql = " SELECT COUNT(B.i_user) AS like_cnt "
+				   + " FROM t_show_list A "
+				   + " JOIN t_work_like B "
+				   + " ON B.i_work = A.i_work "
+				   + " WHERE A.i_show = ? ";
+		
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {				
+				ps.setInt(1, param.getI_show());
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				while(rs.next()) {
+					
+					int like_cnt = rs.getInt("like_cnt");
+					
+					vo.setLikeCnt(like_cnt);
+
+				}
+				return 0;
+			}
+		});
+		return vo;
+	}
+	
+	//전시회의 댓글 개수 가져오기
+		public static ShowVO selShowCmtCnt(ShowVO param) {
+			ShowVO vo = new ShowVO();
+			
+			String sql = " SELECT COUNT(B.i_user) AS cmt_cnt "
+					   + " FROM t_show_list A "
+					   + " JOIN t_work_cmt B "
+					   + " ON B.i_work = A.i_work "
+					   + " WHERE A.i_show = ? ";
+			
+			JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+				
+				@Override
+				public void prepared(PreparedStatement ps) throws SQLException {				
+					ps.setInt(1, param.getI_show());
+				}
+				
+				@Override
+				public int executeQuery(ResultSet rs) throws SQLException {
+					while(rs.next()) {
+						
+						int cmt_cnt = rs.getInt("cmt_cnt");
+						
+						vo.setCmtCnt(cmt_cnt);
+
+					}
+					return 0;
+				}
+			});
+			return vo;
+		}
 	
 	
 	public static ShowVO selShow(ShowVO param) {

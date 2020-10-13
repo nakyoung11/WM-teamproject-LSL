@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.lsl.wm.vo.ShowVO;
 import com.lsl.wm.vo.UserVO;
+import com.lsl.wm.vo.WorkDomain;
 import com.lsl.wm.vo.WorkVO;
 
 public class WorkDAO {
@@ -31,7 +32,7 @@ public class WorkDAO {
 			}
 		});
 	}
-	//°¡Àå ¸¶Áö¸·¿¡ ÀúÀåµÈ i_work¸¦ °¡Á®¿À´Â ¸Ş¼Òµå
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ i_workï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
 	public static WorkVO selLatestWork(WorkVO param) {
 		String sql = " SELECT "
 				+ " MAX(i_work) as i_work "
@@ -60,7 +61,7 @@ public class WorkDAO {
 		return vo;
 	}
 	
-	//ÀÛÇ° ¸®½ºÆ®¸¦ °¡Á®¿À´Â ¸Ş¼Òµå
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
 	public static List<WorkVO> selWorkList(WorkVO param) {
 		String sql = " SELECT i_work, i_user, work_title, work_images, work_ctnt, i_show"
 				   + " FROM t_work ";
@@ -121,7 +122,7 @@ public class WorkDAO {
 		return list;
 	}
 	
-	//ÀÛÇ° ¸®½ºÆ®¸¦ °¡Á®¿À´Â ¸Ş¼Òµå
+	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½
 	public static WorkVO selWork(WorkVO param) {
 			String sql = " SELECT i_work, i_user, work_title, work_images, work_ctnt"
 					   + " FROM t_work ";
@@ -185,6 +186,66 @@ public class WorkDAO {
 			
 			return vo;
 		}
+	
+	//ì „ì‹œíšŒì˜ ì¢‹ì•„ìš” ê°œìˆ˜ ê°€ì ¸ì˜¤ê¸°
+		public static WorkDomain selWorklikeCnt(WorkVO param) {
+			WorkDomain vo = new WorkDomain();
+			
+			String sql = " SELECT COUNT(i_user) as like_cnt "
+					   + " FROM t_work_like "
+					   + " WHERE i_work = ? ";
+			
+			JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+				
+				@Override
+				public void prepared(PreparedStatement ps) throws SQLException {				
+					ps.setInt(1, param.getI_work());
+				}
+				
+				@Override
+				public int executeQuery(ResultSet rs) throws SQLException {
+					while(rs.next()) {
+						
+						int like_cnt = rs.getInt("like_cnt");
+						
+						vo.setLikeCnt(like_cnt);
+
+					}
+					return 0;
+				}
+			});
+			return vo;
+		}
+		
+		//ì‘í’ˆì˜ ëŒ“ê¸€ ê°œìˆ˜ ê°€ì ¸ì˜¤ê¸°
+			public static  WorkDomain selWorkCmtCnt(WorkVO param) {
+				WorkDomain vo = new WorkDomain();
+				
+				String sql = " SELECT COUNT(i_work_cmt) as cmt_cnt"
+						   + " FROM t_work_cmt "
+						   + " WHERE i_work = ? ";
+						  
+				JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+					
+					@Override
+					public void prepared(PreparedStatement ps) throws SQLException {				
+						ps.setInt(1, param.getI_work());
+					}
+					
+					@Override
+					public int executeQuery(ResultSet rs) throws SQLException {
+						while(rs.next()) {
+							
+							int cmt_cnt = rs.getInt("cmt_cnt");
+							
+							vo.setCmtCnt(cmt_cnt);
+
+						}
+						return 0;
+					}
+				});
+				return vo;
+			}
 		
 		public static int updWork(WorkVO param) {
 			String sql = " UPDATE t_work " 
