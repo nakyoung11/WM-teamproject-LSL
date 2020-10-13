@@ -27,10 +27,49 @@ public class MainSer extends HttpServlet {
 		String str = String.format("%03d", UserDAO.selUserCnt()) ;
 		
 		ShowVO param = new ShowVO();
-		param.setRow(0);
+	
 		param.setSearchText("%%");
-		List<ShowVO> list = ShowDAO.selShowList(param);
-		request.setAttribute("list", list);
+		List<ShowVO> list = ShowDAO.selAllShowList(param);
+		
+		// 좋아요 및 댓글 개수 가져오기
+		for (int i = 0; i < list.size(); i++) {
+			ShowVO vo = new ShowVO();
+			vo.setI_show(list.get(i).getI_show());
+			vo = ShowDAO.selShowlikeCnt(vo);
+			list.get(i).setLikeCnt(vo.getLikeCnt());
+			vo.setI_show(list.get(i).getI_show());
+			vo = ShowDAO.selShowCmtCnt(vo);
+			list.get(i).setCmtCnt(vo.getCmtCnt());
+		}
+		// 좋아요가 높은 순대로 정렬
+		ShowVO temp = new ShowVO();
+		for (int i = 0; i < (list.size() - 1); i++) {
+			for (int j = 0; j < (list.size() - 1) - i; j++) {
+				if (list.get(j).getLikeCnt() < list.get(j + 1).getLikeCnt()) {
+					temp = list.get(j);
+					list.set(j, list.get(j + 1));
+					list.set(j + 1, temp);
+
+				}
+			}
+		}
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println("전시회 명:" + list.get(i).getShow_title()
+					+ "좋아요 개수:" + list.get(i).getLikeCnt());
+		}
+		List<ShowVO> topTenList;
+		if(list.size() < 10) {
+			topTenList = list.subList(0, list.size());
+		}else {
+			topTenList = list.subList(0, 10);
+		}
+		
+	
+		
+		
+		
+		request.setAttribute("list", topTenList);
 		
 		String savePath = "/resource/show/images/posters/";
 		

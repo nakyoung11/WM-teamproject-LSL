@@ -65,6 +65,20 @@ public class ShowListSer extends HttpServlet {
 			vo = ShowDAO.selShowCmtCnt(vo);
 			list.get(i).setCmtCnt(vo.getCmtCnt());
 		}
+		//좋아요가 높은 순대로 정렬
+		List<ShowVO> tempList = list;
+		ShowVO temp = new ShowVO();
+		for(int i=0; i<(tempList.size()-1); i++) {
+			for(int j=0; j<(tempList.size()-1)-i; j++) {
+				if(tempList.get(j).getLikeCnt() < tempList.get(j+1).getLikeCnt()) {
+					temp = tempList.get(j);
+					tempList.set(j, tempList.get(j+1));
+					tempList.set(j+1, temp);
+					
+				}
+			}	
+		}
+		
 		 
 		String savePath = "/resource/show/images/posters/";
 		

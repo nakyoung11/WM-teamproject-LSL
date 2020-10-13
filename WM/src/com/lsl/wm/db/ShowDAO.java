@@ -92,6 +92,44 @@ public class ShowDAO {
 		});
 		return list;
 	}
+	
+	public static List<ShowVO> selAllShowList(ShowVO param) {
+		List<ShowVO> list = new ArrayList<ShowVO>();
+		
+		String sql = " SELECT A.* "
+				   + " FROM (SELECT i_show, show_title, show_poster, i_user, r_dt FROM t_show WHERE show_title LIKE ?) A"
+				   + " ORDER BY A.r_dt DESC ";
+
+		JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
+			
+			@Override
+			public void prepared(PreparedStatement ps) throws SQLException {				
+				ps.setNString(1, param.getSearchText());
+				
+			}
+			
+			@Override
+			public int executeQuery(ResultSet rs) throws SQLException {
+				while(rs.next()) {
+					
+					int i_user = rs.getInt("i_user");
+					int i_show = rs.getInt("i_show");
+					String show_title = rs.getNString("show_title");
+					String show_poster = rs.getNString("show_poster");
+					ShowVO vo = new ShowVO();
+					
+					vo.setI_user(i_user);
+					vo.setI_show(i_show);
+					vo.setShow_title(show_title);
+					vo.setShow_poster(show_poster);
+					
+					list.add(vo);
+				}
+				return 0;
+			}
+		});
+		return list;
+	}
 	//전시회의 좋아요 개수 가져오기
 	public static ShowVO selShowlikeCnt(ShowVO param) {
 		ShowVO vo = new ShowVO();
