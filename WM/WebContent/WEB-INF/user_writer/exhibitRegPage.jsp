@@ -244,9 +244,7 @@ button:focus {
 			</form>
 			<button id="exhibit_work_btn" onclick="submitExihibit()">수정하기</button>
 		</div>
-		<div id="footer">
-			<h3>푸터 영역</h3>
-		</div>
+	 <jsp:include page="../../footer.jsp"></jsp:include>
 	</div>
 	<script>
      

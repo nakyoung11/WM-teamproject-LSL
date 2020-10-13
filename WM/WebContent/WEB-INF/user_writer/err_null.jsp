@@ -58,13 +58,6 @@ background: #625569; width: 100px; height: 100px; border-radius: 50%}
 
       </div>
    
-		<footer id="footer">
-		<ul>
-			<li>jumoney15@naver.com: 아이디어 제공, 3D</li>
-			<li>dlehdud1653@kakao.com: 로그인 및 게시판</li>
-			<li>nakihome@naver.com: 디자인</li>
-		</ul>
-
-	</footer>
+ <jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 </html>

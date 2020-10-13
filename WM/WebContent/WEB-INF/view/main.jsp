@@ -116,7 +116,6 @@ body{padding-top: 250px;}
 			</div>
 		</div>
 	</div>
-	
 <jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 

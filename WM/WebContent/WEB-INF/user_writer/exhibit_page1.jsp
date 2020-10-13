@@ -251,14 +251,7 @@ button:focus {
 		</div>
 	</div>
 
-	<footer id="footer">
-		<ul>
-			<li>jumoney15@naver.com: 아이디어 제공, 3D</li>
-			<li>dlehdud1653@kakao.com: 로그인 및 게시판</li>
-			<li>nakihome@naver.com: 디자인</li>
-		</ul>
-
-	</footer>
+ <jsp:include page="../../footer.jsp"></jsp:include>
 	<script>
         /*작품정보를 받아와 콘텐츠영역안에 테이블을 생성하여 보여주는 함수*/
         function displayWorkInfo() {
