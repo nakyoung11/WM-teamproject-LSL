@@ -5,7 +5,15 @@ public class ShowListDomain extends ShowListVO{
 	private String  work_title;
 	private String work_ctnt;
 	private String work_image;
+	private int like_cnt;
 	
+	
+	public int getLike_cnt() {
+		return like_cnt;
+	}
+	public void setLike_cnt(int like_cnt) {
+		this.like_cnt = like_cnt;
+	}
 	public int getI_user() {
 		return i_user;
 	}
