@@ -33,9 +33,15 @@ public class ExihibitPage0Ser extends HttpServlet {
 		//�α����� ����� ������ �޾ƿ´�.
 		UserVO loginUser = MyUtils.getLoginUser(request);
 		
+		String jsp;
 		
-	
-		String jsp = "/WEB-INF/user_writer/exhibit_page0.jsp";
+		if(loginUser == null) {
+			jsp = "/WEB-INF/view/main.jsp";
+		}else {
+			jsp = "/WEB-INF/user_writer/exhibit_page0.jsp";
+		}
+		
+		
 		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
