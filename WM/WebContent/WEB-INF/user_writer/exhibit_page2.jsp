@@ -214,9 +214,9 @@ table{border-bottom: 1px solid #765D9E;}
 .work_title{
 	width:260px;
 	height:30px;	  
-		overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;}
+	overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;}
 </style>
 
 <body>
