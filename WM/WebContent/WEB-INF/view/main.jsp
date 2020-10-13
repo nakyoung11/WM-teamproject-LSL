@@ -109,7 +109,7 @@ body{padding-top: 250px;}
  
 			<div class="sub_manu">
 				<ul>
-					<li><a href="">인기전시보기</a></li>
+					<li><a href="">인기작품보기</a></li>
 					<li><a href="/exhibit_page0">전시회 열기</a></li>
 					<li><a href="/exhibit_page2">나의 전시관리</a></li>
 				</ul>

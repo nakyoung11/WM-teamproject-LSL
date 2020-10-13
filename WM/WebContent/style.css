@@ -189,6 +189,7 @@ a {
 	margin: 20px 0 20px 0;
 }
 
+
 #footer {
 	align-self: flex-end;
 	display: flex;
@@ -264,7 +265,7 @@ a {
 	width: 150px;
 	text-align: center;
 	font-size:17px;
-	background: #ABA5E6; 
+	background:#92809b; 
 }
 
 
