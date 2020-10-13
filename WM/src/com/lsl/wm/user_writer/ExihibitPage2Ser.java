@@ -156,7 +156,7 @@ public class ExihibitPage2Ser extends HttpServlet {
 			param.setI_show(i_show);
 			ShowDAO.delShow(param);
 			
-			response.sendRedirect("/exhibit_page2?i_user="+ i_user + "&i_show=" + i_show);	
+			response.sendRedirect("/exhibit_page2?i_user="+ i_user);	
 			return;
 		}
 		
