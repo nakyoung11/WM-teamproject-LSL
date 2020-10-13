@@ -47,9 +47,6 @@ table{border-bottom: 1px solid #765D9E;}
 	margin: 0 auto;
 }
 
-#my_exihibit div:nth-child(1) {
-	margin-bottom: 7%;
-}
 #my_exihibit div:nth-child(1)>.material-icons {
 	font-size: 30px;
 	color: red;
@@ -128,7 +125,8 @@ table{border-bottom: 1px solid #765D9E;}
 }
 
 .title {
-	display: flex; flex-flow: row nowrap;
+	display: flex; flex-flow: row nowrap; padding: 10px;
+
 }
 /* 두번째 테이블 */
 #my_exihibit div:nth-child(2) {
@@ -182,8 +180,9 @@ table{border-bottom: 1px solid #765D9E;}
 }
 
 .title {
-	flex: 1
+	font-size: 24px
 }
+.Reg_remove>a:hover{color:red;}
 
 .like_cmt {
 	display: flex;
@@ -212,6 +211,12 @@ table{border-bottom: 1px solid #765D9E;}
 	margin-top: 3%;
 	width: 100%
 }
+.work_title{
+	width:260px;
+	height:30px;	  
+		overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;}
 </style>
 
 <body>
@@ -281,7 +286,7 @@ table{border-bottom: 1px solid #765D9E;}
                 var li = document.createElement('li');
                 li.innerHTML = `<input type="hidden" id="i_show_idx_\${i}\${j}" value="\${tempI_show}">
                 <input type="hidden" id="i_work_idx_\${i}\${j}" name="i_work_idx_\${i}\${j}" value="${item2.i_work}">
-                <span style="cursor: default" id="work_title_idx_\${i}\${j}" class="title">\${j+1}.${item2.work_title}</span>
+                <span style="cursor: default" id="work_title_idx_\${i}\${j}" class="work_title">\${j+1}.${item2.work_title}</span>
                 <div class="like_cmt">
                 <span class="material-icons">favorite</span><span>100</span>
                 <span class="material-icons">insert_comment</span><span>100</span>
