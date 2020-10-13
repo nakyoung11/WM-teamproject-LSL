@@ -14,7 +14,7 @@ public class DbCon {
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection(url, id, pw);
-		System.out.println("�젒�냽 �꽦怨�");
+		System.out.println("접속 성공");
 		return con;
 	}
 	

@@ -32,7 +32,7 @@
             <nav id="menu">
                 <h2 class="hidden">WM이용메뉴</h2>
                 <ul>
-                <li><a href="/main">메인</a></li>
+                <li><a href="/">메인</a></li>
                  <li><a href="/showlist">전시둘러보기</a></li>
                  <li><a href="/notice">공지사항</a></li>
                  <li id="mypage">
