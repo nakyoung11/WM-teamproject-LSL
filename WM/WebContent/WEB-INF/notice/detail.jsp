@@ -67,6 +67,7 @@
             </c:if>
 		</div>
 	</div>
+	 <jsp:include page="../../footer.jsp"></jsp:include>
 	<script>
 		function moveToList() {
 			location.href = "/notice"
