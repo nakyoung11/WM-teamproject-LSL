@@ -1,34 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<work_title>작품 수정 페이지</work_title>
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
 <style>
+#headerWrap {
+	flex: 1
+}
+
+body {
+	padding-top: 250px;
+}
+
 #container {
-	width: 100%;
-	margin: 0 auto;
-	border: 1px solid black;
+	display: flex;
+	width: 1000px;
+	margin-bottom: 400px;
+	justify-content: center;
+	align-content: center;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	flex: 1;
+	background-image:
+}
+
+#contents {
+	display: flex;
+	flex-flow: column;
+	flex: 1;
+	height: 100%;
 }
 /*----------------------- 추가 사항 ----------------- */
+input, textarea {
+	background: none;
+}
+
 #exhibit_list {
 	width: 100%;
 	margin: 5% auto;
 }
-
+#input_painting{position: relative;}
 #exhibit_list table {
 	border-collapse: separate;
 	width: 100%;
 	height: 280px;
+	padding-bottom: 30px;
 	margin-bottom: 5%;
+	border-bottom: 1px solid #3f3d55;
 }
 
+}
 #exhibit_list table:nth-last-child(1) {
 	animation: fadeInDown;
 	animation-duration: 1s;
@@ -40,14 +68,13 @@
 
 #exhibit_list table td:nth-child(1) button {
 	border-style: none;
-	background-color: rgb(241, 113, 113);
 	color: white;
-	font-weight: bold;
 	text-align: center;
-	font-size: 2em;
+	font-size: 1em;
 	padding-bottom: 10%;
 	border-radius: 50%;
 	cursor: pointer;
+	background: #FF798A;
 }
 
 #exhibit_list table td:nth-child(1) button:hover {
@@ -61,18 +88,22 @@
 }
 
 #exhibit_list table td:nth-child(2) div {
-	position: absolute;
-	top: 0;
+
 	width: 90%;
 	height: 100%;
 	background-size: 100% 100%;
 	cursor: pointer;
 	display: table;
+	background-image: url("/resource/exhibit/imgbox.JPG");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 }
 
 #exhibit_list table td:nth-child(2) div:hover {
-	opacity: 0.8;
-	transition-duration: 0.5s;
+	opacity: 1;
+	transition-duration: 0.3s;
+	background-image: none;
 }
 
 #exhibit_list table td:nth-child(2) div span {
@@ -82,7 +113,7 @@
 	font-size: 1.5em;
 	font-weight: bold;
 	color: black;
-	opacity: 0%;
+	opacity: 0;
 }
 
 #exhibit_list table td:nth-child(2) div span:hover {
@@ -92,7 +123,7 @@
 	font-size: 1.5em;
 	font-weight: bold;
 	color: black;
-	opacity: 100%;
+	opacity: 1;
 }
 
 #exhibit_list table td:nth-child(3) {
@@ -100,7 +131,7 @@
 	height: 5%;
 	text-align: center;
 	font-size: 1.2em;
-	background-color: #DCD3C0;
+	font-weight: bold;
 	border: 0;
 	margin: 0;
 	font-weight: bolder;
@@ -110,7 +141,6 @@
 	position: relative;
 	border: 0;
 	width: 100%;
-	background-color: rgba(235, 230, 230, 0.5);
 }
 
 #exhibit_list table td:nth-child(4) input {
@@ -122,19 +152,17 @@
 	font-weight: bold;
 	width: 90%;
 	height: 100%;
-	background-color: rgba(235, 230, 230, 0.5);
+	border-bottom: 1px solid #3f3d55;
 }
 
 #exhibit_list table tr:nth-child(2) td:nth-child(1) {
-	background-color: rgba(255, 255, 255, 0.37);
 	text-align: center;
-	font-size: 1.2em;
-	font-weight: bold;
+	font-size: 1em;
+	font-weight: bolder;
 }
 
 #exhibit_list table tr:nth-child(2) td:nth-child(2) {
 	position: relative;
-	background-color: #FAF7F1;
 	width: 100%;
 	height: 150px;
 	font-weight: bold;
@@ -149,10 +177,11 @@
 	width: 90%;
 	height: 90%;
 	resize: none;
-	background-color: #FAF7F1;
+	border-bottom: 1px solid #3f3d55;
 	font-weight: bolder;
-	font-size: 2em;
-	border: 0;
+	font-size: 1.3EM;
+	border: none;
+	padding: 30px 0 20px 0px;
 }
 
 #add_work_btn {
@@ -203,37 +232,65 @@ textarea:focus {
 button:focus {
 	outline: none;
 }
+#add{
+position: absolute;
+bottom: 34px;
+left: 29px;
+display:flex;
+font-weight: bold;
+font-size: 15px;
+opacity: 0;
+justify-content: center;
+
+}
+#add p{
+
+    align-self: center;
+}
+
+#input_painting:hover>#add{
+opacity: 1;
+padding:7px;
+width: 150px;
+height:150px;
+background: rgba(244, 244, 243, 0.8);
+border-radius: 50%;
+display: flex;
+}
 </style>
 <body>
+	<jsp:include page="../../header.jsp"></jsp:include>
 	<div id="container">
 		<div id="contents">
 			<form action="/exhibitRegPage" method="POST" name="exhibit_frm"
 				enctype="multipart/form-data" accept-charset="UTF-8">
 				<!-- 어느 전시회인지를  POST로 보내주기 위해 i_show정보를 담아놓는다. -->
-				<input type="hidden" name="i_show" id="i_show"
-					value="${data}"> <input type="hidden"
-					name="list_cnt" id="list_cnt" value="">
+				<input type="hidden" name="i_show" id="i_show" value="${data}">
+				<input type="hidden" name="list_cnt" id="list_cnt" value="">
 				<input type="hidden" name="i_work" id="i_work"
 					value="${workData.i_work}"> <input type="hidden"
 					name="list_cnt" id="list_cnt" value="">
 				<div id="exhibit_list">
 					<table>
 						<tr>
-						  <td rowspan="2">
-                			<button id="min_work_btn_\${listLastIndex}" style="visibility:hidden">－</button>
-                			</td>
 							<td rowspan="2">
-								<div id="input_painting" onclick="document.all.file.click()" style="background-image:url('${workPath}${workData.work_image}')">
-									<input type="file" name="file" id="file"
-										style="display: none" accept="image/*"
-										onchange="updatePainting()"> <span>이미지 등록/수정</span> <input
-										id="work_image" name="work_image" type="hidden"
-										value="">
+								<button id="min_work_btn_\${listLastIndex}"
+									style="visibility: hidden">－</button>
+							</td>
+							<td rowspan="2">
+								<div id="input_painting" onclick="document.all.file.click()"
+									style="background-image:url('${workPath}${workData.work_image}')">
+									<input type="file" name="file" id="file" style="display: none"
+										accept="image/*" onchange="updatePainting()">
+									<div id="add">
+										<p>이미지 등록/수정</p>
+									</div>
+									<input id="work_image" name="work_image" type="hidden" value="">
 								</div>
 							</td>
 							<td>제목</td>
-							<td><input type="text" name="input_title"
-								id="input_title" value="${workData.work_title}"></td>
+							<td><input type="text" name="input_title" id="input_title"
+								value="${workData.work_title}"></td>
 						</tr>
 						<tr>
 							<td>작품설명</td>
@@ -244,8 +301,9 @@ button:focus {
 			</form>
 			<button id="exhibit_work_btn" onclick="submitExihibit()">수정하기</button>
 		</div>
-	 <jsp:include page="../../footer.jsp"></jsp:include>
+
 	</div>
+	<jsp:include page="../../footer.jsp"></jsp:include>
 	<script>
      
        
