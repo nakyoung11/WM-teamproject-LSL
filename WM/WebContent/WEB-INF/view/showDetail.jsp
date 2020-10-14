@@ -72,7 +72,7 @@ body {
 	top: 0;
 	left: 0;
 	margin-right: 30px;
-	 border-radius: 20px;
+	/* border-radius: 20px; */
 	justify-content: center;
 	opacity: 0;
 	transition: all ease 0.7s;
@@ -103,7 +103,6 @@ body {
 	align-self: center;
 	flex-flow: row nowrap;
 	border: 1px solid black;
-	border-radius:20px;
 	width: 100%;
 	/* height: 329px;*/
 }
@@ -127,7 +126,7 @@ body {
 	width: 350px;
 	height: 350px;
 	/* margin-bottom: 30px; */
-	border-radius: 20px 0 0 20px;
+	border-radius: 0 20px 20px 0;
 	cursor: pointer;
 	/* margin-top: 30px;*/
 }
