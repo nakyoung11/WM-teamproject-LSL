@@ -30,7 +30,7 @@ public class NoticeSer extends HttpServlet {
 		List<NoticeVO> list = NoticeDAO.selNoticeList(param);
 		
 		request.setAttribute("list", list);
-		request.setAttribute("i_user", loginUser.getI_user());
+		request.setAttribute("i_user", loginUser.getI_user()); // i_user가 1번일 때만 글쓰기, 수정 나타남
 		
 		request.getRequestDispatcher("/WEB-INF/notice/notice.jsp").forward(request, response);
 	}
