@@ -18,6 +18,7 @@ import com.lsl.wm.MyUtils;
 import com.lsl.wm.db.ShowDAO;
 import com.lsl.wm.db.ShowListDAO;
 import com.lsl.wm.db.WorkDAO;
+import com.lsl.wm.vo.ShowListDomain;
 import com.lsl.wm.vo.ShowListVO;
 import com.lsl.wm.vo.ShowVO;
 import com.lsl.wm.vo.UserVO;
@@ -39,21 +40,41 @@ public class ExihibitPage1Ser extends HttpServlet {
 		
 		param = ShowDAO.selShow(param);
 		
+		//전시회의 작품 개수를 받아온다.
+		ShowListDomain param2 = new ShowListDomain();
+		param2.setI_show(i_show);
+		param2 = ShowListDAO.selShowListCnt(param2);
+		
 		String savePath = "/resource/show/images/posters/" + loginUser.getI_user() + "/";
 		
 		System.out.println("i_show: " +  param.getI_show());
 		System.out.println("title: " + param.getShow_title());
 		
+		String jsp;
+		
 		//����ȸ ������ �����ش�.
 		request.setAttribute("data", param);
 		//jsp���� ������� �������� ��θ� �����ش�.
 		request.setAttribute("imagePath", savePath);
+		//만약 작품 개수가 25개 이상이라면
+		if(param2.getShowListCnt() >= 25) {
+			jsp = "/WEB-INF/user_writer/exhibit_page2.jsp";
+			request.getRequestDispatcher(jsp).forward(request, response);
+			return;
+		}
 		
-		String jsp = "/WEB-INF/user_writer/exhibit_page1.jsp";
+		//작품 개수를 세팅해준다.
+		request.setAttribute("workCnt", param2.getShowListCnt());
+		
+		jsp = "/WEB-INF/user_writer/exhibit_page1.jsp";
 		request.getRequestDispatcher(jsp).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//랜덤한 키값을 부여 할 변수
+		String randomKey = null;
+		List<String> keyList = new ArrayList();
+		//렌덤한 이름을 저장할 변수
 		UserVO loginUser = MyUtils.getLoginUser(request);
 		//������ ����
 		String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
@@ -78,13 +99,18 @@ public class ExihibitPage1Ser extends HttpServlet {
 		//��� ����ȸ ����
 		int i_show = Integer.parseInt(mr.getParameter("i_show"));
 		
+		
+		
 		//������ �Ѿ�� ������ DB�� t_work�� �־��ش�
 		for(int i=0; i<list_cnt; i++) {
+			//랜덤한 이름을 부여한다.
+			randomKey = String.valueOf(UUID.randomUUID());
+			keyList.add(randomKey);
 			String work_image = mr.getParameter("work_image_idx_" + i);
 			String work_title = mr.getParameter("input_title_" + i);
 			String work_ctnt = mr.getParameter("input_comment_" + i);
 			//���� ����� ���� �̸� (����ȸidx_����idx_���ϸ�) ���� work_iamge�� ���ϸ� �޾ƿ� ���̴�.
-			String saveImageName = i_show  + "_" + loginUser.getI_user() + "_" +  work_image; 
+			String saveImageName = i_show  + "_" + loginUser.getI_user() + "_" + randomKey + "_" + work_image; 
 			
 			WorkVO param = new WorkVO();
 			param.setI_show(i_show);
@@ -109,20 +135,24 @@ public class ExihibitPage1Ser extends HttpServlet {
 		
 		System.out.println("savePath : " + savePath);
 		
+		ShowListVO param2 = new ShowListVO();
+		param2.setI_show(i_show);
+		List<ShowListDomain> list = ShowListDAO.selShowList(param2);
+		
 		try {
 			Enumeration files = mr.getFileNames();
-			
+			int i = 0;
 			while(files.hasMoreElements()) {
 				String key = (String)files.nextElement();
 				fileNm = mr.getFilesystemName(key);
-				String ext = fileNm.substring(fileNm.lastIndexOf("."));
-				saveFileNm = i_show  + "_" + loginUser.getI_user() + "_" + fileNm;				
+				saveFileNm = list.get(i).getWork_image();				
 				System.out.println("key : " + key);
 				System.out.println("fileNm : " + fileNm);
 				System.out.println("saveFileNm : " + saveFileNm);				
 				File oldFile = new File(savePath + "/" + fileNm);
 			    File newFile = new File(savePath + "/" + saveFileNm);
-			    oldFile.renameTo(newFile);				  
+			    oldFile.renameTo(newFile);	
+			    i++;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -30,7 +30,7 @@ public class ChnagePwSer extends HttpServlet {
 		UserVO loginUser = MyUtils.getLoginUser(request);
 
 		String pw = request.getParameter("pw");
-		String encrypt_pw = SecurityUtils.encryptString(pw);
+		String encrypt_pw = SecurityUtils.encryptString(pw); // 암호화 후 DB에 저장
 		
 		UserVO param = new UserVO();
 		param.setI_user(loginUser.getI_user());
