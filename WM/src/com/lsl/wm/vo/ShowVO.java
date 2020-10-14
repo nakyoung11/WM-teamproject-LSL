@@ -13,7 +13,6 @@ public class ShowVO {
 	private int likeCnt;
 	private int cmtCnt;
 	
-	
 	public int getLikeCnt() {
 		return likeCnt;
 	}

@@ -9,26 +9,6 @@ import java.util.List;
 import com.lsl.wm.vo.NoticeVO;
 
 public class NoticeDAO {
-	
-	// 공지사항 작성시 사용
-	public static int insNotice(NoticeVO param) {
-		String sql = " INSERT INTO t_notice "
-				   + " (title, ctnt, i_user) "
-				   + " VALUES "
-				   + " (?, ?, ?) ";
-		
-		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
-			
-			@Override
-			public void update(PreparedStatement ps) throws SQLException {
-				ps.setNString(1, param.getTitle());
-				ps.setNString(2, param.getCtnt());
-				ps.setInt(3, param.getI_user());
-			}
-		});
-	}
-	
-	// 공지사항 리스트 출력시 사용
 	public static List<NoticeVO> selNoticeList(NoticeVO param) {
 		List<NoticeVO> list = new ArrayList<NoticeVO>();
 		
@@ -70,7 +50,6 @@ public class NoticeDAO {
 		return list;
 	}
 	
-	// 공지사항 세부사항시 사용
 	public static NoticeVO selNotice(NoticeVO param) {
 		String sql = " SELECT title, ctnt "
 				   + " FROM t_notice "
@@ -99,7 +78,23 @@ public class NoticeDAO {
 		return param;
 	}
 	
-	// 공지사항 수정시 사용
+	public static int insNotice(NoticeVO param) {
+		String sql = " INSERT INTO t_notice "
+				   + " (title, ctnt, i_user) "
+				   + " VALUES "
+				   + " (?, ?, ?) ";
+		
+		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setNString(1, param.getTitle());
+				ps.setNString(2, param.getCtnt());
+				ps.setInt(3, param.getI_user());
+			}
+		});
+	}
+	
 	public static int updNotice(NoticeVO param) {
 		String sql = " UPDATE t_notice "
 				   + " SET title = ?, ctnt = ?, m_dt = now() "

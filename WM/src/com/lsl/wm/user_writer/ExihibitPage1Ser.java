@@ -100,7 +100,6 @@ public class ExihibitPage1Ser extends HttpServlet {
 		int i_show = Integer.parseInt(mr.getParameter("i_show"));
 		
 		
-		
 		//������ �Ѿ�� ������ DB�� t_work�� �־��ش�
 		for(int i=0; i<list_cnt; i++) {
 			//랜덤한 이름을 부여한다.

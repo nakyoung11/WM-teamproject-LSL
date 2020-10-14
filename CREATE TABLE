@@ -16,12 +16,14 @@ CREATE TABLE t_work (
 	i_work INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	i_user int UNSIGNED NOT NULL,
 	i_show int UNSIGNED NOT NULL,
+
 	work_images VARCHAR(200) NOT NULL,	-- 작품 파일명
 	work_title VARCHAR(50) NOT NULL,	-- 작품명
 	work_ctnt VARCHAR(1000) NOT NULL,	-- 작품내용
 	r_dt DATETIME DEFAULT NOW(),		-- 등록날짜
    m_dt DATETIME DEFAULT NOW(),			-- 수정날짜
    CONSTRAINT work_fk_1 FOREIGN KEY (i_user) REFERENCES t_user(i_user)	-- 유저가 없어지면 따라 없어지게끔
+
    ON DELETE CASCADE
    ON UPDATE CASCADE,
    CONSTRAINT work_fk_2 FOREIGN KEY (i_show) REFERENCES t_show(i_show)	-- 전시회가 없어지면 따라 없어지게끔
@@ -47,28 +49,34 @@ i_work INT UNSIGNED NOT NULL,
 CONSTRAINT show_list_fk_1 FOREIGN KEY (i_show) REFERENCES t_show(i_show)	-- 전시회가 삭제 되면 같이 삭제 되게끔
    ON DELETE CASCADE
    ON UPDATE CASCADE
+
 );
+
 
 CREATE TABLE t_work_like (
 i_work INT UNSIGNED NOT NULL,
 i_user INT UNSIGNED NOT NULL,
+
 PRIMARY KEY(i_work, i_user), 
 
 CONSTRAINT work_like_fk_1 FOREIGN KEY (i_work) REFERENCES t_work(i_work) -- 작품이 삭제 되면 같이 삭제 되게끔
    ON DELETE CASCADE
    ON UPDATE CASCADE
+
 );
 
 CREATE TABLE t_work_cmt (
 i_work_cmt INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 i_work INT UNSIGNED NOT NULL,
 i_user INT UNSIGNED NOT NULL,
+
 cmt VARCHAR(1000) NOT NULL,	-- 댓글내용
 r_dt DATETIME DEFAULT NOW(),
 
 CONSTRAINT work_cmt_fk_1 FOREIGN KEY (i_work) REFERENCES t_work(i_work)	-- 작품이 삭제되면 같이 삭제 되게끔
    ON DELETE CASCADE
    ON UPDATE CASCADE
+
 );
 
 create table t_notice(

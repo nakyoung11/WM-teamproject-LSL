@@ -84,7 +84,6 @@ public class ExihibitPage0Ser extends HttpServlet {
 			
 			param = ShowDAO.selLatestI_show(param);
 			
-		
 		System.out.println("타이틀 : " + param.getShow_title());
 		System.out.println("이미지명 : " + param.getShow_poster());
 		

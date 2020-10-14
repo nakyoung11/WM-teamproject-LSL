@@ -18,7 +18,7 @@ body {
 #container {
 	display: flex;
 	width: 1000px;
-	margin-bottom: 100px;
+	margin-bottom: 260px;
 	justify-content: center;
 	align-content: center;
 	font-family: 'Noto Sans KR', sans-serif;

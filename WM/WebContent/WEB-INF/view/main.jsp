@@ -16,14 +16,15 @@
 #headerWrap{flex: 1}
 body{padding-top: 250px;}
 
+
+
 #container {
     display: flex;
     width: 1000px;
     margin-bottom: 292px;
     justify-content: center;
     align-content: center;
-    font-family: 'RIDIBatang';
-    font-weight: 300;
+    font-weight: 700;
     flex: 1;
 }
 
@@ -40,7 +41,6 @@ body{padding-top: 250px;}
 	justify-content: center;
 	align-items: center;
 }
-
 
 .poster img {
 	margin: 10px auto;
@@ -89,7 +89,12 @@ body{padding-top: 250px;}
 
 }
  
-.listClass{margin-left: 8%; display: flex; align-items: stretch;}
+.listClass{display: flex;
+    align-items: center;
+    align-self: center;
+    width: 80%;
+    
+    }
 .smallPoster {
 	width: 150px;
 	height: 150px;
@@ -103,21 +108,31 @@ body{padding-top: 250px;}
 		padding: 5%;
 		width: 80%;
 	}
+	
+	.crown{display: inline-block; width: 150px; text-align: center;margin-right: 30px; }
+	
+	
 	legend {
 		font-size: 1.5em;
 	}
 	.crown1 {
 		color: #f1c40f;
-		margin-left: 5%;
+
 	}
 	.crown2 {
 		color: #7f8c8d;
-		margin-left: 14%;
+
 	}
 	.crown3 {
 		color: #cd6133;
-		margin-left: 16%;
+
 	}
+	
+	.showTitle{    align-self: center;
+    text-align: center;
+    margin-right: 40px;}
+
+	.fav{display: flex; justify-content: center; align-items: center;  margin-right: 35px;}
 </style>
 
  
@@ -143,15 +158,21 @@ body{padding-top: 250px;}
 				<div class="listClass">
 						<fieldset>
 						<legend>인기 전시회</legend>
+						<div class="crown">
 						<span class="material-icons crown1"  style="font-size: 60px;">
 						emoji_events
 						</span>
+						</div>
+						<div class="crown">
 						<span class="material-icons crown2"  style="font-size: 50px;">
 						emoji_events
 						</span>
+						</div>
+						<div class="crown">
 						<span class="material-icons crown3"  style="font-size: 40px;">
 						emoji_events
 						</span>
+						</div>
 						<c:set var="i" value="0" /> 
 						<c:set var="j" value="5" />
 						<table>		  
@@ -163,10 +184,12 @@ body{padding-top: 250px;}
 									<input type="hidden" value="${item.i_show}" id="idx_${i}">
 									<img src="${posterPath}${item.i_user}/${item.show_poster}" class="smallPoster">
 									<div class="showTitle"><p>${item.show_title}</p></div>
+									<div class="fav">
 									<p><span class="material-icons">favorite</span>
 									<span class="span">${item.likeCnt}</span>
 									<span class="material-icons">comment</span>
 									<span class="span">${item.cmtCnt}</span></p>
+									</div>
 								</td>
 								<c:if test="${i%j == j-1 }">
 								  </tr>
