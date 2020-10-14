@@ -3,6 +3,7 @@ package com.lsl.wm.user_writer;
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -94,22 +95,23 @@ public class ExhibitRegPageSer extends HttpServlet {
 				
 				File f = new File(savePath + "/" + param.getWork_image());		
 				if(f.exists()){
+					
 					f.delete();
 					System.out.println("���� ������");
 				}else{
 					System.out.println("���� ����");
 				}
-				
+				String randomKey = String.valueOf(UUID.randomUUID());
 				try {
 					Enumeration files = mr.getFileNames();
 					
-					saveImageName = i_show  + "_" + loginUser.getI_user() + "_" +  work_image; 
+					saveImageName = i_show  + "_" + loginUser.getI_user() + "_" + randomKey + "_" + work_image; 
 					
 					while(files.hasMoreElements()) {
 						String key = (String)files.nextElement();
 						fileNm = mr.getFilesystemName(key);
 						String ext = fileNm.substring(fileNm.lastIndexOf("."));
-						saveFileNm = i_show  + "_" + loginUser.getI_user() + "_" + fileNm;				
+						saveFileNm = saveImageName;				
 						System.out.println("key : " + key);
 						System.out.println("fileNm : " + fileNm);
 						System.out.println("saveFileNm : " + saveFileNm);				

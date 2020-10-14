@@ -73,6 +73,8 @@ public class ExihibitPage1Ser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//랜덤한 키값을 부여 할 변수
 		String randomKey = null;
+		List<String> keyList = new ArrayList();
+		//렌덤한 이름을 저장할 변수
 		UserVO loginUser = MyUtils.getLoginUser(request);
 		//������ ����
 		String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
@@ -97,10 +99,13 @@ public class ExihibitPage1Ser extends HttpServlet {
 		//��� ����ȸ ����
 		int i_show = Integer.parseInt(mr.getParameter("i_show"));
 		
+		
+		
 		//������ �Ѿ�� ������ DB�� t_work�� �־��ش�
 		for(int i=0; i<list_cnt; i++) {
 			//랜덤한 이름을 부여한다.
 			randomKey = String.valueOf(UUID.randomUUID());
+			keyList.add(randomKey);
 			String work_image = mr.getParameter("work_image_idx_" + i);
 			String work_title = mr.getParameter("input_title_" + i);
 			String work_ctnt = mr.getParameter("input_comment_" + i);
@@ -130,20 +135,24 @@ public class ExihibitPage1Ser extends HttpServlet {
 		
 		System.out.println("savePath : " + savePath);
 		
+		ShowListVO param2 = new ShowListVO();
+		param2.setI_show(i_show);
+		List<ShowListDomain> list = ShowListDAO.selShowList(param2);
+		
 		try {
 			Enumeration files = mr.getFileNames();
-			
+			int i = 0;
 			while(files.hasMoreElements()) {
 				String key = (String)files.nextElement();
 				fileNm = mr.getFilesystemName(key);
-				String ext = fileNm.substring(fileNm.lastIndexOf("."));
-				saveFileNm = i_show  + "_" + loginUser.getI_user() + "_"  + randomKey + "_" + fileNm;				
+				saveFileNm = list.get(i).getWork_image();				
 				System.out.println("key : " + key);
 				System.out.println("fileNm : " + fileNm);
 				System.out.println("saveFileNm : " + saveFileNm);				
 				File oldFile = new File(savePath + "/" + fileNm);
 			    File newFile = new File(savePath + "/" + saveFileNm);
-			    oldFile.renameTo(newFile);				  
+			    oldFile.renameTo(newFile);	
+			    i++;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
