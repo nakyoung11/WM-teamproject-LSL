@@ -203,7 +203,13 @@ body{padding-top: 250px;}
 			
 		</div>	
 	</div>
-				
+		<script type="text/javascript">
+		function moveDetail(i) {
+			var i_show = document.getElementById(`idx_\${i}`).value;
+			
+			location.href="/showDetail?i_show=" + i_show;
+		}
+	</script>
 <jsp:include page="../../footer.jsp"></jsp:include>
 </body>
 

@@ -210,6 +210,15 @@ form h4{padding-left:10px; margin-bottom: 10px }
                   show_image.replace(/\s| /gi, "").length == 0){
                     return false;
              }
+            if(work_title.length > 50){
+          	  alert('제목은 50자 이하로 작성해 주십시오.');
+          	  return false;
+          	  
+            }
+            if(work_title.length > 1000) {
+          	  alert('내용은 1000자 이하로 작성해 주십시오.');
+          	  return false;
+            }
            
         
         return true;

@@ -305,8 +305,8 @@ line-height:40px;
                 <span style="cursor: default" id="work_title_idx_\${i}\${j}" class="title_">\${j+1}.${item2.work_title}</span>
                 </div>
                 <div class="like_cmt">
-                <span class="material-icons">favorite</span><span>100</span>
-                <span class="material-icons">insert_comment</span><span>100</span>
+                <span class="material-icons">favorite</span><span>${item2.like_cnt}</span>
+                <span class="material-icons">insert_comment</span><span>${item2.cmt_cnt}</span>
                 </div>
                 <div class="Reg_remove">
                 <a id="mod_exhibit" style="cursor: pointer" onclick="modExhibit('\${i}\${j}')">수정</a>
