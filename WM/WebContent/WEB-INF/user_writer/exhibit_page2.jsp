@@ -169,7 +169,7 @@ table{border-bottom: 1px solid #765D9E;}
 
 #my_exihibit div:nth-child(2) table tr td:nth-child(3) ul li {
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: row nowrap; 
 	align-items: center; width : 96%;
 	height: 100%;
 	font-weight: bold;

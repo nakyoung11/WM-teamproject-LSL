@@ -10,6 +10,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
+<title>작품등록하기</title>
 <style>
 #headerWrap {
 	flex: 1
