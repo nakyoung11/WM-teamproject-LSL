@@ -7,29 +7,6 @@ import java.sql.SQLException;
 import com.lsl.wm.vo.UserVO;
 
 public class UserDAO {
-	
-	// 회원가입시 사용
-	public static int insUser(UserVO param) {
-		String sql = " INSERT INTO t_user "
-				+ " (user_email, nickname, user_pw, user_year, user_month, user_date, news) " + " VALUES "
-				+ " ( ?, ?, ?, ?, ?, ?, ?) ";
-
-		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
-
-			@Override
-			public void update(PreparedStatement ps) throws SQLException {
-				ps.setNString(1, param.getUser_email());
-				ps.setNString(2, param.getNickname());
-				ps.setNString(3, param.getUser_pw());
-				ps.setNString(4, param.getUser_year());
-				ps.setNString(5, param.getUser_month());
-				ps.setNString(6, param.getUser_date());
-				ps.setNString(7, param.getNews());
-			}
-		});
-	}
-	
-	// 가입한 유저 수
 	public static int selUserCnt() {
 		String sql = " SELECT COUNT(i_user) as userCnt FROM t_user ";
 		
@@ -51,7 +28,6 @@ public class UserDAO {
 		});
 	}
 	
-	// 프로필에 사용
 	public static UserVO selUser(final int i_user) {
 		String sql = " SELECT user_email, nickname, profile_img "
 				   + " FROM t_user "
@@ -80,9 +56,27 @@ public class UserDAO {
 		return result;
 	}
 	
+	public static int insUser(UserVO param) {
+		String sql = " INSERT INTO t_user " 
+				+ " (user_email, nickname, user_pw, user_year, user_month, user_date, news) " 
+				+ " VALUES " 
+				+ " ( ?, ?, ?, ?, ?, ?, ?) ";
+		
+		return JdbcTemplate.executeUpdate(sql, new JdbcUpdateInterface() {
+			
+			@Override
+			public void update(PreparedStatement ps) throws SQLException {
+				ps.setNString(1, param.getUser_email());
+				ps.setNString(2, param.getNickname());
+				ps.setNString(3, param.getUser_pw());
+				ps.setNString(4, param.getUser_year());
+				ps.setNString(5, param.getUser_month());
+				ps.setNString(6, param.getUser_date());
+				ps.setNString(7, param.getNews());
+			}
+		});
+	}
 	
-	
-	// 비밀번호 찾기/변경시 사용
 	public static int findPass(UserVO param) {
 		String sql = " SELECT user_year, user_month, user_date "
 				   + " FROM t_user "
@@ -113,7 +107,6 @@ public class UserDAO {
 		});
 	}
 	
-	// 로그인, 아이디 중복확인시 사용
 	public static int login(UserVO param) {
 		String sql = " SELECT i_user, nickname, user_pw "
 				   + " FROM t_user "
@@ -146,8 +139,6 @@ public class UserDAO {
 			}
 		});
 	}
-	
-	// 닉네임 중복확인 시 사용
 	public static int nickNameChk(UserVO param) {
 		String sql = " SELECT nickname "
 				   + " FROM t_user "
@@ -171,7 +162,6 @@ public class UserDAO {
 		});
 	}
 	
-	// 프로필 변경시 사용
 	public static int updUser(UserVO param) {
 		StringBuilder sb = new StringBuilder(" UPDATE t_user SET m_dt = now() ");
 		if(param.getNickname() != null) {
@@ -201,7 +191,6 @@ public class UserDAO {
 		});
 	}
 	
-	// 비밀번호 변경시 사용
 	public static int changePw(UserVO param) {
 		String sql = " UPDATE t_user SET user_pw = ? WHERE user_email = ? ";
 		
