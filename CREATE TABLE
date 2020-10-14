@@ -34,7 +34,7 @@ CREATE TABLE t_work (
 CREATE TABLE t_show (
 i_show INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 i_user INT UNSIGNED,
-show_poster VARCHAR(50) NOT NULL,	-- 전시회 포스터 파일명
+show_poster VARCHAR(200) NOT NULL,	-- 전시회 포스터 파일명
 show_title VARCHAR(30) NOT NULL,	-- 전시회명
 show_ctnt VARCHAR(1000) NOT NULL,	-- 전시회 내용
 r_dt DATETIME DEFAULT NOW() NOT NULL,	-- 전시회 등록 일자
