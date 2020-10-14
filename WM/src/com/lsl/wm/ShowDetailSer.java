@@ -18,9 +18,6 @@ import com.lsl.wm.vo.ShowListVO;
 import com.lsl.wm.vo.ShowVO;
 import com.lsl.wm.vo.UserVO;
 
-/**
- * Servlet implementation class ShowDetailSer
- */
 @WebServlet("/showDetail")
 public class ShowDetailSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;

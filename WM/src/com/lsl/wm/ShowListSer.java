@@ -22,38 +22,38 @@ public class ShowListSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserVO loginUser = MyUtils.getLoginUser(request);
 	      
-	       if(loginUser == null) {
-	            response.sendRedirect("/login"); //
-	            return;
-	         }
+		if (loginUser == null) {
+			response.sendRedirect("/login");
+			return;
+		}
 
 		String searchText = request.getParameter("searchText");
-		searchText = (searchText == null ? "" : searchText);
+		searchText = (searchText == null ? "" : searchText); // 검색을 안하면 빈칸
 		String strPage = request.getParameter("page");
-		if(strPage == null) {
+		if(strPage == null) { // 처음에는 null이 넘어오므로 0으로 변경
 			strPage = "0";
 		}
 
 		int page = Integer.parseInt(strPage);
 		
-		page = (page == 0 ? 1 : page);
+		page = (page == 0 ? 1 : page); // 0이 넘어오면 1페이지로 변경
 		
 		request.setAttribute("page", page);
 		
 		ShowVO param = new ShowVO();
 
 		param.setI_user(loginUser.getI_user());
-		param.setRow(page * 6 - 6);
-		param.setSearchText("%" + searchText + "%");
+		param.setRow(page * 6 - 6); // 페이지 알고리즘
+		param.setSearchText("%" + searchText + "%"); 
 		int pagingCnt = ShowDAO.selPagingCnt(param);
 		
 		List<ShowVO> list = ShowDAO.selShowList(param);
 		
-		 if(list.size() == 0) {
-	         String jsp1 = "/WEB-INF/user_writer/err_null.jsp";
-	         request.getRequestDispatcher(jsp1).forward(request, response);
-	         return;
-	      }
+		if (list.size() == 0) { // 전시회가 없으면 에러페이지로 이동
+			String jsp1 = "/WEB-INF/user_writer/err_null.jsp";
+			request.getRequestDispatcher(jsp1).forward(request, response);
+			return;
+		}
 		
 		//좋아요 및 댓글 개수 가져오기
 		for(int i=0; i< list.size(); i++) {
