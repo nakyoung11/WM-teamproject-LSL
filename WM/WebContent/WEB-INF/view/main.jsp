@@ -146,7 +146,6 @@ legend {
 	text-align: center;
 
 }
-
 .btn .btn1 {
 	overflow: hidden;
 	position: relative;
@@ -159,11 +158,9 @@ legend {
 	transition: all 0.5s;
 	border-radius: 50%;
 }
-
 .btn .btn1:hover {
 	color: #fff;
 }
-
 .btn .btn1:before {
 	content: "";
 	z-index: -1;
