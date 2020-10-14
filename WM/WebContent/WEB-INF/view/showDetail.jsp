@@ -38,36 +38,51 @@ body {
 /*----------------------- 추가 사항 ----------------- */
 .main {
 	display: flex;
+	flex-flow: column;
 	justify-content: center;
-	align-items: center;
+	align-self: center;
+	width:85%;
 }
 
-.main .poster> #3d {
-	width: 450px;
-	height: 450px;
+#gallery {
+	width: 100%;
+	height: 451px;
 	background: #8E9C9E;
 	position: absolute;
-	top: 0;
+	top: 61px;
 	left: 0;
 	margin-right: 30px;
 	border-radius: 20px;
-	text-align: center;
-	opacity: 1;
+	justify-content: center;
+	opacity: 0;
 	transition: all ease 0.7s;
+	display: flex;
+	align-content: center;
+	cursor: pointer;
+}
+
+#gallery:hover {
+	opacity: 0.6
+}
+
+#gallery>p {
+	align-self: center;
+	font-size: 30px;
+	font-weight: bolder;
 }
 
 .poster {
 	flex-direction: column;
-	margin-left: 50px;
 	position: relative;
 }
 
 .poster #poster {
-	width: 450px;
+	width: 100%;
 	height: 450px;
 	margin-bottom: 30px;
 	border-radius: 20px;
 	cursor: pointer;
+	margin-top: 30px;
 }
 
 .main #title {
@@ -79,76 +94,104 @@ body {
 }
 
 .introduction {
-	flex-direction: column;
-	margin-left: 50px;
-	width: 430px;
+	margin-top: 64px;
+	display:flex;
+	
+	
+}
+.user_por{display: flex; flex-flow: column; justify-content: center; align-items: center;}
+.por_img {
+	width: 300px;
+	margin-bottom: 15px;
+	height: 300px;
+}
+
+.por_img img {
+	width: 100%;
+	height: 100%;
+	border-radius: 15px;
+
 }
 
 .exhibition {
-	display: flex;
-	width: 1150px;
-	flex-direction: column;
-	margin-left: 140px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;;
 }
 
 .exhibition ul {
-	display: flex;
-	flex-wrap: wrap;
-	list-style: none;
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
 }
 
+
 .exhibition ul li {
-	flex: 1 1 30%;
-	margin-bottom: 1em;
+    flex: 1 30%;
+    /* width: 100px; */
+    margin-bottom: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .introduction .profile_img {
 	width: 250px;
 	height: 250px;
+
 	border-radius: 50%;
 	margin-bottom: 10px;
 }
+#introduction>p{font-weight: bold; font-size: 17px}
 </style>
 </head>
 <body style="padding-top: 230px;">
 	<jsp:include page="../../header.jsp"></jsp:include>
 	<div id="container">
 		<div id="contents">
-
 			<div class="main">
 				<div class="poster">
-					<h2 id="title">${showData.show_title}</h2>
-					<img src="${posterPath}${showData.show_poster}" id="poster" onclick="move3dGallay(${showData.i_show})">
-					<div id="3d">
+					<h2 id="title">전시 제목: ${showData.show_title}</h2>
+					<img src="${posterPath}${showData.show_poster}" id="poster"
+						onclick="move3dGallay(${showData.i_show})">
+					<div id="gallery" onclick="move3dGallay(${showData.i_show})">
 						<p>3D전시회관람</p>
+					</div>
+						<div id="introduction">
+						<p>
+							전시회 설명:${showData.show_ctnt}
+						</p>
 					</div>
 				</div>
 
 
 				<div class="introduction">
+					<div class="user_por">
+					<div class="por_img">
+						<img id="profile_img" src="${profilePath}${userData.profile_img}">
+					</div>
 					<h3>작가: ${userData.nickname}</h3>
-					<img id="profile_img" src="${profilePath}${userData.profile_img}">
-
-					<div id="introduction">
-						<p>
-							전시회 설명: <br>${showData.show_ctnt}
-						</p>
+					
+					</div>
+					
+					<div class="exhibition">
+				
+						<h3>작품목록</h3>
+						<div id="exhibition_items">
+							<ul>
+								<c:set var="i" value="1" />
+								<c:forEach items="${workList}" var="item">
+									<li>${i}. ${item.work_title}</li>
+									<c:set var="i" value="${i+1}" />
+								</c:forEach>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="exhibition">
-				<h3>작품목록</h3>
-				<div id="exhibition_items">
-					<ul>
-						<c:set var="i" value="1" />
-						<c:forEach items="${workList}" var="item">
-							<li>${i}.${item.work_title}</li>
-							<c:set var="i" value="${i+1}" />
-						</c:forEach>
-					</ul>
-				</div>
-			</div>
+
 		</div>
 	</div>
 	<jsp:include page="../../footer.jsp"></jsp:include>
