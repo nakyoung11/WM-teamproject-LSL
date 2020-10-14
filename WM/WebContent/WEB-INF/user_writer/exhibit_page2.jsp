@@ -38,7 +38,27 @@ body {
 }
 /*----------------------- 추가 사항 ----------------- */
 table{border-bottom: 1px solid #765D9E;}
+
+.ex_title{   
+	 flex: 1;
+    width: 217px;
+    height: 56px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.title_{
+    flex: 1;
+    height: 56px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: default;
+    /* width: 100px; */
+    height: 31px;}
+
 #my_exihibit {
+
    width: 100%;
    margin: 0 auto;
 }
@@ -145,21 +165,25 @@ table{border-bottom: 1px solid #765D9E;}
    list-style-type: none;
 }
 #my_exihibit div:nth-child(2) table tr td:nth-child(3) ul li {
-   display: flex;
-   flex-flow: row nowrap;
-   align-items: center; width : 96%;
-   height: 100%;
-   font-weight: bold;
-   font-size: 20px;
-   padding: 0.3% 2%;
-   margin-top: 2%;
-   animation: fadeInDown;
-   animation-duration: 1s;
-   width: 96%;
+      display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: 96%;
+    height: 100%;
+    font-weight: bold;
+    font-size: 20px;
+    /* padding: 0.3% 2%; */
+    /* margin-top: 2%; */
+    animation: fadeInDown;
+    animation-duration: 1s;
+    width: 96%;
+}
 }
 .title {
    font-size: 24px
 }
+.title>h4{align-self: flex-start; flex: 1}
+.title>a{align-self: flex-end;}
 .Reg_remove>a:hover{color:red;}
 .like_cmt {
    display: flex;
@@ -178,11 +202,11 @@ table{border-bottom: 1px solid #765D9E;}
 #my_exihibit div:nth-child(2) table tr td:nth-child(3) ul li span:nth-child(1)
    {
    float: left;
-   width: 40%;
+   width: 80%;
    margin-top: 4%;
 }
 #my_exihibit div:nth-child(2) table tr td:nth-child(3) ul li #cnt_div {
-   margin-top: 3%;
+
    width: 100%
 }
 .work_title{
@@ -191,6 +215,16 @@ table{border-bottom: 1px solid #765D9E;}
    overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;}
+    
+.a {
+text-align:center;
+line-height:40px;
+	width: 100px;
+	height: 40px;
+	background: #A08DD6;
+	border-radius: 10px;
+	color:#F73028;
+}    
 </style>
 
 <body>
@@ -201,7 +235,9 @@ table{border-bottom: 1px solid #765D9E;}
 
             <div class="title">
                <h4>전시 및 작품 관리</h4>
+               <div class="a"><a href="/exhibit_page0">전시회 열기</a></div>
             </div>
+          
             <div id="title_div"></div>
 
 
@@ -265,7 +301,9 @@ table{border-bottom: 1px solid #765D9E;}
                 li.innerHTML = `
                 <input type="hidden" id="i_show_idx_\${i}\${j}" value="\${tempI_show}">
                 <input type="hidden" id="i_work_idx_\${i}\${j}" name="i_work_idx_\${i}\${j}" value="${item2.i_work}">
-                <span style="cursor: default" id="work_title_idx_\${i}\${j}" class="title">\${j+1}.${item2.work_title}</span>
+                <div class="ex_title">
+                <span style="cursor: default" id="work_title_idx_\${i}\${j}" class="title_">\${j+1}.${item2.work_title}</span>
+                </div>
                 <div class="like_cmt">
                 <span class="material-icons">favorite</span><span>100</span>
                 <span class="material-icons">insert_comment</span><span>100</span>
