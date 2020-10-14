@@ -363,7 +363,7 @@ table{border-bottom: 1px solid #765D9E;}
     }
     
     displayExhibitWorkInfo();
-    //displayExhibitionWorkInfo(exhibitionWorkInfoArr);
+   
     </script>
 </body>
 

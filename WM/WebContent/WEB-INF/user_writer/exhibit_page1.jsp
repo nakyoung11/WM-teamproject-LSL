@@ -286,7 +286,6 @@ button:focus {
                 </tr>`;
                 exhibitList.append(table);
         }
-       
    
         /*현재 까지의 입력사항을 검사하는 함수*/
         function checkInput() {

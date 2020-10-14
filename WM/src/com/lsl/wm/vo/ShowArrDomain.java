@@ -6,7 +6,6 @@ public class ShowArrDomain extends ShowVO{
 	private List<ShowListDomain> showDomainList;
 	private int workCnt;
 
-	
 	public int getWorkCnt() {
 		return workCnt;
 	}

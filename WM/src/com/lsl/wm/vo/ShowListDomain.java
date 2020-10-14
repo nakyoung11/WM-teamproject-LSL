@@ -9,7 +9,6 @@ public class ShowListDomain extends ShowListVO{
 	private int cmt_cnt;
 	private int showListCnt;
 	
-	
 	public int getShowListCnt() {
 		return showListCnt;
 	}

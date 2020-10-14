@@ -39,7 +39,6 @@ public class ExihibitPage2Ser extends HttpServlet {
 	      }       
 
 	
-
 		
 		//����ȸ ������ �޾ƿ´�.
 		ShowVO param = new ShowVO();
