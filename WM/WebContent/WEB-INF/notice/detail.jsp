@@ -7,6 +7,25 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 <style>
+#container {
+	display: flex;
+	width: 1000px;
+	margin-bottom: 600px;
+	justify-content: center;
+	align-content: center;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	flex: 1;
+	background-image:
+}
+
+#contents {
+	display: flex;
+	flex-flow: column;
+	flex: 1;
+	height: 100%;
+}
+/*----------------------- 추가 사항 ----------------- */
 	body {
             display: flex;
             flex-flow: column;
