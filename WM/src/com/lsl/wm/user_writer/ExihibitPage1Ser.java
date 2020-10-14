@@ -104,12 +104,14 @@ public class ExihibitPage1Ser extends HttpServlet {
 		for(int i=0; i<list_cnt; i++) {
 			//랜덤한 이름을 부여한다.
 			randomKey = String.valueOf(UUID.randomUUID());
-			keyList.add(randomKey);
+			
 			String work_image = mr.getParameter("work_image_idx_" + i);
 			String work_title = mr.getParameter("input_title_" + i);
 			String work_ctnt = mr.getParameter("input_comment_" + i);
 			//���� ����� ���� �̸� (����ȸidx_����idx_���ϸ�) ���� work_iamge�� ���ϸ� �޾ƿ� ���̴�.
 			String saveImageName = i_show  + "_" + loginUser.getI_user() + "_" + randomKey + "_" + work_image; 
+			
+			keyList.add(saveImageName);
 			
 			WorkVO param = new WorkVO();
 			param.setI_show(i_show);
@@ -144,7 +146,7 @@ public class ExihibitPage1Ser extends HttpServlet {
 			while(files.hasMoreElements()) {
 				String key = (String)files.nextElement();
 				fileNm = mr.getFilesystemName(key);
-				saveFileNm = list.get(i).getWork_image();				
+				saveFileNm = keyList.get(i);				
 				System.out.println("key : " + key);
 				System.out.println("fileNm : " + fileNm);
 				System.out.println("saveFileNm : " + saveFileNm);				
