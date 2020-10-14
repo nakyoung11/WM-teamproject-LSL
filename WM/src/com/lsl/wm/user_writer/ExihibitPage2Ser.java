@@ -125,7 +125,7 @@ public class ExihibitPage2Ser extends HttpServlet {
 			//������ ��ǰ�� i_work���� �����´�.
 			int i_work = Integer.parseInt(request.getParameter("i_work"));
 			
-			
+			System.out.println("i_work값: " + i_work);
 			WorkVO param = new WorkVO();
 			
 			param.setI_show(i_show);
@@ -134,18 +134,19 @@ public class ExihibitPage2Ser extends HttpServlet {
 			
 			param = WorkDAO.selWork(param);
 			
-			System.out.println("������ �̹��� ���� " + param.getWork_image());
+			System.out.println("이미지명: " + param.getWork_image());
 			//���� ������ ���� �Ѵ�.
 			String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
-			System.out.println("path : " + savePath);
+			System.out.println("삭제하는 파일 : " + savePath + param.getWork_image());
 			
 
 			File f = new File(savePath + "/" + param.getWork_image());		
 			if(f.exists()){
+				System.gc();
 				f.delete();
-				System.out.println("���� ������");
+				System.out.println("삭제성공");
 			}else{
-				System.out.println("���� ����");
+				System.out.println("삭제실패");
 			}
 			
 			WorkDAO.delWork(param);
@@ -163,6 +164,18 @@ public class ExihibitPage2Ser extends HttpServlet {
 			//전시회 값을 저장
 			ShowVO param = new ShowVO();
 			param.setI_show(i_show);
+			param = ShowDAO.selShow(param);
+			//전시회 포스터를 삭제
+			String posterSavePath = getServletContext().getRealPath("resource") + "/show/images/posters/"  + loginUser.getI_user() + "/";
+			
+			//포스터 파일 삭제 부문.
+			File f2 = new File(posterSavePath + "/" + param.getShow_poster());		
+			if(f2.exists()){
+				f2.delete();
+				System.out.println("삭제에 성공했습니다.");
+			}else{
+				System.out.println("삭제에 실패했습니다.");
+			}
 			
 			//사진을 삭제 하기 위한 처리
 			//전시회에 포함되는 작품정보를 자겨온다.
@@ -172,9 +185,9 @@ public class ExihibitPage2Ser extends HttpServlet {
 			
 			String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/" + loginUser.getI_user() + "/";
 			System.out.println("path : " + savePath);
-			//파일 삭제 부문.
+			//작품 파일 삭제 부문.
 			for(int i = 0; i< list.size(); i++) {
-				File f = new File(savePath + "/" +list.get(i).getWork_image());		
+				File f = new File(savePath + list.get(i).getWork_image());		
 				if(f.exists()){
 					f.delete();
 					System.out.println("삭제에 성공했습니다.");
@@ -184,6 +197,7 @@ public class ExihibitPage2Ser extends HttpServlet {
 			}
 			
 			//전시회 삭제.
+			param.setI_show(i_show);
 			ShowDAO.delShow(param);
 			
 			response.sendRedirect("/exhibit_page2?i_user="+ i_user);	
