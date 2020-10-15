@@ -24,7 +24,7 @@ public class MainSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String str = String.format("%03d", UserDAO.selUserCnt()) ;
+		String str = String.format("%03d", UserDAO.selUserCnt()); // 3자리 수 맞추기
 		
 		ShowVO param = new ShowVO();
 	
@@ -60,15 +60,11 @@ public class MainSer extends HttpServlet {
 		}
 		List<ShowVO> topTenList;
 		if(list.size() < 10) {
-			topTenList = list.subList(0, list.size());
+			topTenList = list.subList(0, list.size()); // 게시물이 10개보다 작으면 전시회 개수만큼 출력
 		}else {
-			topTenList = list.subList(0, 10);
+			topTenList = list.subList(0, 10); // 10보다 많으면 10개만 출력
 		}
-		
-	
-		
-		
-		
+
 		request.setAttribute("list", topTenList);
 		
 		String savePath = "/resource/show/images/posters/";

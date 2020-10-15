@@ -20,13 +20,13 @@ public class NoticeRegModSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String strI_notice = request.getParameter("i_notice");
 		
-		if(strI_notice != null) {
+		if(strI_notice != null) { // i_notice의 값이 있으면 수정
 			int i_notice = Integer.parseInt(strI_notice);
 			NoticeVO param = new NoticeVO();
 			param.setI_notice(i_notice);
 			
 			param = NoticeDAO.selNotice(param);
-			request.setAttribute("list", param);
+			request.setAttribute("list", param); // 수정 시 제목과 내용을 출력해줌
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/notice/regmod.jsp").forward(request, response);
@@ -47,9 +47,9 @@ public class NoticeRegModSer extends HttpServlet {
 		param.setCtnt(ctnt);
 		param.setI_user(loginUser.getI_user());
 		
-		if(strI_notice == "") {
+		if(strI_notice == "") { // i_notice가 없다면 등록
 			NoticeDAO.insNotice(param);
-		} else {
+		} else { // 수정
 			int i_notice = Integer.parseInt(strI_notice);
 			param.setI_notice(i_notice);
 			NoticeDAO.updNotice(param);

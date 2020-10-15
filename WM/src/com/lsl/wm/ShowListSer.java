@@ -22,23 +22,23 @@ public class ShowListSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String searchText = request.getParameter("searchText");
-		searchText = (searchText == null ? "" : searchText);
+		searchText = (searchText == null ? "" : searchText); // 처음에는 null이 넘어오므로 다 검색
 		String strPage = request.getParameter("page");
-		if(strPage == null) {
+		if(strPage == null) { // 처음에는 null이 넘어옴
 			strPage = "0";
 		}
 
 		int page = Integer.parseInt(strPage);
 		
-		page = (page == 0 ? 1 : page);
+		page = (page == 0 ? 1 : page); // 처음에는 1페이지
 		
 		request.setAttribute("page", page);
 		
 		ShowVO param = new ShowVO();
 
 		
-		param.setRow(page * 6 - 6);
-		param.setSearchText("%" + searchText + "%");
+		param.setRow(page * 6 - 6); // 페이지 limit 알고리즘
+		param.setSearchText("%" + searchText + "%"); // like 뒤에 들어가 텍스트
 		int pagingCnt = ShowDAO.selPagingCnt(param);
 		
 		List<ShowVO> list = ShowDAO.selShowList(param);
@@ -53,10 +53,10 @@ public class ShowListSer extends HttpServlet {
 		for(int i=0; i< list.size(); i++) {
 			ShowVO vo = new ShowVO();
 			vo.setI_show(list.get(i).getI_show());
-			vo = ShowDAO.selShowlikeCnt(vo);
+			vo = ShowDAO.selShowlikeCnt(vo); // 좋아요 개수
 			list.get(i).setLikeCnt(vo.getLikeCnt());
 			vo.setI_show(list.get(i).getI_show());
-			vo = ShowDAO.selShowCmtCnt(vo);
+			vo = ShowDAO.selShowCmtCnt(vo); // 댓글 개수
 			list.get(i).setCmtCnt(vo.getCmtCnt());
 		}
 		
