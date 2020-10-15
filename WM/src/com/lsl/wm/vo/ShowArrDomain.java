@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ShowArrDomain extends ShowVO{
 	private List<ShowListDomain> showDomainList;
+
 	private int workCnt;
 
 	public int getWorkCnt() {
@@ -13,6 +14,7 @@ public class ShowArrDomain extends ShowVO{
 	public void setWorkCnt(int workCnt) {
 		this.workCnt = workCnt;
 	}
+
 
 	public List<ShowListDomain> getShowDomainList() {
 		return showDomainList;

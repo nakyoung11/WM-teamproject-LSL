@@ -51,8 +51,8 @@ public class ChangeProfileSer extends HttpServlet {
 			if(files.hasMoreElements()) {
 				String key = (String)files.nextElement();
 				fileNm = mr.getFilesystemName(key);
-				String ext = fileNm.substring(fileNm.lastIndexOf(".")); // 확장자만 담아줌
-				saveFileNm = UUID.randomUUID() + ext; // 파일 이름을 램덤값으로 변경 후 확장자랑 연결
+				String ext = fileNm.substring(fileNm.lastIndexOf("."));
+				saveFileNm = UUID.randomUUID() + ext;				
 				System.out.println("key : " + key);
 				System.out.println("fileNm : " + fileNm);
 				System.out.println("saveFileNm : " + saveFileNm);				

@@ -10,6 +10,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
 </head>
+<title>작품등록하기</title>
 <style>
 #headerWrap {
 	flex: 1
@@ -253,9 +254,6 @@ button:focus {
 
  <jsp:include page="../../footer.jsp"></jsp:include>
 	<script>
-		//등록 할수 있는 작품의 개수
-		var max_workCnt = 25 - ${workCnt};
-	
         /*작품정보를 받아와 콘텐츠영역안에 테이블을 생성하여 보여주는 함수*/
         function displayWorkInfo() {
            
@@ -367,7 +365,7 @@ button:focus {
             var exhibitList = document.getElementById('exhibit_list');
             var listLastIndex = exhibitList.childElementCount;
             console.log(listLastIndex);
-            if(listLastIndex >= max_workCnt) {
+            if(listLastIndex >= 25) {
                alert('25개 까지만 등록 가능합니다.');
                return;
             }

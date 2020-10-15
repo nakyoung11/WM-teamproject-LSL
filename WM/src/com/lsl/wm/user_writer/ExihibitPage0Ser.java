@@ -64,11 +64,8 @@ public class ExihibitPage0Ser extends HttpServlet {
 		MultipartRequest mr = new MultipartRequest(request, savePath
 				, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		//고유 키값을 받음
-		String randomKey = String.valueOf(UUID.randomUUID());
-		
 		//jsp파일의 자료들을 받아온다.
-			
+
 			String show_image = mr.getParameter("show_image");
 			String show_title = mr.getParameter("show_title");
 			String show_ctnt = mr.getParameter("show_ctnt");
@@ -76,7 +73,7 @@ public class ExihibitPage0Ser extends HttpServlet {
 			//데이터 베이스에 삽입
 			ShowVO param = new ShowVO();
 			param.setI_user(loginUser.getI_user());
-			param.setShow_poster(randomKey + "_" + show_image);
+			param.setShow_poster(show_image);
 			param.setShow_title(show_title);
 			param.setShow_ctnt(show_ctnt);
 			
@@ -94,7 +91,7 @@ public class ExihibitPage0Ser extends HttpServlet {
 				String key = (String)files.nextElement();
 				fileNm = mr.getFilesystemName(key);
 				String ext = fileNm.substring(fileNm.lastIndexOf("."));
-				saveFileNm = randomKey + "_" + show_image;				
+				saveFileNm = show_image;				
 				System.out.println("key : " + key);
 				System.out.println("fileNm : " + fileNm);
 				System.out.println("saveFileNm : " + saveFileNm);				

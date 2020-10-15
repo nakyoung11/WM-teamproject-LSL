@@ -11,7 +11,7 @@ import com.lsl.wm.vo.ShowVO;
 import com.lsl.wm.vo.WorkVO;
 
 public class ShowDAO {
-	// 전시회 등록시 사용
+	
 	public static int insShow(ShowVO param) {
 		String sql = " INSERT INTO t_show " 
 				+ " (i_user, show_poster, show_title, show_ctnt) " 
@@ -31,7 +31,6 @@ public class ShowDAO {
 		});
 	}
 	
-	// 전시회 페이징시 사용
 	public static int selPagingCnt(ShowVO param) {
 		String sql = " SELECT CEIL(count(i_show) / 6) as pagingCnt "
 				   + " FROM t_show "
@@ -55,7 +54,6 @@ public class ShowDAO {
 		});
 	}
 	
-	// 전시회 검색, 페이지마다 6개씩 보여주기위해 사용
 	public static List<ShowVO> selShowList(ShowVO param) {
 		List<ShowVO> list = new ArrayList<ShowVO>();
 		
@@ -95,7 +93,6 @@ public class ShowDAO {
 		return list;
 	}
 	
-	// 모든 전시회 select시 사용
 	public static List<ShowVO> selAllShowList(ShowVO param) {
 		List<ShowVO> list = new ArrayList<ShowVO>();
 		
@@ -133,7 +130,6 @@ public class ShowDAO {
 		});
 		return list;
 	}
-	
 	//전시회의 좋아요 개수 가져오기
 	public static ShowVO selShowlikeCnt(ShowVO param) {
 		ShowVO vo = new ShowVO();

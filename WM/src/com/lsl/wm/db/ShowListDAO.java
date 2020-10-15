@@ -65,34 +65,6 @@ public class ShowListDAO {
 			return list;
 		}
 		
-		// 전시회 작품 개수를 구하는 메소드
-		public static ShowListDomain selShowListCnt(ShowListDomain param) {
-			String sql = " SELECT COUNT(B.i_work) as showListCnt" + " FROM t_show_list A"
-					+ " JOIN t_work B ON A.i_work = B.i_work " + " WHERE A.i_show = ? ";
-
-			ShowListDomain vo = new ShowListDomain();
-
-			JdbcTemplate.executeQuery(sql, new JdbcSelectInterface() {
-
-				@Override
-				public void prepared(PreparedStatement ps) throws SQLException {
-					ps.setInt(1, param.getI_show());
-				}
-
-				@Override
-				public int executeQuery(ResultSet rs) throws SQLException {
-					while (rs.next()) {
-
-						vo.setShowListCnt(rs.getInt("showListCnt"));
-
-					}
-					return 1;
-				}
-			});
-
-			return vo;
-		}
-		
 		//전시회 좋아요 수를 구하는 메소드
 				public static List<ShowListDomain> selShowLikeCnt(ShowListVO param) {
 					String sql = " SELECT COUNT(B.i_user) AS like_cnt "
