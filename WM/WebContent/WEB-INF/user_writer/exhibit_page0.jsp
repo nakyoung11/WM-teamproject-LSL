@@ -173,7 +173,7 @@ form h4{padding-left:10px; margin-bottom: 10px }
 	</div>
  <jsp:include page="../../footer.jsp"></jsp:include>
 	<script type="text/javascript">
-	
+	var isDenial = true;
     /*이미지 선택시 이미지 저장과 이미지 변경*/
     function updatePainting() {
        
@@ -228,6 +228,7 @@ form h4{padding-left:10px; margin-bottom: 10px }
     function submitExihibit(){
     	if(checkInput())
     		{
+    		  isDenial = false;
     		  document.exhibit_frm.submit();
     		}else {
     			alert('작성이 완료되지 않았습니다.')
@@ -242,7 +243,9 @@ form h4{padding-left:10px; margin-bottom: 10px }
 }, true);
     //화면 이동을 감지하는 메소드
     window.onbeforeunload = function () {
-		return '메세지 내용';
+    	if(isDenial){
+    		return '메세지 내용';
+    	}
 	};
     </script>
 </body>
