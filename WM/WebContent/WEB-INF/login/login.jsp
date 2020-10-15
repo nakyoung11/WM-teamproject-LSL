@@ -66,7 +66,12 @@ input {
 
 #msg{margin-bottom: 20px; margin-left: 10px;}
 #join{margin: 10px auto; text-align: center;}
-#forget{margin: 10px auto; text-align: center; cursor: pointer}
+#forget{margin: 10px auto; text-align: center; cursor: pointer; width: 107px}
+#main{margin: 10px auto; text-align: center; cursor: pointe}
+a:hover{background: linear-gradient(to top, #8F84A3 50%, transparent 10%)}
+#forget:hover {
+	background: linear-gradient(to top, #8F84A3 50%, transparent 10%)
+}
     </style>
 </head>
 <body>
@@ -86,6 +91,7 @@ input {
                 </div>
                    <div id="join"><a href="/join" >회원가입</a></div>
                    <div id="forget" onclick="window.open('/findpassword','비밀번호 변경' ,'height=500, width=500, top=200, left=500, scrollbars=no, resizable=no, toolbars=no, menubar=no')">비밀번호 찾기</div>
+            	 <div id="main"><a href="/main" >메인으로</a></div>
                 </form>
         </div>
  

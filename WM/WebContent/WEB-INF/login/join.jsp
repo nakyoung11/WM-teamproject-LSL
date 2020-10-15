@@ -106,8 +106,12 @@ input {
     color: white;
 
 }
+a{text-decoration: none;color: white; font-size: smaller;}
+.log_main{display: flex; justify-content:center; align-content: center; margin-bottom: 30px}
+.login, .main{background: #605366; width:100px; height: 30px; margin-right: 10px;border-radius: 20px;display: flex;justify-content: center;align-content: center;}
+.login>a, .main>a{align-self: center; }
  
-.submit_btn{display: flex; justify-content: center; align-content: center;}
+.submit_btn{display: flex;flex-flow:column; justify-content: center; align-content: center;}
 #submit_btn {
     display:lock;
     margin: 50px auto;
@@ -165,7 +169,13 @@ input {
                 </div> 
                 <div class="submit_btn">
                     <input type="submit" value="가입하기" id="submit_btn">
-                </div>
+                   
+             
+                <div class="log_main">
+                <div class="login"><a href="/login">로그인으로</a></div> 
+                <div class="main"><a href="/main">메인으로</a></div> 
+                </div> 
+                  </div>
              </form>
 
         </div>

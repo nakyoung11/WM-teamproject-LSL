@@ -8,7 +8,7 @@ public class ShowListDomain extends ShowListVO{
 	private int like_cnt;
 	private int cmt_cnt;
 	private int showListCnt;
-	
+	        
 	public int getShowListCnt() {
 		return showListCnt;
 	}
