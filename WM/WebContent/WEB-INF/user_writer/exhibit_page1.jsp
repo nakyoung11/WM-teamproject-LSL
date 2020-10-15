@@ -256,6 +256,8 @@ button:focus {
 	<script>
 		//등록 할수 있는 작품의 개수
 		var max_workCnt = 25 - ${workCnt};
+		
+		var isDenial = true;
 	
         /*작품정보를 받아와 콘텐츠영역안에 테이블을 생성하여 보여주는 함수*/
         function displayWorkInfo() {
@@ -433,7 +435,7 @@ button:focus {
          if(checkInput()){
             //총 몇 개의 작품이 올라갔는지 보내주기 위해 list_cnt에 넣어준다.
             document.getElementById('list_cnt').value = listLastIndex;
-            
+            		isDenial = false;
                   alert('출품완료'); 
                   document.exhibit_frm.submit();
               }else {
@@ -449,8 +451,10 @@ button:focus {
         
         //화면 이동을 감지하는 메소드
         window.onbeforeunload = function () {
-			return '메세지 내용';
-		};
+        	if(isDenial){
+        		return '메세지 내용';
+        	}
+    	};
         displayWorkInfo();
     </script>
 </body>
