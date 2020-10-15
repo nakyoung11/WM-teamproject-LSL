@@ -39,10 +39,10 @@
                  <a href="/writer/mypage_profile">마이페이지</a>                	    
 		                <ul id="my_nav">
 		                  <li id="pro">  <a href="/writer/mypage_profile">프로필 관리</li></a>                
-		                    <li><a href="/exhibit_page2">나의 출품 관리</li></a>
+		                    <li><a href="/exhibit_page2">나의 전시회 관리</li></a>
 		                </ul>                
                  </li>
-                 <li><a href="">이용안내</a></li>
+                 <li><a href="/menual">이용안내</a></li>
                	</ul>
             </nav>				
         </header>   
