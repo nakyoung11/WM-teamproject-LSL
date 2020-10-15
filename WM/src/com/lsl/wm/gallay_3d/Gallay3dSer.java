@@ -39,6 +39,15 @@ public class Gallay3dSer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//占싸깍옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쌨아온댐옙.
 		UserVO loginUser = MyUtils.getLoginUser(request);
+	
+		if(loginUser == null) {
+			loginUser = new UserVO();
+			loginUser.setI_user(0);
+		}
+		
+		System.out.println("i_user값: " + loginUser.getI_user());
+		
+
 		//어느 전시회 인지를 받아 온다.
 		int i_show = Integer.parseInt(request.getParameter("i_show"));
 		//占쏙옙占쏙옙회 占쏙옙품 占쏙옙占쏙옙占� 占쏙옙占쏙옙占승댐옙.
@@ -68,7 +77,13 @@ public class Gallay3dSer extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//占싸깍옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쌨아온댐옙.
-		UserVO loginUser = MyUtils.getLoginUser(request);  
+		UserVO loginUser = MyUtils.getLoginUser(request);
+		
+		if(loginUser == null) {
+			loginUser = new UserVO();
+			loginUser.setI_user(0);
+		}
+		
 		// json 占쏙옙占승뤄옙 占쏙옙占쏙옙占싹깍옙 占쏙옙占쏙옙 json占쏙옙체 占쏙옙占쏙옙
 		 response.setContentType("application/x-json; charset=UTF-8");
 	     PrintWriter out = response.getWriter();
@@ -84,10 +99,12 @@ public class Gallay3dSer extends HttpServlet {
 		    domain.setI_work(i_work);
 		    domain = WorkLikeDAO.selWorkLikeCnt(domain);
 		    //占쏙옙占쏙옙 占쏙옙占싣울옙占쏙옙 占쌓몌옙占쏙옙占쏙옙 占쏙옙占쏙옙
-		    WorkLikeDomain domain2 = new WorkLikeDomain();
-		    domain2.setI_user(loginUser.getI_user());
-		    domain2.setI_work(i_work);
-		    domain2 = WorkLikeDAO.selWorkLike(domain2);
+		   
+		    	WorkLikeDomain domain2 = new WorkLikeDomain();
+		    	domain2.setI_user(loginUser.getI_user());
+		    	domain2.setI_work(i_work);
+		    	domain2 = WorkLikeDAO.selWorkLike(domain2);
+		   
 		    
 		    UserVO param2 = new UserVO();
 		    param2 = UserDAO.selUser(param.getI_user());
@@ -97,6 +114,7 @@ public class Gallay3dSer extends HttpServlet {
 			System.out.println("占싱몌옙占쏙옙: " + param2.getUser_email());
 			
 			JSONObject jobj = new JSONObject();
+			
 			System.out.println("占쏙옙占싣울옙:" + domain2.getIsLike());
 			jobj.put("nickName", param2.getNickname());
 			jobj.put("user_email", param2.getUser_email());

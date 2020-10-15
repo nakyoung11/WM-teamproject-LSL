@@ -325,7 +325,7 @@ display: flex;
                   	  return false;
                   	  
                     }
-                    if(work_title.length > 1000) {
+                    if(work_ctnt.length > 1000) {
                   	  alert('내용은 1000자 이하로 작성해 주십시오.');
                   	  return false;
                     }
@@ -370,6 +370,13 @@ display: flex;
                 alert('작성이 완전치 않은 테이블이 존재합니다.\n작성 혹은 삭제 해주세요.');
            	}
         }
+        
+        //엔터 적용 안되게
+        document.addEventListener('keydown', function(event) {
+        	  if (event.keyCode === 13) {
+        	    event.preventDefault();
+        	  };
+        	}, true); 
 			
     </script>
 </body>

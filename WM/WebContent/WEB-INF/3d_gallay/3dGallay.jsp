@@ -76,7 +76,7 @@
 					</div>
 				</div>
 				<div id="cmtLength">
-						<p>0/100</p>
+					<p>0/100</p>
 				</div>
 			</div>
 		</div>
@@ -394,7 +394,7 @@
  
     if(paintingDomainArr.length <= 5){
     	player_position_z = 200;
-    	player_position_x = -170;
+    	player_position_x = -100;
     	
     	showGallay = gallay_5;
     }
@@ -1065,27 +1065,54 @@
   }
   //좋아요 클릭시 실행될 함수
   function doLike(i) {
-	  $.post("/gallay/gallay3d",
-			  {
-			  	method : "doLike",
-			  	i_work : paintingDomainArr[i].i_work
-			  },
-				  function(data) {
-			 	      document.getElementById('painting_like').innerHTML = data.workLikeCnt;
-			 	      if(data.isLike == '0')
-			 	      {
-			 	    	 document.getElementById('like_icon_div').setAttribute('src', '/resource/3d_gallay/images/icons/empty_like_icon.png');
-			 	      }else{
-			 	    	 document.getElementById('like_icon_div').setAttribute('src', '/resource/3d_gallay/images/icons/like_icon.png');
-			 	      }
-			 	      
-			 	    });
+	  
+	  if(paintingDomainArr[i].i_work == '0') {
+		  alert('대체 이미지에는 좋아요를 할 수 없습니다.')
+		  return;
+	  }
+	//로그인 한 유저가 아니라면 좋아요를 할 수 없게 만든다.
+	  if(${loginUser.i_user} == 0){
+		  alert('좋아요 기능은 로그인 시에만 사용 가능 합니다.')
+		  return;
+	  }
+	 
+	  
+	  
+		  $.post("/gallay/gallay3d",
+				  {
+				  	method : "doLike",
+				  	i_work : paintingDomainArr[i].i_work
+				  },
+					  function(data) {
+				 	      document.getElementById('painting_like').innerHTML = data.workLikeCnt;
+				 	      if(data.isLike == '0')
+				 	      {
+				 	    	 document.getElementById('like_icon_div').setAttribute('src', '/resource/3d_gallay/images/icons/empty_like_icon.png');
+				 	      }else{
+				 	    	 document.getElementById('like_icon_div').setAttribute('src', '/resource/3d_gallay/images/icons/like_icon.png');
+				 	      }
+				 	      
+				 	    });
+	  
  }
   
   function doAddCmt(i) {
+	
 	  var cmt = document.getElementById('input_cmt').value;
 	  var chk_cmt = document.getElementById('input_cmt').value;
 	  var i_work_origin = paintingDomainArr[i].i_work;
+	  
+	  //대체 이미지라면
+	  if(i_work_origin == 0) {
+		  alert('대체 이미지에는 댓글을 달 수 없습니다.')
+		  return;
+	  }
+	  
+	  //로그인 한 유저가 아니라면 댓글을 달 수 없게 만든다.
+	  if(${loginUser.i_user} == 0){
+		  alert('댓글 기능은 로그인 시에만 사용 가능 합니다.')
+		  return;
+	  }
 	  
 	  if(chk_cmt.replace(/ /g,"").length == 0) {
 		alert('댓글을 입력하여주십시오.');  
@@ -1095,6 +1122,8 @@
 		  alert('최대 100자 이내로 작성해주세요.');  
 			return;
 	  }
+	 
+	 
 	  
 	  $.post("/gallay/gallay3d",
 			  {

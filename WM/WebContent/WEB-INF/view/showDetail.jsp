@@ -181,8 +181,7 @@ body {
 }
 
 .exhibition ul li {
-	flex: 1 30%;
-	/* width: 100px; */
+	width: 165px; 
 	margin-bottom: 1em;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -255,7 +254,7 @@ body {
 							<ul>
 								<c:set var="i" value="1" />
 								<c:forEach items="${workList}" var="item">
-									<li>${i}.${item.work_title}</li>
+									<li title="${item.work_title}">${i}.${item.work_title}</li>
 									<c:set var="i" value="${i+1}" />
 								</c:forEach>
 							</ul>

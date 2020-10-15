@@ -148,7 +148,7 @@ form h4{padding-left:10px; margin-bottom: 10px }
 				</div>
 				<div id="input_img_ctnt_div">
 					<div id="input_imge_div">
-						<h4>대표이미지</h4>
+						<h4>전시회 포스터</h4>
 						<div id="input_image" onclick="document.all.file.click()">
 							<input type="file" name="file" id="file" style="display: none"
 								accept="image/*" onchange="updatePainting()">
@@ -233,6 +233,13 @@ form h4{padding-left:10px; margin-bottom: 10px }
     			alert('작성이 완료되지 않았습니다.')
     		}  
     } 
+    
+    //엔터 적용 안되게
+    document.addEventListener('keydown', function(event) {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+  };
+}, true);
     </script>
 </body>
 </html>
