@@ -240,6 +240,10 @@ form h4{padding-left:10px; margin-bottom: 10px }
     event.preventDefault();
   };
 }, true);
+    //화면 이동을 감지하는 메소드
+    window.onbeforeunload = function () {
+		return '메세지 내용';
+	};
     </script>
 </body>
 </html>

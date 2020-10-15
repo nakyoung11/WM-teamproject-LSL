@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+<title>작품 추가</title>
 </head>
 <style>
 #headerWrap {
@@ -446,6 +447,10 @@ button:focus {
         	  };
         	}, true); 
         
+        //화면 이동을 감지하는 메소드
+        window.onbeforeunload = function () {
+			return '메세지 내용';
+		};
         displayWorkInfo();
     </script>
 </body>
