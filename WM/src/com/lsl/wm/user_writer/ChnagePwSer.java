@@ -34,7 +34,7 @@ public class ChnagePwSer extends HttpServlet {
 		
 		UserVO param = new UserVO();
 		param.setI_user(loginUser.getI_user());
-		param.setUser_pw(encrypt_pw);
+		param.setUser_pw(encrypt_pw); // 암호화 된 값 저장
 		
 		UserDAO.updUser(param);
 		response.setContentType("text/html; charset=utf-8");
