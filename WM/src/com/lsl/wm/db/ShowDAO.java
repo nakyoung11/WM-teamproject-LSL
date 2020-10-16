@@ -198,7 +198,7 @@ public class ShowDAO {
 			return vo;
 		}
 	
-	
+	//i_show 정보로 하나의 전시회 정보를 가져온다.
 	public static ShowVO selShow(ShowVO param) {
 		String sql = " SELECT "
 				+ " i_show, i_user, show_ctnt, "
@@ -230,7 +230,7 @@ public class ShowDAO {
 		
 		return vo;
 	}
-	
+	//i_user에 포함하는  전시회 정보를 가져온다.(특정 사용자의 전시회 리스트)
 	public static List<ShowVO> selI_showList(ShowVO param) {
 		String sql = " SELECT "
 				+ " i_show, i_user, show_ctnt, "
@@ -299,7 +299,7 @@ public class ShowDAO {
 		
 		return vo;
 	}
-	
+	//전시회를 삭제하는 메소드
 	public static int delShow(ShowVO param) {
 		String sql = " DELETE " 
 				+ " FROM t_show " 
