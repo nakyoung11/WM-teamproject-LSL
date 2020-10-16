@@ -31,35 +31,37 @@ public class ExihibitPage2Ser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String jsp = "/WEB-INF/user_writer/exhibit_page2.jsp";
-		// �α����� ����� ������ �޾ƿ´�.
+		//로그인 정보를 받아온다.
 		UserVO loginUser = MyUtils.getLoginUser(request);
-
+		//로그인이 되어 있지않다면 로그인 페이지로 돌려 보낸다.
 		if (loginUser == null) {
-			response.sendRedirect("/login"); //
+			response.sendRedirect("/login"); 
 			return;
 		}
 
-		// ����ȸ ������ �޾ƿ´�.
+		//사용자가 연 전시회 정보를 받아오는 작업
 		ShowVO param = new ShowVO();
 		param.setI_user(loginUser.getI_user());
+		//ShowDAO.selI_showList()메소드는 i_user가 가지고 있는 모든 출품전 정보를 받아온다.
 		List<ShowVO> showParam = ShowDAO.selI_showList(param);
-
+		//각 전시회안의 여러 작품 정보를 받을 객체
 		List<ShowArrDomain> list = new ArrayList();
-
+		//전시회가 하나도 없다면 에러페이지로 이동
 		if (showParam.size() == 0) {
 			String jsp1 = "/WEB-INF/user_writer/err_null.jsp";
 			request.getRequestDispatcher(jsp1).forward(request, response);
 			return;
 		}
-
+		//사용자가 가진 전시회 list로 ShowArrDomain객체 리스트에 각각 값을 넣어준다.
 		for (int i = 0; i < showParam.size(); i++) {
 			ShowArrDomain domain = new ShowArrDomain();
-
+			//기존의 showPram리스트에서 전시회 인덱스, 전시회 이름, 내용을 받아옴
 			domain.setI_show(showParam.get(i).getI_show());
 			domain.setShow_title(showParam.get(i).getShow_title());
 			domain.setShow_ctnt(showParam.get(i).getShow_ctnt());
 			ShowListVO vo = new ShowListVO();
 			vo.setI_show(showParam.get(i).getI_show());
+			//ShowArrDomain객체 안의 showDomainList라는 list객체가 또 있다(하나의 전시회에 여러 작품이 있기 때문.)
 			domain.setShowDomainList(ShowListDAO.selShowList(vo));
 
 			// 작품 개수를 가져온다.
@@ -70,7 +72,7 @@ public class ExihibitPage2Ser extends HttpServlet {
 
 			list.add(domain);
 		}
-
+		//확인용 콘솔 출력
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("i_show: " + list.get(i).getShow_title());
 			for (int j = 0; j < list.get(i).getShowDomainList().size(); j++) {
@@ -117,7 +119,7 @@ public class ExihibitPage2Ser extends HttpServlet {
 		int i_show = Integer.parseInt(request.getParameter("i_show"));
 		// 글을 삭제하는 post 요청 이라면
 		if (request.getParameter("i_work") != null) {
-			// ������ ��ǰ�� i_work���� �����´�.
+			//jsp로 부터 어느 작품을 삭제 할건지 받아온다.
 			int i_work = Integer.parseInt(request.getParameter("i_work"));
 
 			System.out.println("i_work값: " + i_work);
@@ -130,7 +132,7 @@ public class ExihibitPage2Ser extends HttpServlet {
 			param = WorkDAO.selWork(param);
 
 			System.out.println("이미지명: " + param.getWork_image());
-			// ���� ������ ���� �Ѵ�.
+			//삭제할 파일의 경로를 설정
 			String savePath = getServletContext().getRealPath("resource") + "/user_writer/images/exhibition/"
 					+ loginUser.getI_user() + "/";
 			System.out.println("삭제하는 파일 : " + savePath + param.getWork_image());
@@ -143,19 +145,18 @@ public class ExihibitPage2Ser extends HttpServlet {
 			} else {
 				System.out.println("삭제실패");
 			}
-
+			//작품 삭제
 			WorkDAO.delWork(param);
-			/* ����ȸ ����Ʈ ������ �����Ѵ�. */
+			/* 수정사항을 다시  출력해주기 위해 작품정보를 받아옴 */
 			ShowListDomain vo = new ShowListDomain();
 			vo.setI_work(i_work);
 
 			ShowListDAO.delShowList(vo);
 
-			System.out.println("�Ѿ�� ��" + i_work);
 
 			response.sendRedirect("/exhibit_page2?i_user=" + i_user + "&i_show=" + i_show);
 			return;
-		} else {
+		} else { //ajax통신으로 날아오는 값은 작품삭제, 전시회 삭제 밖에 없다.(i_work값이 넘어온게 아니라면 전시회 삭제이다.)
 			// 전시회 값을 저장
 			ShowVO param = new ShowVO();
 			param.setI_show(i_show);

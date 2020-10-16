@@ -1,12 +1,19 @@
 package com.lsl.wm.vo;
 
 public class ShowListDomain extends ShowListVO{
+	//작가
 	private int i_user;
+	//작품 제목
 	private String  work_title;
+	//작품 설명
 	private String work_ctnt;
+	//작품 이미지 명
 	private String work_image;
+	//좋아요 개수
 	private int like_cnt;
+	//댓글 개수
 	private int cmt_cnt;
+	//작품 개수
 	private int showListCnt;
 	        
 	public int getShowListCnt() {
