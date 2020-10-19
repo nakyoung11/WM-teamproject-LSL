@@ -180,22 +180,25 @@ form h4{padding-left:10px; margin-bottom: 10px }
     	console.log("이미지 변경 함수 실행")
     	
     	/*파일 선택시 미리보기 기능 구현부*/
-		const file = document.getElementById('file').files[0];
-		if(file){
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            console.log(reader.result);
-            reader.onload = () => {
-            	document.getElementById('input_image').style.backgroundImage = `url(\${reader.result})`;
+    	if(document.getElementById('file').files[0].size > 10485760){
+    		alert("10MB크기 이하의 파일만 업로드 가능 합니다.");
+    	}else{
+    		const file = document.getElementById('file').files[0];
+    		if(file){
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                console.log(reader.result);
+                reader.onload = () => {
+                	document.getElementById('input_image').style.backgroundImage = `url(\${reader.result})`;
+                }
             }
-        }
-     
-       
-        var work_image = document.getElementById('file').files[0].name;
-       
-        document.getElementById(`show_image`).value = work_image;
-        console.log( document.getElementById(`show_image`).value);
-        
+         
+           
+            var work_image = document.getElementById('file').files[0].name;
+           
+            document.getElementById(`show_image`).value = work_image;
+            console.log( document.getElementById(`show_image`).value);
+    	}   
     }
     
     /*현재 까지의 입력사항을 검사하는 함수*/

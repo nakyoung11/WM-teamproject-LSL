@@ -78,6 +78,7 @@ public class Gallay3dSer extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 로그인유저 정보를 받아옴
 		UserVO loginUser = MyUtils.getLoginUser(request);
 		// 로그인 유저가 아닐 경우의 처리를 위해 i_user 값을 0으로 세팅.
@@ -93,44 +94,64 @@ public class Gallay3dSer extends HttpServlet {
 		// 작가 정보를 조회해 jsp로 보내준다.
 		if (request.getParameter("method").equals("selI_user")) {
 			int i_work = Integer.parseInt(request.getParameter("i_work"));
+			System.out.println("i_work값" + request.getParameter("i_work"));
 			// i_work에 해당하는 작가정보(i_user)값을 가져온다.
 			WorkVO param = new WorkVO();
-			param.setI_work(i_work);
-			param = WorkDAO.selWork(param);
-			// 작품의 좋아요 개수를 가져온다.
-			WorkLikeDomain domain = new WorkLikeDomain();
-			domain.setI_work(i_work);
-			domain = WorkLikeDAO.selWorkLikeCnt(domain);
-			// 사용자가 이 작품에 좋아요를 했는지 여부를 가져온다.
+			if (i_work != 0) {
+				param.setI_work(i_work);
+				param = WorkDAO.selWork(param);
+				// 작품의 좋아요 개수를 가져온다.
+				WorkLikeDomain domain = new WorkLikeDomain();
+				domain.setI_work(i_work);
+				domain = WorkLikeDAO.selWorkLikeCnt(domain);
+				// 사용자가 이 작품에 좋아요를 했는지 여부를 가져온다.
 
-			WorkLikeDomain domain2 = new WorkLikeDomain();
-			domain2.setI_user(loginUser.getI_user());
-			domain2.setI_work(i_work);
-			domain2 = WorkLikeDAO.selWorkLike(domain2);
+				WorkLikeDomain domain2 = new WorkLikeDomain();
+				domain2.setI_user(loginUser.getI_user());
+				domain2.setI_work(i_work);
+				domain2 = WorkLikeDAO.selWorkLike(domain2);
 
-			// 작품을 작성한 작가의 유저 정보(닉네임, 이메일 등..)을 가져온다.
-			UserVO param2 = new UserVO();
-			param2 = UserDAO.selUser(param.getI_user());
+				// 작품을 작성한 작가의 유저 정보(닉네임, 이메일 등..)을 가져온다.
+				UserVO param2 = new UserVO();
+				System.out.println("sadasdasdsadas: " + param.getI_user());
+				if (param.getI_user() != 0) {
+					param2 = UserDAO.selUser(param.getI_user());
+				} else {
+					param2 = UserDAO.selUser(1);
+				}
 
-			System.out.println("占쏙옙占싱울옙크占쏙옙:" + i_work);
-			System.out.println("占싻놂옙占쏙옙: " + param2.getNickname());
-			System.out.println("占싱몌옙占쏙옙: " + param2.getUser_email());
+				JSONObject jobj = new JSONObject();
+				
+				System.out.println("占쏙옙占싱울옙크占쏙옙:" + i_work);
+				System.out.println("占싻놂옙占쏙옙: " + param2.getNickname());
+				System.out.println("占싱몌옙占쏙옙: " + param2.getUser_email());
 
-			JSONObject jobj = new JSONObject();
-
-			System.out.println("占쏙옙占싣울옙:" + domain2.getIsLike());
-			// 상세보기 화면에 들어갈 정보들을 세팅하는 부분.
-			jobj.put("nickName", param2.getNickname());
-			jobj.put("user_email", param2.getUser_email());
-			jobj.put("workLikeCnt", domain.getWorkLikeCnt());
-			jobj.put("isLike", domain2.getIsLike());
-			if (param2.getProfile_img() != null) {
-				jobj.put("profilePath", "/img/user/" + param.getI_user() + "/" + param2.getProfile_img());
+				System.out.println("占쏙옙占싣울옙:" + domain2.getIsLike());
+				// 상세보기 화면에 들어갈 정보들을 세팅하는 부분.
+				jobj.put("nickName", param2.getNickname());
+				jobj.put("user_email", param2.getUser_email());
+				jobj.put("workLikeCnt", domain.getWorkLikeCnt());
+				jobj.put("isLike", domain2.getIsLike());
+				if (param2.getProfile_img() != null) {
+					jobj.put("profilePath", "/img/user/" + param.getI_user() + "/" + param2.getProfile_img());
+				} else {
+					jobj.put("profilePath", "/resource/profile/default_profile.jpg");
+				}
+				
+				out.print(jobj.toJSONString()); // json 형식으로 jsp로 데이터를 보낸다.
 			} else {
+				JSONObject jobj = new JSONObject();
+				jobj.put("nickName", " ");
+				jobj.put("user_email", " ");
+				jobj.put("workLikeCnt", 0);
+				jobj.put("isLike", 0);
 				jobj.put("profilePath", "/resource/profile/default_profile.jpg");
+				
+				out.print(jobj.toJSONString()); // json 형식으로 jsp로 데이터를 보낸다.
+
 			}
 
-			out.print(jobj.toJSONString()); // json 형식으로 jsp로 데이터를 보낸다.
+			
 		}
 
 		// 댓글을 추가하는 ajax통신 처리("doAddCmt")
