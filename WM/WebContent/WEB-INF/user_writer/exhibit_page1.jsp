@@ -409,6 +409,9 @@ button:focus {
            console.log("이미지 변경 함수 실행")
            
            /*파일 선택시 미리보기 기능 구현부*/
+       	if(document.getElementById('file' + idx).files[0].size > 10485760){
+       		alert("10MB크기 이하의 파일만 업로드 가능 합니다.");
+       	}else{
          const file = document.getElementById('file' + idx).files[0];
          if(file){
                const reader = new FileReader();
@@ -424,6 +427,7 @@ button:focus {
            
             document.getElementById(`work_image_idx_\${idx}`).value = work_image;
             console.log( document.getElementById(`work_image_idx_\${idx}`).value);
+       	}
             
         }
       
@@ -435,6 +439,16 @@ button:focus {
          if(checkInput()){
             //총 몇 개의 작품이 올라갔는지 보내주기 위해 list_cnt에 넣어준다.
             document.getElementById('list_cnt').value = listLastIndex;
+            //총 파일 용량를 구하는 for문
+            var maxSize = 0;
+            for(var i=0; i<listLastIndex; i++) {
+            	maxSize += document.getElementById(`file\${i}`).files[0].size;
+            }
+            alert(maxSize);
+            if(maxSize > 10485760){
+            	alert("10MB크기 이하의 파일만 업로드 가능 합니다.");
+            	return;
+            }
             		isDenial = false;
                   alert('출품완료'); 
                   document.exhibit_frm.submit();

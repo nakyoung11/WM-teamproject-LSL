@@ -278,7 +278,7 @@ a{text-decoration: none;color: white; font-size: smaller;}
 					console.log(res)
 					if(joinFrm.nickname.value != '') {
 						if(res.data == 1) { // 닉네임 DB에 없음
-							nicknameChkResult.innerText = '사용할 수 있는 닉네입니다.'
+							nicknameChkResult.innerText = '사용할 수 있는 닉네임입니다.'
 							joinFrm.nicknameCheck.value = "nicknameCheck"
 						} else if(res.data == 0) { // 닉네임 DB에 있음
 							nicknameChkResult.innerText = '이미 사용중입니다.'
