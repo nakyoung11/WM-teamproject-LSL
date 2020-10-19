@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 
 public class DbCon {
 	public static Connection getCon() throws Exception {
-		String url = "jdbc:mysql://localhost:3306/root?serverTimezone=Asia/Seoul";
+		String url = "jdbc:mysql://115.85.181.66:3306/root?serverTimezone=UTC";
 		String id = "root";
-		String pw = "koreait2020";
+		String pw = "Koreait2020!";
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection(url, id, pw);
